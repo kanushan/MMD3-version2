@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "slug": "basic-tshirt",
+        "title": "Basic T-shirt",
+        "price": 199,
+        "description": "En simpel t-shirt i økologisk bomuld.",
+        "image": "/images/tshirt.jpg"
+    },
+    {
+        "id": 2,
+        "slug": "cozy-hoodie",
+        "title": "Cozy Hoodie",
+        "price": 349,
+        "description": "Blød hoodie til hverdagsbrug.",
+        "image": "/images/hoodie.jpg"
+    }
+]
