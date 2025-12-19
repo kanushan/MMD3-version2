@@ -4,7 +4,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-18',
   devtools: {
-    enabled: true,
+    enabled: false,
   },
   modules: ['@storefront-ui/nuxt'],
 });
