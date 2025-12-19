@@ -1,15 +1,14 @@
 export default defineEventHandler(async (event) => {
-    // Læs slug fra URL'en, fx /api/products/basic-tshirt
     const { slug } = event.context.params;
 
-    // Hent alle produkter fra vores JSON
+    // Hent alle produkter fra JSON
     const productsModule = await import('~/data/products.json');
-    const products = productsModule.default;
+    const products = productsModule.default.products; // Tilføj .products her!
 
-    // Find det produkt der matcher slug
+    // Find produktet med det givne slug
     const product = products.find((p) => p.slug === slug);
 
-    // Hvis ikke vi finder noget, smid en 404-fejl
+    // Hvis ikke fundet, smid 404
     if (!product) {
         throw createError({
             statusCode: 404,
@@ -17,6 +16,5 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    // Returner produktet som JSON
     return product;
 });

@@ -1,23 +1,76 @@
 <script setup>
-const { products, loading, error } = useProducts();
+const { products, loading, error } = useProducts({ type: 'product' });
 </script>
 
 <template>
-  <main style="max-width: 900px; margin: 0 auto; padding: 1.5rem;">
-    <h1>Produkter</h1>
-<p>hello test kanu</p>
-    <p v-if="loading">Loader produkter…</p>
-    <p v-else-if="error">Noget gik galt 😅</p>
-    <ul v-else>
-      <li
-        v-for="product in products"
+  <div>
+    <h1>Velkommen til Shoppen</h1>
+    
+    <div v-if="loading">Loading...</div>
+    
+    <div v-else-if="error">
+      <p>Fejl: {{ error }}</p>
+    </div>
+    
+    <div v-else-if="!products || products.length === 0">
+      <p>Ingen produkter fundet</p>
+    </div>
+    
+    <div v-else class="product-grid">
+      <NuxtLink 
+        v-for="product in products" 
         :key="product.id"
-        style="margin-bottom: 1rem;"
+        :to="`/product/${product.slug}`"
+        class="product-card"
       >
-        <NuxtLink :to="`/product/${product.slug}`">
-          <strong>{{ product.title }}</strong> – {{ product.price }} kr
-        </NuxtLink>
-      </li>
-    </ul>
-  </main>
+        <div class="product-info">
+          <h3>{{ product.ModelNavn }}</h3>
+          <p class="brand">{{ product.Mærke }}</p>
+          <p class="price">{{ product.Pris }} kr</p>
+        </div>
+      </NuxtLink>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  margin-bottom: 100px; /* Plads til navbar i bunden */
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s;
+  border-radius: 8px;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.brand {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.price {
+  font-weight: bold;
+  color: #222;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+</style>

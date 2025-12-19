@@ -1,18 +1,424 @@
-[
-    {
-        "id": 1,
-        "slug": "basic-tshirt",
-        "title": "Basic T-shirt",
-        "price": 199,
-        "description": "En simpel t-shirt i økologisk bomuld.",
-        "image": "/images/tshirt.jpg"
-    },
-    {
-        "id": 2,
-        "slug": "cozy-hoodie",
-        "title": "Cozy Hoodie",
-        "price": 349,
-        "description": "Blød hoodie til hverdagsbrug.",
-        "image": "/images/hoodie.jpg"
-    }
-]
+{
+    "products": [
+        {
+            "id": 1,
+            "slug": "casablanca-pu-jacket-b",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Casablanca PU Jacket B",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Tøj",
+            "UnderKategori": "Striktrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 600.00,
+            "ProduktBeskrivelse": "Sweatshirt i farven Cloud Dancer. Beigefarvet langærmet sweatshirt i oversize cropped fit.",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "nyt",
+                "oversize"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 2,
+            "slug": "pacs-sports-hoodie-g",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Pacs Sports Hoodie G",
+            "Mærke": "Woodbird.",
+            "Kategori": "Tøj",
+            "UnderKategori": "Hættetrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 520.00,
+            "ProduktBeskrivelse": "Flot og blød Woodbird Hættetrøje til Herre Pacs Snow Melange",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "populær",
+                "comfort"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 3,
+            "slug": "kidd-knit-sea-salt",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Kidd Knit Sea Salt",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Tøj",
+            "UnderKategori": "Striktrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 300.00,
+            "ProduktBeskrivelse": "Simpel strik i relaxed fit. Trøjen har crewneck, lange ærmer og en kraftig struktur.",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "relaxed",
+                "basic"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 4,
+            "slug": "casablanca-pu-jacket-b-2",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Casablanca PU Jacket B",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Tøj",
+            "UnderKategori": "Jakke",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 600.00,
+            "ProduktBeskrivelse": "Denne jakke har et moderne design med en vandafvisende overflade, der gør den ideel til overgangsperioder.",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "vandafvisende",
+                "moderne"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 5,
+            "slug": "bradley-knit-moonbeam",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Bradley Knit Moonbeam",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Tøj",
+            "UnderKategori": "Striktrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 300.00,
+            "ProduktBeskrivelse": "Fladstrikket trøje med crewneck og lange ærmer Trøjen har en relaxed pasform.",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "relaxed",
+                "classic"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 6,
+            "slug": "hydra-cutout-cedar",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Hydra Cutout Cedar",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Tøj",
+            "UnderKategori": "Tshirt",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 200.00,
+            "ProduktBeskrivelse": "T-shirts i farven Cedar Grøn t-shirt i loose fit Kommer med print foran og på ryggen samt crew neck",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "print",
+                "loose"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 7,
+            "slug": "hydra-cutout-white",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Hydra Cutout White",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Tøj",
+            "UnderKategori": "Tshirt",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 200.00,
+            "ProduktBeskrivelse": "T-shirts i farven Cedar Hvid t-shirt i loose fit Kommer med print foran og på ryggen samt crew neck",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "print",
+                "loose",
+                "basic"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 8,
+            "slug": "millinium-oversize-tee",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Millinium Oversize Tee",
+            "Mærke": "ONLY & SONS",
+            "Kategori": "Tøj",
+            "UnderKategori": "Tshirt",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 200.00,
+            "ProduktBeskrivelse": "Flot og god Basic t-shirt, Box fit",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "oversize",
+                "basic"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 9,
+            "slug": "ceres-wide-sweatpants-l",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Ceres Wide Sweatpants L",
+            "Mærke": "ONLY & SONS",
+            "Kategori": "Tøj",
+            "UnderKategori": "Bukser",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 250.00,
+            "ProduktBeskrivelse": "Sweatpants i wide fit Bukserne har snører og elastik i livet samt to lommer foran og en bagpå",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "wide",
+                "comfort"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 10,
+            "slug": "phil-half-zip-demitasse",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Phil Half Zip Demitasse",
+            "Mærke": "ONLY & SONS",
+            "Kategori": "Tøj",
+            "UnderKategori": "Striktrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 350.00,
+            "ProduktBeskrivelse": "Strikket trøje med høj og half-zip Trøjen har ribkant ved halsen, ved ærmerne samt i livet og er i regular fit",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "half-zip",
+                "regular"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 11,
+            "slug": "join-regular-strik-blac",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Join Regular Strik Blac",
+            "Mærke": "ONLY & SONS",
+            "Kategori": "Tøj",
+            "UnderKategori": "Striktrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 350.00,
+            "ProduktBeskrivelse": "Grov strikket trøje med høj hals og half-zip Trøjen har ribkant ved ærmerne og i livet",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "half-zip",
+                "grov"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 12,
+            "slug": "hydra-front-tee-black",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Hydra Front Tee Black",
+            "Mærke": "ONLY & SONS",
+            "Kategori": "Tøj",
+            "UnderKategori": "Tshirt",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 200.00,
+            "ProduktBeskrivelse": "Sort t-shirt i relaxed fit Kommer med print foran og o-hals",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "print",
+                "relaxed",
+                "basic"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 13,
+            "slug": "join-regular-strik-dk",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Join Regular Strik Dk.",
+            "Mærke": "ONLY & SONS",
+            "Kategori": "Tøj",
+            "UnderKategori": "Striktrøje",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 350.00,
+            "ProduktBeskrivelse": "Den bløde strukturstrik med et bredt udvalg af mønstre og strukturer giver et stilfuldt og rent look.",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "strukturstrik",
+                "elegant"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 14,
+            "slug": "blake-suede-loafer-chocola",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Blake Suede Loafer Chocola",
+            "Mærke": "SELECTED",
+            "Kategori": "Sko",
+            "UnderKategori": "Loafer",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 1100.00,
+            "ProduktBeskrivelse": "Loafers i ruskind med rund snude Har kvast-detalje",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "ruskind",
+                "elegant",
+                "premium"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 15,
+            "slug": "chelsea-boots-black",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Chelsea Boots Black",
+            "Mærke": "LVL",
+            "Kategori": "Sko",
+            "UnderKategori": "Støvle",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 600.00,
+            "ProduktBeskrivelse": "LVL Chelsea boots i sort. Støvlen er lavet i imiteret læder og har et elegant og minimalistisk udtryk.",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "chelsea",
+                "minimalistisk",
+                "classic"
+            ],
+            "inStock": true
+        },
+        {
+            "id": 16,
+            "slug": "ainsworth-pu-brown-sto",
+            "type": "product",
+            "BilledeMain": "",
+            "Billede1": "",
+            "Billede2": "",
+            "Billede3": "",
+            "Billede4": "",
+            "ModelNavn": "Ainsworth PU Brown Sto",
+            "Mærke": "JACK & JONES",
+            "Kategori": "Sko",
+            "UnderKategori": "Støvle",
+            "VareNummer": "xxxx xxxx xxxx",
+            "Pris": 400.00,
+            "ProduktBeskrivelse": "Støvlerne har rund tå og gummisål og er forret med polyester",
+            "USP": [
+                "Fylde tekst her",
+                "Fylde tekst her"
+            ],
+            "tags": [
+                "støvle",
+                "vinter"
+            ],
+            "inStock": true
+        }
+    ]
+}
