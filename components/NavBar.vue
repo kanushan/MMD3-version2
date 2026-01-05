@@ -1,6 +1,5 @@
 <script setup>
 const emit = defineEmits(['open-search', 'open-menu']);
-
 const props = defineProps({
   isMenuOpen: {
     type: Boolean,
@@ -17,39 +16,37 @@ const toggleMenu = () => {
  <nav class="navBar">
     <!-- Hjem -->
     <NuxtLink to="/" class="navItem" aria-label="Hjem">
-      <span class="navIcon">🏠</span>
+      <i class="fa-solid fa-house navIcon"></i>
       <span class="navLabel">Hjem</span>
     </NuxtLink>
 
     <!-- Søg -->
-  <button
-    type="button"
-    class="navItem"
-    aria-label="Søg"
-    @click="emit('open-search')"
-  >
-    <span class="navIcon">🔍</span>
-    <span class="navLabel">Søg</span>
-  </button>
+    <button
+      type="button"
+      class="navItem"
+      aria-label="Søg"
+      @click="emit('open-search')"
+    >
+      <i class="fa-solid fa-magnifying-glass navIcon"></i>
+      <span class="navLabel">Søg</span>
+    </button>
 
     <!-- Favoritter -->
     <NuxtLink to="/favorites" class="navItem" aria-label="Favoritter">
-      <span class="navIcon">❤️</span>
+      <i class="fa-solid fa-heart navIcon"></i>
       <span class="navLabel">Favorit</span>
     </NuxtLink>
 
     <!-- Kurv -->
     <NuxtLink to="/cart" class="navItem" aria-label="Kurv">
-      <span class="navIcon">🛒</span>
+      <i class="fa-solid fa-cart-shopping navIcon"></i>
       <span class="navLabel">Kurv</span>
-
-      <!-- Badge kommer senere når vi kobler kurv-logik på -->
       <span class="cartBadge" v-if="false">0</span>
     </NuxtLink>
 
     <!-- Bruger -->
     <NuxtLink to="/account" class="navItem" aria-label="Bruger">
-      <span class="navIcon">👤</span>
+      <i class="fa-solid fa-user navIcon"></i>
       <span class="navLabel">Bruger</span>
     </NuxtLink>
 
@@ -60,7 +57,7 @@ const toggleMenu = () => {
       aria-label="Menu"
       @click="toggleMenu"
     >
-      <span class="navIcon">{{ isMenuOpen ? '✕' : '☰' }}</span>
+      <i :class="isMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="navIcon"></i>
       <span class="navLabel">Menu</span>
     </button>
   </nav>
@@ -96,11 +93,12 @@ const toggleMenu = () => {
   font-size: 0.7rem;
   border: none;
   background: none;
-  position: relative; /* vigtig for badge placering */
+  position: relative;
+  cursor: pointer;
 }
 
 .navIcon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   line-height: 1;
 }
 
