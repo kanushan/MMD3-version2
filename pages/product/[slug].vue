@@ -9,6 +9,7 @@ const { product, loading, error } = useProduct(route.params.slug);
   <div v-else-if="product">
     <h1>{{ product.ModelNavn }}</h1>
     <p class="brand">{{ product.Mærke }}</p>
+    <img :src="product.BilledeMain" :alt="product.ModelNavn" class="product-image">
     <p class="price">{{ product.Pris }} kr</p>
     <p class="category">{{ product.Kategori }} - {{ product.UnderKategori }}</p>
     <p class="description">{{ product.ProduktBeskrivelse }}</p>
