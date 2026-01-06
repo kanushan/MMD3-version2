@@ -117,27 +117,10 @@ const toggleMenu = () => {
   font-size: 0.7rem;
 }
 
-/* Desktop style */
-@media (min-width: 768px) {
+/* Skjul på desktop - over 930px */
+@media (min-width: 930px) {
   .navBar {
-    position: static;
-    width: auto;
-    border-bottom: 1px solid #ddd;
-    border-top: none;
-    margin-bottom: 1rem;
-    justify-content: flex-start;
-  }
-
-  .navItem {
-    flex: 0;
-    flex-direction: row;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    padding: 0.25rem 0.75rem;
-  }
-
-  .navIcon {
-    font-size: 1.1rem;
+    display: none;
   }
 }
 </style>

@@ -154,7 +154,8 @@
                 "print",
                 "loose"
             ],
-            "inStock": true
+            "inStock": true,
+            "isNew": true
         },
         {
             "id": 7,
@@ -206,7 +207,8 @@
                 "wide",
                 "comfort"
             ],
-            "inStock": true
+            "inStock": true,
+            "isNew": true
         },
         {
             "id": 9,
@@ -311,7 +313,8 @@
                 "elegant",
                 "premium"
             ],
-            "inStock": true
+            "inStock": true,
+            "isNew": true
         },
         {
             "id": 13,
@@ -390,7 +393,8 @@
                 "jeans",
                 "baggy"
             ],
-            "inStock": true
+            "inStock": true,
+            "isNew": true
         }
     ]
 }

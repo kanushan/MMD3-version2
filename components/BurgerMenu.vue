@@ -78,7 +78,7 @@ const close = () => {
 
         <!-- Direkte links -->
         <div class="directLinks">
-          <NuxtLink to="/news" @click="close" class="directLink">Nyheder</NuxtLink>
+          <NuxtLink to="/products?isNew=true" @click="close" class="directLink">Nyheder</NuxtLink>
           <NuxtLink to="/lookbook" @click="close" class="directLink">Boxens Look</NuxtLink>
         </div>
       </div>

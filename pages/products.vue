@@ -1,103 +1,150 @@
 <script setup>
-const route = useRoute();
-const products = ref([]);
-const loading = ref(true);
+import ProductFilter from '~/components/ProductFilter.vue';
+import ProductCard from '~/components/ProductCard.vue';
 
-const fetchProducts = async () => {
-    loading.value = true;
-    try {
-        products.value = await $fetch('/api/products', {
-            params: {
-                type: 'product',
-                category: route.query.category,
-                subcategory: route.query.subcategory,
-                brand: route.query.brand
-            }
-        });
-    } catch (error) {
-        console.error('Error fetching products:', error);
-    } finally {
-        loading.value = false;
-    }
+// Hent produkter
+const { products, loading, error } = useProducts({ type: 'product' });
+
+// Filtered products fra filter component
+const filteredProducts = ref([]);
+
+const handleFiltered = (filtered) => {
+  filteredProducts.value = filtered;
 };
-
-// Fetch ved første load
-await fetchProducts();
-
-// Refetch når route query ændres
-watch(() => route.query, () => {
-    fetchProducts();
-});
-
-const title = computed(() => {
-  if (route.query.subcategory) return route.query.subcategory;
-  if (route.query.category) return route.query.category;
-  if (route.query.brand) return route.query.brand;
-  return 'Alle Produkter';
-});
 </script>
 
 <template>
-  <div>
-    <h1>{{ title }}</h1>
+  <div class="container">
+    <div class="header">
+      <h1>Produkter</h1>
+      <p>Se vores udvalg af produkter</p>
+    </div>
+
+    <div v-if="loading" class="loading">Loading...</div>
     
-    <div v-if="loading">Loading...</div>
+    <div v-else-if="error" class="error">
+      <p>Fejl: {{ error }}</p>
+    </div>
     
-    <div v-else-if="products?.length === 0">
+    <div v-else-if="!products || products.length === 0" class="no-products">
       <p>Ingen produkter fundet</p>
     </div>
     
-    <div v-else class="product-grid">
-      <NuxtLink 
-        v-for="product in products" 
-        :key="product.id"
-        :to="`/product/${product.slug}`"
-        class="product-card"
-      >
-        <h3>{{ product.ModelNavn }}</h3>
-        <p class="brand">{{ product.Mærke }}</p>
-        <p class="price">{{ product.Pris }} kr</p>
-      </NuxtLink>
+    <div v-else class="main-content">
+      <!-- Sidebar med filters -->
+      <aside>
+        <ProductFilter 
+          :products="products"
+          @filtered="handleFiltered"
+        />
+      </aside>
+
+      <!-- Products Grid -->
+      <div class="products-section">
+        <div class="product-count">
+          Viser {{ filteredProducts.length }} produkter
+        </div>
+        
+        <div v-if="filteredProducts.length === 0" class="no-products">
+          Ingen produkter matcher dine filtre
+        </div>
+        
+        <div v-else class="products-grid">
+          <ProductCard 
+            v-for="product in filteredProducts" 
+            :key="product.id"
+            :product="product"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
-  margin-bottom: 100px;
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.product-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s;
-  border-radius: 8px;
+.header {
+  margin-bottom: 32px;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
 }
 
-h3 {
-  margin: 0 0 0.5rem 0;
-}
-
-.brand {
+.header p {
   color: #666;
-  font-size: 0.9rem;
-  margin: 0.25rem 0;
+  font-size: 15px;
 }
 
-.price {
-  font-weight: bold;
-  color: #222;
-  margin-top: 0.5rem;
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #666;
 }
-</style>
+
+.error {
+  color: #d32f2f;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+}
+
+.products-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-count {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.no-products {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #666;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style> 
