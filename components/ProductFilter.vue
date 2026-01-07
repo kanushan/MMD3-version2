@@ -107,8 +107,11 @@ const filteredProducts = computed(() => {
 
     // Søge filter
     const searchMatch = searchTerm.value === '' ||
-      product.ModelNavn.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+      product.ModelNavn?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
       product.ProduktBeskrivelse?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+      product.Mærke?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+      product.Kategori?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+      product.UnderKategori?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
       product.tags?.some(tag => tag.toLowerCase().includes(searchTerm.value.toLowerCase()));
 
     // Brand filter
@@ -174,6 +177,11 @@ const activeFiltersCount = computed(() => {
 
     <!-- Sidebar Filters -->
     <div class="sidebar" :class="{ 'mobile-hidden': !mobileFiltersOpen }">
+      <!-- Category Buttons - kun på mobil -->
+      <div class="mobile-categories">
+        <slot name="categories"></slot>
+      </div>
+
       <!-- Search Filter -->
       <div class="filter-box">
         <h3>Søg</h3>
@@ -283,6 +291,10 @@ const activeFiltersCount = computed(() => {
 
 /* Mobile Filter Toggle Button - kun synlig på mobil */
 .mobile-filter-toggle {
+  display: none;
+}
+
+.mobile-categories {
   display: none;
 }
 
@@ -471,6 +483,10 @@ const activeFiltersCount = computed(() => {
     justify-content: center;
     font-size: 11px;
     font-weight: 600;
+  }
+
+  .mobile-categories {
+    display: block;
   }
 
   .mobile-hidden {

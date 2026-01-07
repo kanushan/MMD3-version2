@@ -20,7 +20,7 @@ const closeDropdowns = () => {
       <div class="container">
         <!-- Search -->
         <div class="search-section">
-          <form @submit.prevent="handleSearch" class="search-form">
+          <form @submit.prevent="handleSearch()" class="search-form">
             <input
               v-model="searchQuery"
               type="text"
@@ -345,7 +345,6 @@ const closeDropdowns = () => {
   left: 50%;
   transform: translateX(-50%);
   margin-top: 0;
-  padding-top: 14px;
   background: white;
   border: 1px solid #e5e5e5;
   border-radius: 4px;

@@ -32,8 +32,10 @@ const handleFiltered = (filtered) => {
     </div>
     
     <div v-else class="main-content">
-      <!-- Category Buttons - fuld bredde -->
-      <CategoryButtons :products="products" />
+      <!-- Category Buttons - kun synlig på desktop -->
+      <div class="category-section-desktop">
+        <CategoryButtons :products="products" />
+      </div>
 
       <div class="content-wrapper">
         <!-- Sidebar med filters -->
@@ -41,7 +43,12 @@ const handleFiltered = (filtered) => {
           <ProductFilter 
             :products="products"
             @filtered="handleFiltered"
-          />
+          >
+            <!-- Category buttons vises inde i filter på mobil -->
+            <template #categories>
+              <CategoryButtons :products="products" />
+            </template>
+          </ProductFilter>
         </aside>
 
         <!-- Products Grid -->
@@ -105,6 +112,10 @@ const handleFiltered = (filtered) => {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.category-section-desktop {
+  display: none;
 }
 
 .content-wrapper {
@@ -183,6 +194,10 @@ const handleFiltered = (filtered) => {
 
   .header p {
     font-size: 15px;
+  }
+
+  .category-section-desktop {
+    display: block;
   }
 
   .content-wrapper {

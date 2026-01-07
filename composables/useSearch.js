@@ -6,14 +6,12 @@ export const useSearch = () => {
     const searchQuery = ref('');
 
     const handleSearch = (query = null) => {
-        const searchTerm = query || searchQuery.value;
+        const searchTermValue = query || searchQuery.value;
 
-        if (searchTerm && searchTerm.trim()) {
-            router.push(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
-            clearSearch();
+        if (searchTermValue && searchTermValue.trim()) {
+            router.push(`/products?search=${encodeURIComponent(searchTermValue.trim())}`);
         }
     };
-
     const clearSearch = () => {
         searchQuery.value = '';
     };
