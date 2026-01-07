@@ -80,7 +80,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: scale(1.01);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 

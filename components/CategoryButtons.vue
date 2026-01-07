@@ -12,6 +12,7 @@ const route = useRoute();
 const router = useRouter();
 
 const selectedCategory = ref('ALLE PRODUKTER');
+const mobileOpen = ref(false);
 
 // Beregn kategorier med antal
 const categories = computed(() => {
@@ -105,6 +106,9 @@ const handleCategoryClick = (category) => {
   }
   
   router.push({ query: newQuery });
+  
+  // Luk accordion på mobil efter valg
+  mobileOpen.value = false;
 };
 </script>
 
@@ -162,14 +166,16 @@ const handleCategoryClick = (category) => {
 @media (max-width: 930px) {
   .category-btn {
     font-size: 13px;
-    padding: 8px 20px;
+    padding: 10px 20px;
+    min-width: 120px;
   }
 }
 
 @media (max-width: 600px) {
   .category-btn {
     font-size: 12px;
-    padding: 7px 16px;
+    padding: 8px 16px;
+    min-width: 100px;
   }
 }
 </style>
