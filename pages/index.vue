@@ -2,6 +2,7 @@
 import HeroSection from "~/components/HeroSection.vue";
 import BannerSplitCards from "~/components/BannerSplitCards.vue";
 import { useFavorites } from "~/composables/useFavorites";
+import FullWidthBanner from "~/components/FullWidthBanner.vue";
 
 const { products, loading, error } = useProducts({ type: "product" });
 const { toggleFavorite, isFavorite } = useFavorites();
@@ -17,18 +18,18 @@ const isProductFavorite = (product) => isFavorite(product.id);
 
 <template>
   <div>
+    <!-- Hero Section 1 -->
     <HeroSection />
 
-    <h1>
-      <NuxtLink to="/products" class="h1-link"> NYHEDER &gt; </NuxtLink>
+    <!-- First row: All products -->
+    <h1 style="margin-top: 2rem">
+      <NuxtLink to="/products" class="h1-link">NYHEDER &gt;</NuxtLink>
     </h1>
-
     <div v-if="loading">Loading...</div>
     <div v-else-if="error">Fejl: {{ error }}</div>
     <div v-else-if="!products || products.length === 0">
       Ingen produkter fundet
     </div>
-
     <div v-else class="product-scroll">
       <NuxtLink
         v-for="product in products"
@@ -49,6 +50,7 @@ const isProductFavorite = (product) => isFavorite(product.id);
           </div>
 
           <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
+          <div v-if="product.isNew" class="product-badge">NYHED</div>
 
           <button
             class="wishlist-btn"
@@ -67,14 +69,10 @@ const isProductFavorite = (product) => isFavorite(product.id);
           <div class="product-brand">{{ product.Mærke }}</div>
           <div class="product-name">{{ product.ModelNavn }}</div>
           <div class="product-price">{{ formatPrice(product.Pris) }}</div>
-
-          <div
-            v-if="product.colors && product.colors.length > 0"
-            class="color-swatches"
-          >
+          <div v-if="product.colors?.length" class="color-swatches">
             <div
-              v-for="(color, index) in product.colors"
-              :key="index"
+              v-for="(color, idx) in product.colors"
+              :key="idx"
               class="color-swatch"
               :style="{ backgroundColor: color }"
               :title="color"
@@ -83,13 +81,69 @@ const isProductFavorite = (product) => isFavorite(product.id);
         </div>
       </NuxtLink>
     </div>
+
+    <!-- Banner Split -->
     <div class="banner-wrapper">
-  <BannerSplitCards />
-</div>
+      <BannerSplitCards />
+    </div>
 
+    <!-- Second row: Only BoxensLook products -->
+    <h1 style="margin-top: 2rem">BOXENS LOOK &gt;</h1>
+    <div class="product-scroll">
+      <NuxtLink
+        v-for="product in products.filter((p) => p.BoxensLook)"
+        :key="product.id"
+        :to="`/product/${product.slug}`"
+        class="product-card"
+        :class="{ 'out-of-stock': !product.inStock }"
+      >
+        <div class="product-image-wrapper">
+          <img
+            v-if="product.BilledeMain"
+            :src="product.BilledeMain"
+            :alt="product.ModelNavn"
+            class="product-image"
+          />
+          <div v-else class="placeholder-image">
+            {{ product.ModelNavn?.charAt(0) || "?" }}
+          </div>
 
+          <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
+          <div v-if="product.isNew" class="product-badge">NYHED</div>
+
+          <button
+            class="wishlist-btn"
+            :class="{ active: isProductFavorite(product) }"
+            aria-label="Tilføj til favoritter"
+            @click.prevent="toggleWishlist(product)"
+          >
+            <i
+              class="fa-heart"
+              :class="isProductFavorite(product) ? 'fa-solid' : 'fa-regular'"
+            ></i>
+          </button>
+        </div>
+
+        <div class="product-info">
+          <div class="product-brand">{{ product.Mærke }}</div>
+          <div class="product-name">{{ product.ModelNavn }}</div>
+          <div class="product-price">{{ formatPrice(product.Pris) }}</div>
+          <div v-if="product.colors?.length" class="color-swatches">
+            <div
+              v-for="(color, idx) in product.colors"
+              :key="idx"
+              class="color-swatch"
+              :style="{ backgroundColor: color }"
+              :title="color"
+            ></div>
+          </div>
+        </div>
+      </NuxtLink>
+    </div>
+
+    <!-- Hero Section 2 -->
+    <FullWidthBanner />
   </div>
-
 </template>
 
 <style scoped>
@@ -139,6 +193,24 @@ h1 {
   margin-left: 1.5rem;
 }
 
+.product-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.product-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.product-scroll::-webkit-scrollbar-thumb {
+  background: #c5c4c4;
+  border-radius: 3px;
+}
+
+.product-scroll::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
 .product-card {
   flex: 0 0 340px;
   background: white;
@@ -151,6 +223,21 @@ h1 {
   color: inherit;
   display: flex;
   flex-direction: column;
+}
+
+/* NEW badge */
+.product-badge {
+  position: absolute;
+  top: 12px; /* Matches previous stock badge spacing */
+  left: 12px; /* Matches previous stock badge spacing */
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 4px;
+  color: white;
+  background-color: #ff4444; /* Red color for NEW */
+  z-index: 3; /* Ensure it sits above the image */
 }
 
 .product-card:hover {
@@ -281,5 +368,4 @@ h1 {
 .banner-wrapper {
   padding: 2rem 0;
 }
-
 </style>

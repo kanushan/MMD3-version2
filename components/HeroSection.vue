@@ -59,8 +59,13 @@ onBeforeUnmount(() => {
       src="../public/img/bannerImgs/jakkeSaetMain.png"
       alt="Jakke sæt til herrer"
     />
+    
+    <div class="hero-overlay"></div>
 
-    <button>Shop Nu</button>
+    <!-- Navigation button -->
+    <router-link to="/products" class="hero-button">
+      Shop Nu
+    </router-link>
 
     <div class="progress">
       <div><span class="fill"></span></div>
@@ -69,13 +74,9 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
+
+<style scoped>
 .hero {
   position: relative;
   width: 100%;
@@ -84,37 +85,50 @@ onBeforeUnmount(() => {
 }
 
 .hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80vh;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
 }
 
 .hero img.active {
   opacity: 1;
 }
 
-.hero button {
+.hero-button {
   position: absolute;
   bottom: 80px;
   left: 180px;
   padding: 10px 42px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 2px solid rgb(255, 255, 255);
   background: transparent;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   cursor: pointer;
   font-size: 14px;
   text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
   transition: all 0.3s ease;
 }
 
-.hero button:hover {
-  background: rgba(0, 0, 0, 0.1);
+.hero-button:hover {
+  background: white;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
 
 .progress {
   position: absolute;
@@ -128,7 +142,7 @@ onBeforeUnmount(() => {
 .progress div {
   width: 15px;
   height: 5px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
   background: transparent;
   overflow: hidden;
   position: relative;
@@ -140,11 +154,11 @@ onBeforeUnmount(() => {
   left: 0;
   height: 100%;
   width: 0%;
-  background: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   transition: width 5s linear;
 }
 
-@media (max-width: 930px) {
+@media (max-width: 900px) {
   .hero {
     height: 70vh;
   }
@@ -153,16 +167,25 @@ onBeforeUnmount(() => {
     height: 70vh;
   }
 
-  .hero button {
-    left: 50%;
-    bottom: 60px;
+  .hero-button {
+    position: absolute;    
+    bottom: 60px;        
+    left: 50%;     
     transform: translateX(-50%);
     padding: 10px 35px;
     font-size: 13px;
+  }
+
+  .hero-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+    background: white;
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 
   .progress {
     bottom: 20px;
   }
 }
+
 </style>
