@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue';
 import { useFavorites } from '~/composables/useFavorites';
+import { useCart } from '~/composables/useCart';
 import { useSearch } from '~/composables/useSearch';
 
 const { favoritesCount } = useFavorites();
+const { cartCount } = useCart();
 const { searchQuery, handleSearch } = useSearch();
 
 const openDropdown = ref(null);
@@ -54,6 +56,7 @@ const closeDropdowns = () => {
           <NuxtLink to="/cart" class="action-link">
             <i class="fa-solid fa-shopping-bag"></i>
             <span>Kurv</span>
+            <span v-if="cartCount > 0" class="badge">{{ cartCount }}</span>
           </NuxtLink>
         </div>
       </div>

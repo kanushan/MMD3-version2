@@ -1,4 +1,10 @@
 <script setup>
+import { useFavorites } from '~/composables/useFavorites';
+import { useCart } from '~/composables/useCart';
+
+const { favoritesCount } = useFavorites();
+const { cartCount } = useCart();
+
 const emit = defineEmits(['open-search', 'open-menu']);
 const props = defineProps({
   isMenuOpen: {
@@ -35,13 +41,14 @@ const toggleMenu = () => {
     <NuxtLink to="/favorites" class="navItem" aria-label="Favoritter">
       <i class="fa-solid fa-heart navIcon"></i>
       <span class="navLabel">Favorit</span>
+      <span class="cartBadge" v-if="favoritesCount > 0">{{ favoritesCount }}</span>
     </NuxtLink>
 
     <!-- Kurv -->
     <NuxtLink to="/cart" class="navItem" aria-label="Kurv">
       <i class="fa-solid fa-cart-shopping navIcon"></i>
       <span class="navLabel">Kurv</span>
-      <span class="cartBadge" v-if="false">0</span>
+      <span class="cartBadge" v-if="cartCount > 0">{{ cartCount }}</span>
     </NuxtLink>
 
     <!-- Bruger -->
@@ -110,7 +117,7 @@ const toggleMenu = () => {
   position: absolute;
   top: -2px;
   right: 10px;
-  background: red;
+  background: #c41e3a;
   color: white;
   border-radius: 50%;
   padding: 0.15rem 0.45rem;
