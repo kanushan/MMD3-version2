@@ -1,43 +1,46 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 
-const current = ref(0);     // which image is showing now
-let interval = null;        // holds the timer
+const current = ref(0);
+let interval = null;
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
+
   const images = document.querySelectorAll(".hero img");
   const fills = document.querySelectorAll(".fill");
 
-  // start the first bar
+  // Start first bar animation
   fills[current.value].style.width = "100%";
 
   function switchSlide() {
-    // remove the active image
+    // Remove the active class from current image
     images[current.value].classList.remove("active");
 
-    // remember which bar we just used
     const previous = current.value;
-
-    // go to the next image (loops back to 0)
     current.value = (current.value + 1) % images.length;
 
-    // show the new image
+    // Show the new image
     images[current.value].classList.add("active");
 
-    // reset the previous progress bar instantly (no retract animation)
+    // Reset the previous progress bar instantly
     fills[previous].style.transition = "none";
     fills[previous].style.width = "0%";
 
-    // restart transition for the next fill
+    // Force reflow to apply transition again
+    void fills[previous].offsetWidth;
+
+    // Re-enable transition
     fills[current.value].style.transition = "width 5s linear";
 
-    // small delay before starting the new fill animation
+    // Reset *new* fill to 0, then start growing it again
+    fills[current.value].style.width = "0%";
     setTimeout(() => {
       fills[current.value].style.width = "100%";
-    }, 100);
+    }, 50);
   }
 
-  // run the switchSlide function every 5 seconds
+  // Change image every 5 seconds
   interval = setInterval(switchSlide, 5000);
 });
 
@@ -45,7 +48,6 @@ onBeforeUnmount(() => {
   clearInterval(interval);
 });
 </script>
-
 
 <template>
   <div class="hero">
@@ -56,16 +58,13 @@ onBeforeUnmount(() => {
     />
 
     <img
-      src="../public/img/bannerImgs/jakkeSaetMain.png"
+      src="../public/img/bannerImgs/snowBoard2ndHero.jpg"
       alt="Jakke sæt til herrer"
     />
-    
+
     <div class="hero-overlay"></div>
 
-    <!-- Navigation button -->
-    <router-link to="/products" class="hero-button">
-      Shop Nu
-    </router-link>
+    <router-link to="/products" class="hero-button"> Shop Nu </router-link>
 
     <div class="progress">
       <div><span class="fill"></span></div>
@@ -73,8 +72,6 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 .hero {
@@ -88,21 +85,24 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-}
-
-.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 0;
 }
 
 .hero img.active {
   opacity: 1;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
 }
 
 .hero-button {
@@ -110,9 +110,9 @@ onBeforeUnmount(() => {
   bottom: 80px;
   left: 180px;
   padding: 10px 42px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid #fff;
   background: transparent;
-  color: rgb(255, 255, 255);
+  color: #fff;
   cursor: pointer;
   font-size: 14px;
   text-transform: uppercase;
@@ -120,6 +120,7 @@ onBeforeUnmount(() => {
   text-decoration: none;
   display: inline-block;
   transition: all 0.3s ease;
+  z-index: 3;
 }
 
 .hero-button:hover {
@@ -129,7 +130,6 @@ onBeforeUnmount(() => {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-
 .progress {
   position: absolute;
   bottom: 20px;
@@ -137,6 +137,7 @@ onBeforeUnmount(() => {
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
+  z-index: 3;
 }
 
 .progress div {
@@ -168,9 +169,9 @@ onBeforeUnmount(() => {
   }
 
   .hero-button {
-    position: absolute;    
-    bottom: 60px;        
-    left: 50%;     
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
     transform: translateX(-50%);
     padding: 10px 35px;
     font-size: 13px;
@@ -187,5 +188,4 @@ onBeforeUnmount(() => {
     bottom: 20px;
   }
 }
-
 </style>

@@ -2,7 +2,6 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 </script>
 
-
 <template>
   <div class="hero">
     <img
@@ -10,17 +9,18 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
       class="active"
       alt="Ski Session vinter kollektion"
     />
-    
-    <div class="hero-overlay"></div>
 
-    <!-- Navigation button -->
-    <router-link to="/products" class="hero-button">
-      Shop Nu
-    </router-link>
+    <div class="hero-overlay"></div>
+    <a
+      href="https://www.instagram.com/boxenaalborg/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hero-button"
+    >
+      Følg os her!
+    </a>
   </div>
 </template>
-
-
 
 <style scoped>
 .hero {
@@ -37,18 +37,6 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
   object-fit: cover;
   display: block;
 }
-
-.hero-overlay {
-  position: absolute;
-  top: 2rem; /* match .hero padding-block */
-  left: 0;
-  width: 100%;
-  height: calc(100% - 2rem); /* subtract top+bottom padding */
-  background: rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease;
-  z-index: 2;
-  pointer-events: none; /* let clicks through */
-}   
 
 .hero img.active {
   opacity: 1;
@@ -78,7 +66,6 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-
 .progress {
   position: absolute;
   bottom: 20px;
@@ -107,7 +94,7 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
   transition: width 5s linear;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 930px) {
   .hero {
     height: 70vh;
   }
@@ -117,9 +104,9 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
   }
 
   .hero-button {
-    position: absolute;    
-    bottom: 60px;        
-    left: 50%;     
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
     transform: translateX(-50%);
     padding: 10px 35px;
     font-size: 13px;
@@ -136,5 +123,4 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
     bottom: 20px;
   }
 }
-
 </style>
