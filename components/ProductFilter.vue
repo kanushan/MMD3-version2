@@ -14,7 +14,6 @@ const route = useRoute();
 const router = useRouter();
 
 // State
-const selectedCategory = ref('ALLE PRODUKTER');
 const searchTerm = ref('');
 const selectedBrands = ref([]);
 const priceRange = ref([0, 1200]);
@@ -27,74 +26,31 @@ const mobileFiltersOpen = ref(false);
 onMounted(() => {
   const query = route.query;
   
+  // Set search term from URL
+  if (query.search) {
+    searchTerm.value = query.search;
+  }
+  
   // Set brand from URL
   if (query.brand) {
     const brands = Array.isArray(query.brand) ? query.brand : [query.brand];
     selectedBrands.value = brands;
   }
-  
-  // Set category from URL
-  if (query.category) {
-    if (query.category === 'Sko') {
-      selectedCategory.value = 'SKO';
-    } else if (query.category === 'Tøj') {
-      if (query.subcategory === 'Tshirt') {
-        selectedCategory.value = 'T-SHIRTS';
-      } else if (query.subcategory === 'Striktrøje') {
-        selectedCategory.value = 'SWEATSHIRTS';
-      } else if (query.subcategory === 'Hættetrøje') {
-        selectedCategory.value = 'HOODIES';
-      } else if (query.subcategory === 'Jakke') {
-        selectedCategory.value = 'JAKKER';
-      } else if (query.subcategory === 'Bukser') {
-        selectedCategory.value = 'BUKSER';
-      }
-    }
-  }
-  
-  // Set subcategory for shoes
-  if (query.subcategory && query.category === 'Sko') {
-    selectedCategory.value = 'SKO';
-  }
 });
 
 // Watch for URL changes
 watch(() => route.query, (newQuery) => {
+  // Update search term
+  if (newQuery.search) {
+    searchTerm.value = newQuery.search;
+  } else {
+    searchTerm.value = '';
+  }
+  
   if (newQuery.brand) {
     const brands = Array.isArray(newQuery.brand) ? newQuery.brand : [newQuery.brand];
     selectedBrands.value = brands;
   }
-  
-  if (newQuery.category) {
-    if (newQuery.category === 'Sko') {
-      selectedCategory.value = 'SKO';
-    } else if (newQuery.category === 'Tøj') {
-      if (newQuery.subcategory === 'Tshirt') {
-        selectedCategory.value = 'T-SHIRTS';
-      } else if (newQuery.subcategory === 'Striktrøje') {
-        selectedCategory.value = 'SWEATSHIRTS';
-      } else if (newQuery.subcategory === 'Hættetrøje') {
-        selectedCategory.value = 'HOODIES';
-      } else if (newQuery.subcategory === 'Jakke') {
-        selectedCategory.value = 'JAKKER';
-      } else if (newQuery.subcategory === 'Bukser') {
-        selectedCategory.value = 'BUKSER';
-      }
-    }
-  }
-});
-
-// Beregn kategorier med antal
-const categories = computed(() => {
-  return {
-    'ALLE PRODUKTER': props.products.length,
-    'BUKSER': props.products.filter(p => p.UnderKategori === 'Bukser').length,
-    'JAKKER': props.products.filter(p => p.UnderKategori === 'Jakke').length,
-    'T-SHIRTS': props.products.filter(p => p.UnderKategori === 'Tshirt').length,
-    'HOODIES': props.products.filter(p => p.UnderKategori === 'Hættetrøje').length,
-    'SWEATSHIRTS': props.products.filter(p => p.UnderKategori === 'Striktrøje').length,
-    'SKO': props.products.filter(p => p.Kategori === 'Sko').length,
-  };
 });
 
 // Hent alle unikke brands
@@ -117,20 +73,37 @@ const priceAccordionOpen = ref(true);
 // Filter produkter
 const filteredProducts = computed(() => {
   return props.products.filter(product => {
-    // Nyheder filter fra URL
     const query = route.query;
+    
+    // Nyheder filter fra URL - early return hvis ikke match
     if (query.isNew === 'true') {
       if (!product.isNew) return false;
     }
 
-    // Kategori filter
-    const categoryMatch = selectedCategory.value === 'ALLE PRODUKTER' ||
-      (selectedCategory.value === 'BUKSER' && product.UnderKategori === 'Bukser') ||
-      (selectedCategory.value === 'JAKKER' && product.UnderKategori === 'Jakke') ||
-      (selectedCategory.value === 'T-SHIRTS' && product.UnderKategori === 'Tshirt') ||
-      (selectedCategory.value === 'HOODIES' && product.UnderKategori === 'Hættetrøje') ||
-      (selectedCategory.value === 'SWEATSHIRTS' && product.UnderKategori === 'Striktrøje') ||
-      (selectedCategory.value === 'SKO' && product.Kategori === 'Sko');
+    // BoxensLook filter fra URL - early return hvis ikke match
+    if (query.BoxensLook === 'true') {
+      if (!product.BoxensLook) return false;
+    }
+
+    // Kategori filter - kun hvis ikke isNew eller BoxensLook filter
+    let categoryMatch = true;
+    
+    // Hvis der er en category i URL
+    if (query.category) {
+      if (query.category === 'Tøj') {
+        if (query.subcategory) {
+          categoryMatch = product.Kategori === 'Tøj' && product.UnderKategori === query.subcategory;
+        } else {
+          categoryMatch = product.Kategori === 'Tøj';
+        }
+      } else if (query.category === 'Sko') {
+        if (query.subcategory) {
+          categoryMatch = product.Kategori === 'Sko' && product.UnderKategori === query.subcategory;
+        } else {
+          categoryMatch = product.Kategori === 'Sko';
+        }
+      }
+    }
 
     // Søge filter
     const searchMatch = searchTerm.value === '' ||
@@ -146,13 +119,7 @@ const filteredProducts = computed(() => {
     const priceMatch = product.Pris >= priceRange.value[0] && 
       product.Pris <= priceRange.value[1];
 
-    // Handle subcategory from URL for shoes
-    let subcategoryMatch = true;
-    if (query.subcategory && query.category === 'Sko') {
-      subcategoryMatch = product.UnderKategori === query.subcategory;
-    }
-
-    return categoryMatch && searchMatch && brandMatch && priceMatch && subcategoryMatch;
+    return categoryMatch && searchMatch && brandMatch && priceMatch;
   });
 });
 
@@ -173,7 +140,6 @@ const toggleBrand = (brand) => {
 
 // Clear all filters
 const clearFilters = () => {
-  selectedCategory.value = 'ALLE PRODUKTER';
   searchTerm.value = '';
   selectedBrands.value = [];
   priceRange.value = [0, 1200];
@@ -186,7 +152,6 @@ const clearFilters = () => {
 // Count active filters
 const activeFiltersCount = computed(() => {
   let count = 0;
-  if (selectedCategory.value !== 'ALLE PRODUKTER') count++;
   if (searchTerm.value) count++;
   if (selectedBrands.value.length > 0) count += selectedBrands.value.length;
   if (priceRange.value[0] !== 0 || priceRange.value[1] !== 1200) count++;
@@ -206,19 +171,6 @@ const activeFiltersCount = computed(() => {
       <span v-if="activeFiltersCount > 0" class="filter-badge">{{ activeFiltersCount }}</span>
       <i class="fa-solid fa-chevron-down" :class="{ 'rotate': mobileFiltersOpen }"></i>
     </button>
-
-    <!-- Category Filters -->
-    <div class="category-filters" :class="{ 'mobile-hidden': !mobileFiltersOpen }">
-      <button
-        v-for="(count, category) in categories"
-        :key="category"
-        class="category-btn"
-        :class="{ active: selectedCategory === category }"
-        @click="selectedCategory = category"
-      >
-        {{ category }} ({{ count }})
-      </button>
-    </div>
 
     <!-- Sidebar Filters -->
     <div class="sidebar" :class="{ 'mobile-hidden': !mobileFiltersOpen }">
@@ -322,7 +274,6 @@ const activeFiltersCount = computed(() => {
   </div>
 </template>
 
-
 <style scoped>
 .filter-container {
   display: flex;
@@ -333,34 +284,6 @@ const activeFiltersCount = computed(() => {
 /* Mobile Filter Toggle Button - kun synlig på mobil */
 .mobile-filter-toggle {
   display: none;
-}
-
-.category-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.category-btn {
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  background: white;
-  color: #333;
-  transition: all 0.2s;
-}
-
-.category-btn:hover {
-  background: #f5f5f5;
-}
-
-.category-btn.active {
-  background: #000;
-  color: white;
-  border-color: #000;
 }
 
 .sidebar {
@@ -505,7 +428,6 @@ const activeFiltersCount = computed(() => {
 
 /* Mobile styles - under 930px */
 @media (max-width: 930px) {
-  /* Vis mobile filter toggle knap */
   .mobile-filter-toggle {
     display: flex;
     align-items: center;
@@ -551,18 +473,8 @@ const activeFiltersCount = computed(() => {
     font-weight: 600;
   }
 
-  /* Skjul filtre som standard på mobil */
   .mobile-hidden {
     display: none;
-  }
-
-  .category-filters {
-    flex-wrap: wrap;
-  }
-
-  .category-btn {
-    font-size: 13px;
-    padding: 8px 20px;
   }
 
   .filter-box {
@@ -596,11 +508,6 @@ const activeFiltersCount = computed(() => {
   .mobile-filter-toggle {
     padding: 10px 14px;
     font-size: 14px;
-  }
-
-  .category-btn {
-    font-size: 12px;
-    padding: 7px 16px;
   }
 
   .filter-box {

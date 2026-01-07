@@ -143,16 +143,15 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 36px;
-  height: 36px;
-  background: white;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   z-index: 2;
 }
@@ -169,10 +168,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
 
 .wishlist-btn.active i {
   color: #ff4444;
-}
-
-.wishlist-btn.active {
-  background: #ffe5e5;
 }
 
 .product-info {

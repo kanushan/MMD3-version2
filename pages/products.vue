@@ -1,4 +1,5 @@
 <script setup>
+import CategoryButtons from '~/components/CategoryButtons.vue';
 import ProductFilter from '~/components/ProductFilter.vue';
 import ProductCard from '~/components/ProductCard.vue';
 
@@ -31,30 +32,35 @@ const handleFiltered = (filtered) => {
     </div>
     
     <div v-else class="main-content">
-      <!-- Sidebar med filters -->
-      <aside>
-        <ProductFilter 
-          :products="products"
-          @filtered="handleFiltered"
-        />
-      </aside>
+      <!-- Category Buttons - fuld bredde -->
+      <CategoryButtons :products="products" />
 
-      <!-- Products Grid -->
-      <div class="products-section">
-        <div class="product-count">
-          Viser {{ filteredProducts.length }} produkter
-        </div>
-        
-        <div v-if="filteredProducts.length === 0" class="no-products">
-          Ingen produkter matcher dine filtre
-        </div>
-        
-        <div v-else class="products-grid">
-          <ProductCard 
-            v-for="product in filteredProducts" 
-            :key="product.id"
-            :product="product"
+      <div class="content-wrapper">
+        <!-- Sidebar med filters -->
+        <aside class="sidebar">
+          <ProductFilter 
+            :products="products"
+            @filtered="handleFiltered"
           />
+        </aside>
+
+        <!-- Products Grid -->
+        <div class="products-section">
+          <div class="product-count">
+            Viser {{ filteredProducts.length }} produkter
+          </div>
+          
+          <div v-if="filteredProducts.length === 0" class="no-products">
+            Ingen produkter matcher dine filtre
+          </div>
+          
+          <div v-else class="products-grid">
+            <ProductCard 
+              v-for="product in filteredProducts" 
+              :key="product.id"
+              :product="product"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -62,18 +68,17 @@ const handleFiltered = (filtered) => {
 </template>
 
 <style scoped>
+/* Mobile first - starter med mobile styles */
 .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 12px;
 }
 
 .header {
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .header h1 {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   color: #111;
   margin-bottom: 8px;
@@ -81,7 +86,7 @@ const handleFiltered = (filtered) => {
 
 .header p {
   color: #666;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .loading,
@@ -97,9 +102,19 @@ const handleFiltered = (filtered) => {
 }
 
 .main-content {
-  display: grid;
-  grid-template-columns: 280px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.sidebar {
+  width: 100%;
 }
 
 .products-section {
@@ -108,7 +123,7 @@ const handleFiltered = (filtered) => {
 }
 
 .product-count {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
   margin-bottom: 16px;
 }
@@ -122,29 +137,73 @@ const handleFiltered = (filtered) => {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
-@media (max-width: 1200px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
+/* Tablet - 600px+ */
+@media (min-width: 600px) {
+  .container {
+    padding: 16px;
   }
-}
 
-@media (max-width: 900px) {
-  .main-content {
-    grid-template-columns: 1fr;
+  .header {
+    margin-bottom: 24px;
   }
-  
+
+  .header h1 {
+    font-size: 24px;
+  }
+
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .product-count {
+    font-size: 14px;
   }
 }
 
-@media (max-width: 600px) {
+/* Desktop - 930px+ */
+@media (min-width: 930px) {
+  .container {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-bottom: 32px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .header p {
+    font-size: 15px;
+  }
+
+  .content-wrapper {
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+  }
+
+  .sidebar {
+    width: 280px;
+  }
+
   .products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 }
-</style> 
+
+/* Large Desktop - 1200px+ */
+@media (min-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
