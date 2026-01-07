@@ -25,12 +25,11 @@ export default {
 </template>
 
 <style scoped>
-
 .container {
   display: flex;
   height: 80vh;
-  width: 100%;
-  margin: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   padding: 0;
 }
 
@@ -65,11 +64,11 @@ export default {
 }
 
 .card-left .card-bg {
-  background-image: url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1200');
+  background-image: url("https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1200");
 }
 
 .card-right .card-bg {
-  background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200');
+  background-image: url("https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200");
   background-position: center 30%;
 }
 
@@ -116,7 +115,7 @@ export default {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 930px) {
   .container {
     flex-direction: column;
     height: auto;

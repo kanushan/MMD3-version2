@@ -18,7 +18,7 @@ const isProductFavorite = (product) => isFavorite(product.id);
 
 <template>
   <div>
-    <!-- Hero Section 1 -->
+    <!-- Hero Section -->
     <HeroSection />
 
     <!-- First row: All products -->
@@ -49,9 +49,16 @@ const isProductFavorite = (product) => isFavorite(product.id);
             {{ product.ModelNavn?.charAt(0) || "?" }}
           </div>
 
+          <!-- Out of stock badge -->
           <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
-          <div v-if="product.isNew" class="product-badge">NYHED</div>
 
+          <!-- Stacked badges -->
+          <div class="badges-wrapper">
+            <div v-if="product.isNew" class="product-badge">NYHED</div>
+            <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
+          </div>
+
+          <!-- Wishlist button -->
           <button
             class="wishlist-btn"
             :class="{ active: isProductFavorite(product) }"
@@ -82,13 +89,17 @@ const isProductFavorite = (product) => isFavorite(product.id);
       </NuxtLink>
     </div>
 
-    <!-- Banner Split -->
+    <!-- Banner Split (Full Width) -->
     <div class="banner-wrapper">
       <BannerSplitCards />
     </div>
 
     <!-- Second row: Only BoxensLook products -->
-    <h1 style="margin-top: 2rem">BOXENS LOOK &gt;</h1>
+    <h1 style="margin-top: 2rem">
+      <NuxtLink to="/products?filter=boxens-look" class="h1-link">
+        BOXENS LOOK &gt;
+      </NuxtLink>
+    </h1>
     <div class="product-scroll">
       <NuxtLink
         v-for="product in products.filter((p) => p.BoxensLook)"
@@ -108,9 +119,16 @@ const isProductFavorite = (product) => isFavorite(product.id);
             {{ product.ModelNavn?.charAt(0) || "?" }}
           </div>
 
+          <!-- Out of stock badge -->
           <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
-          <div v-if="product.isNew" class="product-badge">NYHED</div>
 
+          <!-- Stacked badges -->
+          <div class="badges-wrapper">
+            <div v-if="product.isNew" class="product-badge">NYHED</div>
+            <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
+          </div>
+
+          <!-- Wishlist button -->
           <button
             class="wishlist-btn"
             :class="{ active: isProductFavorite(product) }"
@@ -145,6 +163,8 @@ const isProductFavorite = (product) => isFavorite(product.id);
     <FullWidthBanner />
   </div>
 </template>
+
+
 
 <style scoped>
 h1 {
@@ -186,25 +206,25 @@ h1 {
 
 .product-scroll {
   display: flex;
-  padding: 0;
+  padding: 0 1rem;
   overflow-x: auto;
   scroll-behavior: smooth;
-  gap: 0;
-  margin-left: 1.5rem;
+  margin-left: 0;
+  padding-bottom: 0.3rem;
 }
 
 .product-scroll::-webkit-scrollbar {
-  height: 4px;
+  height: 3px;
 }
 
 .product-scroll::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .product-scroll::-webkit-scrollbar-thumb {
   background: #c5c4c4;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .product-scroll::-webkit-scrollbar-thumb:hover {
@@ -225,20 +245,45 @@ h1 {
   flex-direction: column;
 }
 
-/* NEW badge */
-.product-badge {
+.badges-wrapper {
   position: absolute;
-  top: 12px; /* Matches previous stock badge spacing */
-  left: 12px; /* Matches previous stock badge spacing */
-  padding: 4px 8px;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 3;
+  align-items: flex-start;
+}
+
+.product-badge {
+  display: inline-block;
+  padding: 2px 6px; 
   font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
   color: white;
-  background-color: #ff4444; /* Red color for NEW */
-  z-index: 3; /* Ensure it sits above the image */
+  background-color: #ff4444;
+  white-space: nowrap;   
+  text-align: left;   
 }
+
+.boxens-badge {
+  display: inline-block;
+  padding: 4px 12px;  
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 4px;
+  color: white;
+  background-color: #0F2A1E;
+  white-space: nowrap; 
+  text-align: left; 
+}
+
+
+
 
 .product-card:hover {
   transform: translateY(-4px);
@@ -366,6 +411,7 @@ h1 {
 }
 
 .banner-wrapper {
-  padding: 2rem 0;
+  padding: 2rem 0; /* Change to just padding-top/bottom, no horizontal */
+  overflow-x: hidden; /* Prevents horizontal scrollbar from the 100vw */
 }
 </style>
