@@ -40,7 +40,7 @@ const closeDropdowns = () => {
 
         <!-- Right Actions -->
         <div class="actions">
-          <NuxtLink to="/login" class="action-link">
+          <NuxtLink class="action-link">
             <i class="fa-solid fa-user"></i>
             <span>Log ind</span>
           </NuxtLink>
@@ -140,7 +140,7 @@ const closeDropdowns = () => {
           </div>
 
           <!-- Boxens Look -->
-          <NuxtLink to="/lookbook" class="nav-item special">
+          <NuxtLink to="/products?BoxensLook=true" class="nav-item special">
             BOXENS LOOK
           </NuxtLink>
         </div>
