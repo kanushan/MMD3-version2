@@ -1,44 +1,56 @@
 <script setup>
 import { useSearch } from '~/composables/useSearch';
 
+/* Vi importerer vores "useSearch" composable, som håndterer søgefunktionen på tværs af appen. Her får vi så adgang til "searchQuery" (den nuværende visende søgetekst), "handleSearch" (funktionen der udfører søgningen), og "setSearchQuery" (som opdaterer søgefeltets indhold). */
+
+/* "defineModel" bruges til at forbinde komponentens egne states med parent komponenten. Her bruges den til at styre, om søge overlayet er åbent eller lukket standardværdien er "false", hvilket betyder at det starter lukket. */
 const isOpen = defineModel({ type: Boolean, default: false });
+
+/* Vi nedbrydder eller skilder værdierne fra useSearch composable og omdøber handleSearch til "search"
+for at undgå navnekonflikt med vores egen handleSearch funktion længere nede. */
 const { searchQuery, handleSearch: search, setSearchQuery } = useSearch();
 
+/* Denne funktion udfører selve søgningen og lukker derefter søge overlayet. Den kaldes, når brugeren trykker på "Søg" knappen eller sender formularen. */
 const handleSearch = () => {
-  search();
+  search(); 
   isOpen.value = false;
+  /* Vi kalder så search funktion også lukker den efter... */
 };
 
+/* "handleQuickSearch" bruges til en hurtig søgning, når brugeren trykker på et populært søgeord. Den sætter søgeteksten automatisk til det valgte ord og starter derefter søgningen. */
 const handleQuickSearch = (query) => {
-  setSearchQuery(query);
-  handleSearch();
+  /* Her sætter funktionen igang med at søge teksten til det valgte ord og derefter lukker den ved handlesearch(); */
+  setSearchQuery(query); 
+  handleSearch(); 
 };
 
+/* "close" bruges til at lukke søge overlayet manuelt. Den sætter "isOpen" til false og nulstiller søgefeltet, så der ikke står gammel tekst næste gang. den skal køre igen */
 const close = () => {
   isOpen.value = false;
-  setSearchQuery('');
+  setSearchQuery(''); // tøm søgefeltet
 };
 
-// Close on escape key
+/* handleKeyDown funktionen lytter efter, om brugeren trykker på Escape knappen (tasten på keyboardet). Hvis det sker, kaldes "close()", så overlayet lukkes automatisk. */
 const handleKeydown = (e) => {
   if (e.key === 'Escape') {
     close();
   }
 };
 
+/* En "watcher" observere, om søge overlayet åbnes eller lukkes. Når det åbnes (isOpen = true), tilføjer vi en event listener, så brugeren kan lukke med Escape, efter venter vi et øjeblik (nextTick), så DOM’en er klar, og sætter derefter fokus i inputfeltet. Når det lukkes (isOpen = false) fjerner vi event listeneren for at undgå hukommelseslæk (unødvendige aktive events for pcen ikke bruger alt for megt RAM). */
 watch(isOpen, (newVal) => {
   if (newVal) {
     document.addEventListener('keydown', handleKeydown);
-    // Focus input when opened
     nextTick(() => {
       const input = document.querySelector('.search-overlay-input');
-      if (input) input.focus();
+      if (input) input.focus(); 
     });
   } else {
     document.removeEventListener('keydown', handleKeydown);
   }
 });
 </script>
+
 
 <template>
   <Transition name="fade">
@@ -248,7 +260,6 @@ watch(isOpen, (newVal) => {
   z-index: 1;
 }
 
-/* Transitions */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
@@ -259,14 +270,12 @@ watch(isOpen, (newVal) => {
   opacity: 0;
 }
 
-/* Desktop - hide on large screens */
 @media (min-width: 930px) {
   .search-overlay {
     display: none;
   }
 }
 
-/* Small mobile adjustments */
 @media (max-width: 480px) {
   .search-form {
     flex-direction: column;

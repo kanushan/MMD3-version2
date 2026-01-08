@@ -1,20 +1,19 @@
 <template>
   <footer class="footer">
-    <!-- Main Footer Content -->
     <div class="footer-main">
       <div class="footer-container">
-        <!-- Åbningstider -->
         <div class="footer-section">
           <h3 class="footer-heading">Åbningstider:</h3>
           <ul class="footer-list">
             <li><span class="day">Man-tors kl:</span> 10.00 - 18.00</li>
             <li><span class="day">Fredag kl:</span> 10.00 - 19.00</li>
             <li><span class="day">Lørdag kl:</span> 10.00 - 16.00</li>
-            <li><span class="day">Første søndag i måneden kl:</span> 11.00 - 15.00</li>
+            <li>
+              <span class="day">Første søndag i måneden kl:</span> 11.00 - 15.00
+            </li>
           </ul>
         </div>
 
-        <!-- Information -->
         <div class="footer-section">
           <h3 class="footer-heading">Information:</h3>
           <div class="footer-paragraphs">
@@ -27,7 +26,6 @@
           </div>
         </div>
 
-        <!-- Før dit køb -->
         <div class="footer-section">
           <h3 class="footer-heading">Før dit køb</h3>
           <ul class="footer-list">
@@ -38,19 +36,19 @@
           </ul>
         </div>
 
-        <!-- Kontakt -->
         <div class="footer-section">
           <h3 class="footer-heading">Kontakt</h3>
           <ul class="footer-list contact-list">
             <li>Boxen</li>
             <li>Nytorv 1</li>
-            <li><a href="mailto:boxen9000@gmail.com">boxen9000@gmail.com</a></li>
+            <li>
+              <a href="mailto:boxen9000@gmail.com">boxen9000@gmail.com</a>
+            </li>
             <li>DK-9000 Aalborg</li>
             <li>Tlf.: <a href="tel:+4598169166">+45 98 16 91 66</a></li>
           </ul>
         </div>
 
-        <!-- Følg os -->
         <div class="footer-section footer-social">
           <h3 class="footer-heading">Følg os</h3>
           <div class="social-icons">
@@ -99,7 +97,6 @@
       </div>
     </div>
 
-    <!-- Delivery & Payment Logos Bar -->
     <div class="footer-logos">
       <div class="footer-container logos-container">
         <div class="delivery-logos">
@@ -124,7 +121,6 @@
       </div>
     </div>
 
-    <!-- Bottom Bar -->
     <div class="footer-bottom">
       <div class="footer-container">
         <p class="cvr">CVR: 26992192</p>
@@ -167,7 +163,6 @@
   color: #ffffff;
 }
 
-/* Original lists */
 .footer-list {
   list-style: none;
   padding: 0;
@@ -186,7 +181,6 @@
   font-weight: 500;
 }
 
-/* Paragraphs for Information section */
 .footer-paragraphs p {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.8);
@@ -202,7 +196,6 @@
   color: #ffffff;
 }
 
-/* Contact links */
 .contact-list a {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
@@ -214,7 +207,6 @@
   text-decoration: underline;
 }
 
-/* Social Icons */
 .social-icons {
   display: flex;
   gap: 0.75rem;
@@ -238,7 +230,6 @@
   object-fit: contain;
 }
 
-/* Trustpilot */
 .trustpilot-wrapper {
   margin-top: 0.5rem;
 }
@@ -248,7 +239,6 @@
   height: auto;
 }
 
-/* Logos Bar */
 .footer-logos {
   padding: 1.5rem 0;
   background-color: #212121;
@@ -285,7 +275,6 @@
   object-fit: contain;
 }
 
-/* Bottom Bar */
 .footer-bottom {
   padding: 1.5rem 0;
   text-align: center;
@@ -305,7 +294,6 @@
   margin: 0;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .footer-main .footer-container {
     grid-template-columns: repeat(3, 1fr);

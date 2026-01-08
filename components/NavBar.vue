@@ -1,25 +1,43 @@
 <script setup>
-import { useFavorites } from '~/composables/useFavorites';
-import { useCart } from '~/composables/useCart';
+import { useFavorites } from "~/composables/useFavorites";
+import { useCart } from "~/composables/useCart";
 
+/* Vi bruger vores composable useFavorites, som er et lille stykke kode, der holder styr på
+alt relateret til favoritter. Her henter vi kun "favoritesCount", som fortæller hvor mange
+produkter brugeren har markeret som favorit. Det er reaktivt, så hvis tallet ændrer sig,
+opdateres UI automatisk. */
 const { favoritesCount } = useFavorites();
+
+/* På samme måde bruger vi useCart composable til at holde styr på indkøbskurven. 
+Vi henter "cartCount", som viser hvor mange produkter der aktuelt ligger i kurven. 
+Dette er også reaktivt, så UI altid viser korrekt antal. */
 const { cartCount } = useCart();
 
-const emit = defineEmits(['open-search', 'open-menu']);
+/* defineEmits bruges til at registrere events, som denne komponent kan sende til sin parent.
+Her kan komponenten sende to events: "open search" og "open menu", så parent kan reagere,
+fx åbne søgefeltet eller burger menuen, når brugeren klikker på knapper. */
+const emit = defineEmits(["open-search", "open-menu"]);
+
+/* defineProps bruges til at tage imod information fra parent komponenten. 
+Her får vi "isMenuOpen", som er en Boolean, der fortæller om menuen er åben eller ej. 
+Vi sætter default til false, så menuen er lukket, hvis parent ikke sender en værdi. */
 const props = defineProps({
   isMenuOpen: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
+/* toggleMenu er en funktion, som sender eventet 'open menu' til parent komponenten. 
+Når funktionen kaldes (fx når brugeren klikker på burger ikonet), vil parent kunne 
+åbne eller lukke menuen baseret på det. */
 const toggleMenu = () => {
-  emit('open-menu');
+  emit("open-menu");
 };
 </script>
 
 <template>
- <nav class="navBar">
+  <nav class="navBar">
     <NuxtLink to="/" class="navItem" aria-label="Hjem">
       <i class="fa-solid fa-house navIcon"></i>
       <span class="navLabel">Hjem</span>
@@ -38,7 +56,9 @@ const toggleMenu = () => {
     <NuxtLink to="/favorites" class="navItem" aria-label="Favoritter">
       <i class="fa-solid fa-heart navIcon"></i>
       <span class="navLabel">Favorit</span>
-      <span class="cartBadge" v-if="favoritesCount > 0">{{ favoritesCount }}</span>
+      <span class="cartBadge" v-if="favoritesCount > 0">{{
+        favoritesCount
+      }}</span>
     </NuxtLink>
 
     <NuxtLink to="/cart" class="navItem" aria-label="Kurv">
@@ -52,13 +72,11 @@ const toggleMenu = () => {
       <span class="navLabel">Bruger</span>
     </NuxtLink>
 
-    <button
-      type="button"
-      class="navItem"
-      aria-label="Menu"
-      @click="toggleMenu"
-    >
-      <i :class="isMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="navIcon"></i>
+    <button type="button" class="navItem" aria-label="Menu" @click="toggleMenu">
+      <i
+        :class="isMenuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"
+        class="navIcon"
+      ></i>
       <span class="navLabel">Menu</span>
     </button>
   </nav>

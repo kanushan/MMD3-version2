@@ -1,170 +1,171 @@
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue'
 
+/* Vi definerer props, som gør det muligt for komponenten at modtage data fra parent komponenten.
+   Her modtager vi en liste af produkter (products), som er et Array og et påkrævet felt. */
 const props = defineProps({
   products: {
     type: Array,
     required: true
   }
-});
+})
 
-const emit = defineEmits(['filtered']);
+/* Vi definerer et event, som komponenten kan udsende til parent komponenten.
+   Eventet hedder "filtered" og bruges til at sende de filtrerede produkter tilbage. */
+const emit = defineEmits(['filtered'])
 
-const route = useRoute();
-const router = useRouter();
+/* Vi bruger router hooks til at arbejde med URL'en som "useRoute" giver adgang til de aktuelle query parametre (fx ?brand=LVL)... useRouter gør det muligt at ændre URL'en uden at genindlæse siden. */
+const route = useRoute()
+const router = useRouter()
 
-// State
-const searchTerm = ref('');
-const selectedBrands = ref([]);
-const priceRange = ref([0, 1200]);
-const brandSearchTerm = ref('');
+/* Reaktive variabler der holder styr på ting som searchTerm som gøre tekst brugeren skriver i søgefeltet. der kan også bruges til selectedBrands som hvilke brands der er valgt i filteret. eller priceRange som det valgte prisinterval (min og max) og mere som brandSearchTerm som søgefelt til filtrering af mærker inde i filteret er som hvad vi har fundet frem til som løsning */
+const searchTerm = ref('')
+const selectedBrands = ref([])
+const priceRange = ref([0, 1200])
+const brandSearchTerm = ref('')
 
-// Mobile filter accordion state
-const mobileFiltersOpen = ref(false);
+/* simple boolean der observere og styrer om mobilens filter menu er åben eller ej... */
+const mobileFiltersOpen = ref(false)
 
-// Initialize filters from URL on mount
+/* Når komponenten loader første gang (onMounted), tjekkes URL'en for eksisterende filtre. Hvis der fx står ?search=jeans, sættes søgefeltet automatisk til "jeans" og hvis der står ?brand=LVL, vælges det brand automatisk i filteret. */
 onMounted(() => {
-  const query = route.query;
-  
-  // Set search term from URL
+  const query = route.query
   if (query.search) {
-    searchTerm.value = query.search;
+    searchTerm.value = query.search
   }
-  
-  // Set brand from URL
   if (query.brand) {
-    const brands = Array.isArray(query.brand) ? query.brand : [query.brand];
-    selectedBrands.value = brands;
+    const brands = Array.isArray(query.brand) ? query.brand : [query.brand]
+    selectedBrands.value = brands
   }
-});
+})
 
-// Watch for URL changes
+/* Watch observere ændringer i URL'en. Hvis brugeren navigerer frem og tilbage i browseren, bliver filtrene opdateret, så de matcher den aktuelle URL. */
 watch(() => route.query, (newQuery) => {
-  // Update search term
   if (newQuery.search) {
-    searchTerm.value = newQuery.search;
+    searchTerm.value = newQuery.search
   } else {
-    searchTerm.value = '';
+    searchTerm.value = ''
   }
-  
   if (newQuery.brand) {
-    const brands = Array.isArray(newQuery.brand) ? newQuery.brand : [newQuery.brand];
-    selectedBrands.value = brands;
+    const brands = Array.isArray(newQuery.brand) ? newQuery.brand : [newQuery.brand]
+    selectedBrands.value = brands
   }
-});
+})
 
-// Hent alle unikke brands
+/* computed laver en liste over alle unikke brands i produktlisten. Vi bruger "Set" til at fjerne kopier af andre produkter og ".sort()" til at sortere alfabetisk. */
 const allBrands = computed(() => {
-  return [...new Set(props.products.map(p => p.Mærke))].sort();
-});
+  return [...new Set(props.products.map(p => p.Mærke))].sort()
+})
 
-// Filtrer brands baseret på søgning
+/* Her filtreres brands baseret på brugerens input i brands søgefeltet. Hvis brugeren fx skriver "jack", vises kun mærker der indeholder "jack" så som jack & jones... */
 const filteredBrands = computed(() => {
-  if (!brandSearchTerm.value) return allBrands.value;
+  if (!brandSearchTerm.value) return allBrands.value
   return allBrands.value.filter(brand => 
     brand.toLowerCase().includes(brandSearchTerm.value.toLowerCase())
-  );
-});
+  )
+})
 
-// Accordion state
-const brandAccordionOpen = ref(true);
-const priceAccordionOpen = ref(true);
+/* Accordion state styrer om pris og brandfiltrene er åbne eller lukkede */
+const brandAccordionOpen = ref(true)
+const priceAccordionOpen = ref(true)
 
-// Filter produkter
+/* Her foregår den egentlige filtrering af produkterne. Computed sørger for automatisk at opdatere listen, når brugeren ændrer noget i filtrene. */
 const filteredProducts = computed(() => {
   return props.products.filter(product => {
-    const query = route.query;
-    
-    // Nyheder filter fra URL - early return hvis ikke match
+    const query = route.query
+
+ /* Filtrer nye produkter, hvis isNew=true i URL'en */
     if (query.isNew === 'true') {
-      if (!product.isNew) return false;
+      if (!product.isNew) return false
     }
 
-    // BoxensLook filter fra URL - early return hvis ikke match
+    /* Filtrer produkter der hører til "BoxensLook" */
     if (query.BoxensLook === 'true') {
-      if (!product.BoxensLook) return false;
+      if (!product.BoxensLook) return false
     }
 
-    // Kategori filter - kun hvis ikke isNew eller BoxensLook filter
-    let categoryMatch = true;
-    
-    // Hvis der er en category i URL
+    /* Match kategori og underkategori (fx "Tøj" og "Bukser") */
+    let categoryMatch = true
     if (query.category) {
       if (query.category === 'Tøj') {
         if (query.subcategory) {
-          categoryMatch = product.Kategori === 'Tøj' && product.UnderKategori === query.subcategory;
+          categoryMatch = product.Kategori === 'Tøj' && product.UnderKategori === query.subcategory
         } else {
-          categoryMatch = product.Kategori === 'Tøj';
+          categoryMatch = product.Kategori === 'Tøj'
         }
       } else if (query.category === 'Sko') {
         if (query.subcategory) {
-          categoryMatch = product.Kategori === 'Sko' && product.UnderKategori === query.subcategory;
+          categoryMatch = product.Kategori === 'Sko' && product.UnderKategori === query.subcategory
         } else {
-          categoryMatch = product.Kategori === 'Sko';
+          categoryMatch = product.Kategori === 'Sko'
         }
       }
     }
 
-    // Søge filter
+    /* Søgefilteret tjekker navn, beskrivelse, mærke, kategori, underkategori og tags på de forskellige produkter som gøre søgning mere effektivt og giver bedre resultater. */
     const searchMatch = searchTerm.value === '' ||
       product.ModelNavn?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
       product.ProduktBeskrivelse?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
       product.Mærke?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
       product.Kategori?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
       product.UnderKategori?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-      product.tags?.some(tag => tag.toLowerCase().includes(searchTerm.value.toLowerCase()));
+      product.tags?.some(tag => tag.toLowerCase().includes(searchTerm.value.toLowerCase()))
 
-    // Brand filter
+    /* Brand filter viser hvis ingen brand er valgt, ellers vises alle produkter */
     const brandMatch = selectedBrands.value.length === 0 || 
-      selectedBrands.value.includes(product.Mærke);
+      selectedBrands.value.includes(product.Mærke)
 
-    // Pris filter
+    /* Det samme sker hernede som ovenover med filtrering */
     const priceMatch = product.Pris >= priceRange.value[0] && 
-      product.Pris <= priceRange.value[1];
+      product.Pris <= priceRange.value[1]
 
-    return categoryMatch && searchMatch && brandMatch && priceMatch;
-  });
-});
+    /* Et produkt bliver kun vist, hvis det matcher alle kriterier */
+    return categoryMatch && searchMatch && brandMatch && priceMatch
+  })
+})
 
-// Emit filtered products når de ændres
+/* Når listen over filtrerede produkter ændrer sig, sender vi dem til parent komponenten. Dette sker automatisk, også første gang komponenten loader. */
 watch(filteredProducts, (newVal) => {
-  emit('filtered', newVal);
-}, { immediate: true });
+  emit('filtered', newVal)
+}, { immediate: true })
 
-// Toggle brand selection
+/* Funktion til at håndtere valg og fravalg af brands i filteret. Når brugeren klikker på et brand i listen, tjekker vi først om det allerede findes i "selectedBrands". Hvis brandet allerede er valgt (hvor det findes i arrayet), bliver det fjernet ved hjælp af splice(). Eller hvis brandet ikke findes, bliver det tilføjet til arrayet med push(). På den måde fungerer funktionen som en "toggle" hvor hver klik skifter mellem valgt og ikke tilvalgt. Dette gør det muligt for brugeren at vælge flere brands på samme tid. */
 const toggleBrand = (brand) => {
-  const index = selectedBrands.value.indexOf(brand);
+  const index = selectedBrands.value.indexOf(brand)
   if (index > -1) {
-    selectedBrands.value.splice(index, 1);
+    selectedBrands.value.splice(index, 1)
   } else {
-    selectedBrands.value.push(brand);
+    selectedBrands.value.push(brand)
   }
-};
+}
 
-// Clear all filters
+
+/* 
+Funktion til at nulstille ALLE filtre i produktlisten og gendanne standardindstillingerne. det vil sige når brugeren klikker på "Ryd alle filtre" knappen, udføres følgende funktioner så som searchTerm der bliver tømt, så der ikke længere søges på tekst og selectedBrands bliver sat til et tomt array, så ingen mærker er markeret. priceRange bliver nulstillet til standardværdien [0, 1200], så alle priser vises igen og brandSearchTerm bliver tømt, så mærke søgefeltet ikke filtrerer listen. Til sidst opdateres URL’en ved hjælp af router.push({ query: {} }), hvilket fjerner alle query parametre (som fx ?brand= eller ?search=) fra adresselinjen.
+
+Så i alt hvad denne funktion gøre er bare et reset af filteret... Denne funktion giver brugeren en hurtig måde at starte forfra uden at skulle manuelt fjerne hvert enkelt filter.*/
 const clearFilters = () => {
-  searchTerm.value = '';
-  selectedBrands.value = [];
-  priceRange.value = [0, 1200];
-  brandSearchTerm.value = '';
-  
-  // Clear URL query params
-  router.push({ query: {} });
-};
+  searchTerm.value = ''
+  selectedBrands.value = []
+  priceRange.value = [0, 1200]
+  brandSearchTerm.value = ''
+  router.push({ query: {} })
+}
 
-// Count active filters
+
+/* computed tæller hvor mange filtre der er aktive. Det bruges fx til at vise et badge med antal aktive filtre på mobil. */
 const activeFiltersCount = computed(() => {
-  let count = 0;
-  if (searchTerm.value) count++;
-  if (selectedBrands.value.length > 0) count += selectedBrands.value.length;
-  if (priceRange.value[0] !== 0 || priceRange.value[1] !== 1200) count++;
-  return count;
-});
+  let count = 0
+  if (searchTerm.value) count++
+  if (selectedBrands.value.length > 0) count += selectedBrands.value.length
+  if (priceRange.value[0] !== 0 || priceRange.value[1] !== 1200) count++
+  return count
+})
 </script>
+
 
 <template>
   <div class="filter-container">
-    <!-- Mobile Filter Toggle Button -->
     <button 
       class="mobile-filter-toggle" 
       @click="mobileFiltersOpen = !mobileFiltersOpen"
@@ -175,14 +176,11 @@ const activeFiltersCount = computed(() => {
       <i class="fa-solid fa-chevron-down" :class="{ 'rotate': mobileFiltersOpen }"></i>
     </button>
 
-    <!-- Sidebar Filters -->
     <div class="sidebar" :class="{ 'mobile-hidden': !mobileFiltersOpen }">
-      <!-- Category Buttons - kun på mobil -->
       <div class="mobile-categories">
         <slot name="categories"></slot>
       </div>
 
-      <!-- Search Filter -->
       <div class="filter-box">
         <h3>Søg</h3>
         <div class="search-wrapper">
@@ -196,7 +194,6 @@ const activeFiltersCount = computed(() => {
         </div>
       </div>
 
-      <!-- Brand Filter -->
       <div class="filter-box">
         <h3 
           class="accordion"
@@ -236,7 +233,6 @@ const activeFiltersCount = computed(() => {
         </div>
       </div>
 
-      <!-- Price Filter -->
       <div class="filter-box">
         <h3 
           class="accordion"
@@ -274,7 +270,6 @@ const activeFiltersCount = computed(() => {
         </div>
       </div>
 
-      <!-- Clear Filters Button -->
       <button class="clear-btn" @click="clearFilters">
         Ryd alle filtre
       </button>
@@ -289,7 +284,6 @@ const activeFiltersCount = computed(() => {
   gap: 24px;
 }
 
-/* Mobile Filter Toggle Button - kun synlig på mobil */
 .mobile-filter-toggle {
   display: none;
 }
@@ -326,7 +320,7 @@ const activeFiltersCount = computed(() => {
 }
 
 .filter-box h3.accordion::after {
-  content: '▼';
+  content: '';
   font-size: 10px;
   transition: transform 0.2s;
 }
@@ -347,6 +341,7 @@ const activeFiltersCount = computed(() => {
 
 .search-wrapper {
   position: relative;
+  margin-bottom: 12px;
 }
 
 .search-icon {
@@ -438,7 +433,6 @@ const activeFiltersCount = computed(() => {
   background: #e5e5e5;
 }
 
-/* Mobile styles - under 930px */
 @media (max-width: 930px) {
   .mobile-filter-toggle {
     display: flex;

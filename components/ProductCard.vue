@@ -1,23 +1,28 @@
 <script setup>
-import { computed } from 'vue'
-import { useFavorites } from '~/composables/useFavorites'
+import { computed } from "vue";
+import { useFavorites } from "~/composables/useFavorites";
 
+/* defineProps bruges til at modtage data fra parent komponenten. Her modtager vi et "product" objekt, som er påkrævet. Det betyder at komponenten ikke vil fungere korrekt uden et produkt. Dette objekt indeholder fx id, navn, pris og andre produktinformationer. */
 const props = defineProps({
   product: {
     type: Object,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const { toggleFavorite, isFavorite } = useFavorites()
+/* Vi bruger vores composable useFavorites, som håndterer alt relateret til favoritlisten. Vi henter to funktioner så som toggleFavorite hvilket tilføjer eller fjerner et produkt fra favoritlisten... isFavorite tjekker om et produkt allerede er i favoritlisten. Dette gør logikken omkring favoritter let og genbrugelig på tværs af webshoppen. */
+const { toggleFavorite, isFavorite } = useFavorites();
 
-const formatPrice = (price) => `${price.toFixed(2)} DKK`
+/* formatPrice er en simpel funktion til at formatere pris. Den tager et tal (pris) og returnerer det som en streng med 2 decimaler efterfulgt af 'DKK'. Dette sikrer ensartet prisformatering i hele UI'et. */
+const formatPrice = (price) => `${price.toFixed(2)} DKK`;
 
+/* toggleWishlist er en funktion, der kalder toggleFavorite med det aktuelle produkt fra props. Når brugeren klikker på favorit ikonet, vil dette tilføje eller fjerne produktet fra listen. */
 const toggleWishlist = () => {
-  toggleFavorite(props.product)
-}
+  toggleFavorite(props.product);
+};
 
-const isProductFavorite = computed(() => isFavorite(props.product.id))
+/* isProductFavorite er et computed property. Det opdateres automatisk når favoritter ændres. Den bruger isFavorite med produktets id til at returnere true eller false,  så UI'et kan vise om produktet er markeret som favorit. */
+const isProductFavorite = computed(() => isFavorite(props.product.id));
 </script>
 
 <template>
@@ -34,19 +39,16 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
         class="product-image"
       />
       <div v-else class="placeholder-image">
-        {{ product.ModelNavn?.charAt(0) || '?' }}
+        {{ product.ModelNavn?.charAt(0) || "?" }}
       </div>
 
-      <!-- Out of stock badge -->
       <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
 
-      <!-- Stacked badges -->
       <div class="badges-wrapper">
         <div v-if="product.isNew" class="product-badge">NYHED</div>
         <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
       </div>
 
-      <!-- Wishlist button -->
       <button
         class="wishlist-btn"
         :class="{ active: isProductFavorite }"
@@ -102,7 +104,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
   opacity: 0.6;
 }
 
-/* === IMAGE WRAPPER === */
 .product-image-wrapper {
   position: relative;
   width: 100%;
@@ -128,7 +129,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
   font-weight: 600;
 }
 
-/* === BADGES === */
 .badges-wrapper {
   position: absolute;
   top: 12px;
@@ -166,7 +166,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
   text-align: left;
 }
 
-/* === OUT OF STOCK BADGE === */
 .stock-badge {
   position: absolute;
   top: 12px;
@@ -182,7 +181,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
   z-index: 2;
 }
 
-/* === WISHLIST === */
 .wishlist-btn {
   position: absolute;
   top: 12px;
@@ -214,7 +212,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
   color: #ff4444;
 }
 
-/* === PRODUCT INFO === */
 .product-info {
   padding: 1rem;
 }
@@ -240,7 +237,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id))
   margin-bottom: 10px;
 }
 
-/* === COLOR SWATCHES === */
 .color-swatches {
   display: flex;
   gap: 6px;
