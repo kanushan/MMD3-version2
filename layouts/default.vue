@@ -3,6 +3,7 @@ import DesktopNav from '~/components/DesktopNav.vue';
 import NavBar from '~/components/NavBar.vue';
 import SearchOverlay from '~/components/SearchOverlay.vue';
 import BurgerMenu from '~/components/BurgerMenu.vue';
+import MobileBanner from '~/components/MobileBanner.vue';
 
 const isSearchOpen = ref(false);
 const isBurgerOpen = ref(false);
@@ -11,7 +12,7 @@ const isBurgerOpen = ref(false);
 <template>
   <div>
     <DesktopNav />
-    
+    <MobileBanner />
     <NavBar 
       @open-search="isSearchOpen = true"
       @open-menu="isBurgerOpen = !isBurgerOpen"

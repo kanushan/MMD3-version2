@@ -37,7 +37,7 @@ const closeDropdowns = () => {
 
         <!-- Logo -->
         <NuxtLink to="/" class="logo">
-          <span class="logo-text">BO<span class="logo-x">X</span>EN</span>
+          <img src="../public/img/boxen-logo.png" alt="">
         </NuxtLink>
 
         <!-- Right Actions -->
@@ -218,8 +218,9 @@ const closeDropdowns = () => {
 
 /* Logo */
 .logo {
-  text-decoration: none;
   justify-self: center;
+  width: 75%;
+  height: 75%;
 }
 
 .logo-text {

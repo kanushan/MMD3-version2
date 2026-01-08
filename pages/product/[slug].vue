@@ -3,6 +3,7 @@ import { useCart } from '~/composables/useCart';
 import { useFavorites } from '~/composables/useFavorites';
 
 const route = useRoute();
+const router = useRouter();
 const { product, loading, error } = useProduct(route.params.slug);
 
 // Cart and favorites
@@ -14,19 +15,34 @@ const selectedImage = ref(null);
 const quantity = ref(1);
 const selectedSize = ref('L');
 const showAddedToCart = ref(false);
- 
-// One-liner to get all product images
+
+// Loader state
+const showLoader = ref(true);
+
+// One-liner to get all product images - FLYTTET OP
 const productImages = computed(() =>
   product.value ? ['BilledeMain', 'Billede1', 'Billede2', 'Billede3', 'Billede4']
     .map(key => product.value[key]).filter(Boolean) : []
 );
- 
-// Watch for product changes to set initial image
+
+// Watch for når produktet er loaded
 watch(() => product.value, (newProduct) => {
-  if (newProduct && productImages.value.length > 0) {
-    selectedImage.value = productImages.value[0];
+  if (newProduct) {
+    setTimeout(() => {
+      showLoader.value = false;
+    }, 400);
+    
+    // Set initial image
+    if (productImages.value.length > 0) {
+      selectedImage.value = productImages.value[0];
+    }
   }
 }, { immediate: true });
+
+// Reset loader når route ændrer sig
+watch(() => route.params.slug, () => {
+  showLoader.value = true;
+});
  
 const decrementQuantity = () => {
   if (quantity.value > 1) quantity.value--;
@@ -39,12 +55,12 @@ const incrementQuantity = () => {
 const addToCart = () => {
   if (!product.value) return;
 
-  // Tilføj til kurv med valgte optioner
+  // Tilføj til kurv med valgte options
   addProductToCart(
     product.value,
     quantity.value,
     selectedSize.value,
-    null // Farve - kan tilføjes senere hvis du har farve variants
+    null // farve, som kan implenteres senere
   );
 
   // Vis bekræftelse
@@ -58,24 +74,27 @@ const addToCart = () => {
 };
  
 const goBack = () => {
-  navigateTo(-1); // Goes back one page in history
+  router.back();
 };
 </script>
  
 <template>
-  <div v-if="loading" class="loading">Loading...</div>
-  <div v-else-if="error" class="error">Produkt ikke fundet</div>
+  <!-- Loader overlay -->
+  <div v-if="showLoader" class="loader-overlay">
+    <Loader />
+  </div>
+
+  <div v-if="error" class="error">Produkt ikke fundet</div>
   <div v-else-if="product" class="product-page">
  
-    <!-- Back button -->
-    <button @click="goBack" class="back-button" aria-label="Tilbage">
+    <!-- Desktop buttons -->
+    <button @click="goBack" class="back-button desktop-btn" aria-label="Tilbage">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
     
-    <!-- Favorite button -->
     <button 
       @click="toggleFavorite(product)" 
-      class="favorite-button"
+      class="favorite-button desktop-btn"
       :class="{ active: isFavorite(product.id) }"
       :title="isFavorite(product.id) ? 'Fjern fra favoritter' : 'Tilføj til favoritter'"
     >
@@ -97,6 +116,19 @@ const goBack = () => {
  
     <!-- Center: Main product image -->
     <div class="main-image">
+      <!-- Mobile buttons -->
+      <button @click="goBack" class="back-button mobile-btn" aria-label="Tilbage">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      
+      <button 
+        @click="toggleFavorite(product)" 
+        class="favorite-button mobile-btn"
+        :class="{ active: isFavorite(product.id) }"
+      >
+        <i :class="isFavorite(product.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+      </button>
+
       <img :src="selectedImage || product.BilledeMain" :alt="product.ModelNavn">
     </div>
  
@@ -185,6 +217,20 @@ const goBack = () => {
 </template>
  
 <style scoped>
+/* Loader overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
 .back-button {
   position: fixed;
   top: 140px;
@@ -192,6 +238,7 @@ const goBack = () => {
   width: 25px;
   height: 25px;
   background: white;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -280,11 +327,17 @@ const goBack = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
  
 .main-image img {
   max-width: 100%;
   height: auto;
+}
+
+/* Hide mobile buttons on desktop */
+.mobile-btn {
+  display: none;
 }
  
 /* Product Details */
@@ -555,13 +608,61 @@ const goBack = () => {
  
 /* Responsive */
 @media (max-width: 930px) {
+  /* Hide desktop buttons */
+  .desktop-btn {
+    display: none !important;
+  }
+
+  /* Show mobile buttons */
+  .mobile-btn {
+    display: flex !important;
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+
+  .mobile-btn.back-button {
+    top: 20px;
+    left: 16px;
+  }
+
+  .mobile-btn.favorite-button {
+    top: 20px;
+    right: 16px;
+  }
+
+  .mobile-btn i {
+    font-size: 20px;
+  }
+
   .product-page {
     grid-template-columns: 1fr;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
   }
   
   .image-thumbnails {
     flex-direction: row;
     order: 2;
+    justify-content: space-around;
+    height: 100px;
+    padding: 10px;
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
   
   .main-image {
@@ -570,22 +671,8 @@ const goBack = () => {
   
   .product-details {
     order: 3;
-  }
-
-  .back-button {
-    top: 20px;
-    left: 10px;
-    width: 44px;
-    height: 44px;
-  }
-
-  .back-button i {
-    font-size: 16px;
-  }
-
-  .favorite-button {
-    top: 20px;
-    right: 10px;
+    padding: 20px 16px;
+    margin-bottom: 50px;
   }
 }
 </style>

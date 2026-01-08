@@ -148,32 +148,9 @@ const handleFiltered = (filtered) => {
 
 .products-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolonner på mobil */
   gap: 12px;
-}
-
-/* Tablet - 600px+ */
-@media (min-width: 600px) {
-  .container {
-    padding: 16px;
-  }
-
-  .header {
-    margin-bottom: 24px;
-  }
-
-  .header h1 {
-    font-size: 24px;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .product-count {
-    font-size: 14px;
-  }
+  margin-bottom: 50px;
 }
 
 /* Desktop - 930px+ */
@@ -212,6 +189,11 @@ const handleFiltered = (filtered) => {
   .products-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    margin-bottom: 0px;
+  }
+
+  .product-count {
+    font-size: 14px;
   }
 }
 
@@ -219,6 +201,7 @@ const handleFiltered = (filtered) => {
 @media (min-width: 1200px) {
   .products-grid {
     grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 0px;
   }
 }
 </style>

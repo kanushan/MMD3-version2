@@ -28,7 +28,7 @@ export default {
 .container {
   display: flex;
   height: 80vh;
-  width: 100vw;
+  max-width: 100vw;
   margin-left: calc(-50vw + 50%);
   padding: 0;
 }
