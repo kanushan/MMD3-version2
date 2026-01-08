@@ -54,7 +54,7 @@ const isProductFavorite = (product) => isFavorite(product.id);
     <!-- Hvis produkterne er hentet korrekt og listen ikke er tom, vises produktkortene i et scrollbart område med overflow på -->
       <div v-else class="product-scroll">
       <NuxtLink
-        v-for="product in products"
+        v-for="product in products.filter((p) => p.isNew)"
         :key="product.id"
         :to="`/product/${product.slug}`"
         class="product-card"
