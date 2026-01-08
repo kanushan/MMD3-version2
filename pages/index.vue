@@ -1,10 +1,4 @@
 <script setup>
-/* Her bliver der importeret komponenter fra vores component mappe der skal bruges på siden */
-import HeroSection from "~/components/HeroSection.vue"; /* Hero-sektionen øverst på siden */
-import BannerSplitCards from "~/components/BannerSplitCards.vue"; /* Banner med delte kort som vises nede på siden med en 50/50 split med animation */
-import { useFavorites } from "~/composables/useFavorites"; /* Composable til håndtering af favoritter og grunden til denne er sat i { } er fordi vi importerer et named export. */
-import TheFooter from "~/components/TheFooter.vue"; /* Footer-komponent */
-
 /* Her henter vi produkter fra API eller datastore som i vores tilfælde er et JSON fil hvor products er vores produkter og loading der viser om vores boolean stadig henter data... og til sidst error som viser en fejlmeddelelse om der er nogle fejl under processen */
 const { products, loading, error } = useProducts({ type: "product" });
 

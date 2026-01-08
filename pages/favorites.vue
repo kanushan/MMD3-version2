@@ -1,8 +1,4 @@
 <script setup>
-/* Vi importerer composable "useFavorites" som vi ogs¨å gøre på alle andre vue pages med vores komponenter, for at hente brugerens favoritter samt antallet af favoritter. Importerer "ProductCard" komponenten til visning af hvert favoritprodukt. "favorites" indeholder listen af favoritter, og "favoritesCount" holder styr på hvor mange favoritter brugeren har. */
-import { useFavorites } from "~/composables/useFavorites";
-import ProductCard from "~/components/ProductCard.vue";
-
 const { favorites, favoritesCount } = useFavorites();
 </script>
 

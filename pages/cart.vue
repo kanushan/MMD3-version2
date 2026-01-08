@@ -1,7 +1,4 @@
 <script setup>
-/* vi importerer igen et component som hedder "useCart" hvilket er et composable, som giver adgang til brugerens kurv, funktioner til at opdatere eller fjerne varer, samt totaler og antal varer i kurven */
-import { useCart } from "~/composables/useCart";
-
 /* Her henter vi kurvdata og relevante funktioner fra "useCart". "cart" indeholder listen af produkter, "cartTotal" er summen, og "cartCount" er antal varer. "updateQuantity" og "removeFromCart" bruges til at ændre eller fjerne produkter. */
 const { cart, updateQuantity, removeFromCart, cartTotal, cartCount } =
   useCart();

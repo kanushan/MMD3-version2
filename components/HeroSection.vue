@@ -1,6 +1,4 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
-
 /* Reaktive references til slideren */
 /* Gemmer indekset af den aktive slide */
 const current = ref(0);

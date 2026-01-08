@@ -1,9 +1,4 @@
 <script setup>
-import { ref } from "vue";
-import { useFavorites } from "~/composables/useFavorites";
-import { useCart } from "~/composables/useCart";
-import { useSearch } from "~/composables/useSearch";
-
 const { favoritesCount } = useFavorites();
 const { cartCount } = useCart();
 const { searchQuery, handleSearch } = useSearch();

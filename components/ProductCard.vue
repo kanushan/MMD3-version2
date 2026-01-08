@@ -1,7 +1,4 @@
 <script setup>
-import { computed } from "vue";
-import { useFavorites } from "~/composables/useFavorites";
-
 /* defineProps bruges til at modtage data fra parent komponenten. Her modtager vi et "product" objekt, som er påkrævet. Det betyder at komponenten ikke vil fungere korrekt uden et produkt. Dette objekt indeholder fx id, navn, pris og andre produktinformationer. */
 const props = defineProps({
   product: {

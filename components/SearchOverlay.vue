@@ -1,6 +1,4 @@
 <script setup>
-import { useSearch } from '~/composables/useSearch';
-
 /* Vi importerer vores "useSearch" composable, som håndterer søgefunktionen på tværs af appen. Her får vi så adgang til "searchQuery" (den nuværende visende søgetekst), "handleSearch" (funktionen der udfører søgningen), og "setSearchQuery" (som opdaterer søgefeltets indhold). */
 
 /* "defineModel" bruges til at forbinde komponentens egne states med parent komponenten. Her bruges den til at styre, om søge overlayet er åbent eller lukket standardværdien er "false", hvilket betyder at det starter lukket. */

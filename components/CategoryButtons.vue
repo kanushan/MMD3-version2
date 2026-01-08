@@ -1,6 +1,4 @@
 <script setup>
-import { ref, computed, watch, onMounted } from "vue";
-
 /* Vi definerer props så komponenten kan modtage et array af produkter fra parent komponenten. 
    Dette array skal indeholde alle relevante produktdata såsom navn, kategori og underkategori. 
    Det er påkrævet fordi resten af komponenten er afhængig af det for at kunne vise produkter og tælle dem i kategorier. */

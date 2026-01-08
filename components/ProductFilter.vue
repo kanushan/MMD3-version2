@@ -1,6 +1,4 @@
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
-
 /* Vi definerer props, som gør det muligt for komponenten at modtage data fra parent komponenten.
    Her modtager vi en liste af produkter (products), som er et Array og et påkrævet felt. */
 const props = defineProps({

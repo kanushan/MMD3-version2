@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <footer class="footer">
     <div class="footer-main">
@@ -81,7 +83,7 @@
           </div>
           <div class="trustpilot-wrapper">
             <a
-              href="https://www.trustpilot.com/review/yourcompany"
+              href="https://dk.trustpilot.com/review/www.boxen9000.dk"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Trustpilot"
@@ -129,9 +131,6 @@
     </div>
   </footer>
 </template>
-
-<script setup></script>
-
 <style scoped>
 .footer {
   background-color: #212121;

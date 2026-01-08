@@ -1,10 +1,4 @@
 <script setup>
-/* Her importerer vi nødvendige komponenter så som CategoryButtons til kategori knapper, ProductFilter til filtrering, og ProductCard til visning af hvert produkt. */
-
-import CategoryButtons from '~/components/CategoryButtons.vue';
-import ProductFilter from '~/components/ProductFilter.vue';
-import ProductCard from '~/components/ProductCard.vue';
-
 /* derefter henter vi produkter fra en ekstern kilde eller API via useProducts composable som i vores tilfælde er en JSON fil med alt product data... Vi destructurerer resultatet til "products" (produktlisten), "loading" (loading status) og "error" (fejlstatus). */
 const { products, loading, error } = useProducts({ type: 'product' });
 

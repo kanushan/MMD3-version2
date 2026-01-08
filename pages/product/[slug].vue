@@ -1,7 +1,4 @@
 <script setup>
-/* Importer funktioner til håndtering af kurv og favoritter fra vores composables */
-import { useCart } from "~/composables/useCart";
-import { useFavorites } from "~/composables/useFavorites";
 
 /* Hent nuværende rute information samt router funktionalitet til navigation tilbage */
 const route = useRoute();

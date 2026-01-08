@@ -1,7 +1,4 @@
 <script setup>
-import { useFavorites } from "~/composables/useFavorites";
-import { useCart } from "~/composables/useCart";
-
 /* Vi bruger vores composable useFavorites, som er et lille stykke kode, der holder styr på
 alt relateret til favoritter. Her henter vi kun "favoritesCount", som fortæller hvor mange
 produkter brugeren har markeret som favorit. Det er reaktivt, så hvis tallet ændrer sig,
