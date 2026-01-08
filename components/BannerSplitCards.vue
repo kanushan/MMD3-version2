@@ -10,8 +10,8 @@ export default {
       <div class="card-bg"></div>
       <div class="card-overlay"></div>
       <div class="card-content">
-        <NuxtLink to="/products" class="card-button">
-          UDFORSK SAMLINGEN
+        <NuxtLink to="/products?filter=boxens-look" class="card-button">
+          BLIV INSPIRERET
         </NuxtLink>
       </div>
     </div>
@@ -20,14 +20,11 @@ export default {
       <div class="card-bg"></div>
       <div class="card-overlay"></div>
       <div class="card-content">
-        <NuxtLink to="/products" class="card-button">
-          OPLEV KVALITET
-        </NuxtLink>
+        <NuxtLink to="/products" class="card-button"> OPLEV KVALITET </NuxtLink>
       </div>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .container {
@@ -69,15 +66,15 @@ export default {
 }
 
 .card-left .card-bg {
-background-image: url('/img/bannerImgs/boxenLook.jpg');
-
+  background-image: url("/img/bannerImgs/boxenLook.jpg");
 }
+/* Kilde besøgt 08-01-2026, https://unsplash.com/photos/man-with-short-blonde-hair-wearing-tank-top-m72me5WjwNM */
 
 .card-right .card-bg {
-background-image: url('/img/bannerImgs/suitNtie.jpg');
-
+  background-image: url("/img/bannerImgs/suitNtie.jpg");
   background-position: center 30%;
 }
+/* Kilde besøgt 08-01-2026, https://www.colourbox.com/image/buttons-sleeves-for-men-s-jacket-image-31147602 */
 
 .card-overlay {
   position: absolute;

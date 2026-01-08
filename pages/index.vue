@@ -30,9 +30,9 @@ const isProductFavorite = (product) => isFavorite(product.id);
   <div>
     <HeroSection />
 
-    <h1 style="margin-top: 2rem">
-      <NuxtLink to="/products" class="h1-link">NYHEDER &gt;</NuxtLink>
-    </h1>
+    <h2 style="margin-top: 2rem">
+      <NuxtLink to="/products?isNew=true" class="h2-link">NYHEDER &gt;</NuxtLink>
+    </h2>
     <!-- Hvis produkterne stadig hentes, vises en loading besked -->
     <div v-if="loading">Loading...</div>
 
@@ -116,11 +116,11 @@ const isProductFavorite = (product) => isFavorite(product.id);
       <BannerSplitCards />
     </div>
 
-    <h1 style="margin-top: 2rem">
-      <NuxtLink to="/products?filter=boxens-look" class="h1-link">
+    <h2 style="margin-top: 2rem">
+      <NuxtLink to="/products?BoxensLook=true" class="h2-link">
         BOXENS LOOK &gt;
       </NuxtLink>
-    </h1>
+    </h2>
     <div class="product-scroll">
       <NuxtLink
         v-for="product in products.filter((p) => p.BoxensLook)"
@@ -222,7 +222,7 @@ const isProductFavorite = (product) => isFavorite(product.id);
 </template>
 
 <style scoped>
-h1 {
+h2 {
   font-size: 1.4em;
   font-weight: bold;
   padding-left: 1.5rem;
@@ -232,7 +232,7 @@ h1 {
   color: black;
 }
 
-.h1-link {
+.h2-link {
   position: relative;
   text-decoration: none;
   color: inherit;
@@ -240,7 +240,7 @@ h1 {
   transition: color 0.2s;
 }
 
-.h1-link::after {
+.h2-link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -251,11 +251,11 @@ h1 {
   transition: width 0.3s ease;
 }
 
-.h1-link:hover {
+.h2-link:hover {
   color: #757474;
 }
 
-.h1-link:hover::after {
+.h2-link:hover::after {
   width: 100%;
 }
 

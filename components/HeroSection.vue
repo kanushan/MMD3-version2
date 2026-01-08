@@ -63,6 +63,7 @@ onBeforeUnmount(() => {
       :class="{ active: current === 0 }"
       alt="Winter Kollektion"
     />
+  <!-- Kilde besøgt 08-01-2026, https://www.freepik.com/free-photo/upset-european-man-white-shirt-with-tattooed-arms-sitting-outdoors_29302798.htm#fromView=keyword&page=1&position=26&uuid=9c6e7bd4-8a53-4299-94a6-8886137ccaca&query=Men+streetwear -->
 
     <img
       ref="el => images[1] = el"
@@ -70,8 +71,14 @@ onBeforeUnmount(() => {
       :class="{ active: current === 1 }"
       alt="Boxens look"
     />
+    <!-- Kilde besøgt 08-01-2026, https://www.colourbox.com/image/phone-man-talking-on-smartphone-in-winter-sweater-walking-on-black-sand-beach-in-iceland-icelandic-wool-clothes-technology-mobile-cellphone-image-52577381 -->
 
-    <div class="hero-overlay"></div>
+
+    <div class="hero-overlay">
+      <h1 class="Overlay-H1">
+        Velkommen til BOXEN
+      </h1>
+    </div>
 
     <router-link to="/products" class="hero-button">Shop Nu</router-link>
 
@@ -83,6 +90,19 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+.Overlay-H1 {
+  position: absolute;   
+  top: 50%;       
+  left: 180px;       
+  transform: translateY(130px); 
+  font-size: 4em;         
+  color: white;           
+  font-weight: 500;
+  z-index: 4;             
+  margin: 0;               
+  line-height: 1;          
+}
+
 .hero {
   position: relative;
   width: 100%;
