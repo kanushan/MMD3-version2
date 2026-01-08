@@ -64,10 +64,10 @@ const toggleMenu = () => {
       <span class="cartBadge" v-if="cartCount > 0">{{ cartCount }}</span>
     </NuxtLink>
 
-    <NuxtLink to="/account" class="navItem" aria-label="Bruger">
+    <a class="navItem" aria-label="Bruger">
       <i class="fa-solid fa-user navIcon"></i>
       <span class="navLabel">Bruger</span>
-    </NuxtLink>
+    </a>
 
     <button type="button" class="navItem" aria-label="Menu" @click="toggleMenu">
       <i
