@@ -187,16 +187,47 @@ const isProductFavorite = (product) => isFavorite(product.id);
       </NuxtLink>
     </div>
   </div>
+      <div class="benefits-section">
+      <div class="benefits-container">
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <img src="../public/svgIcons/localShipping.png" alt="Hurtig levering ikon" />
+          </div>
+          <h3 class="benefit-title">Hurtig levering</h3>
+          <p class="benefit-description">
+            Ved bestilling inden kl. 16.30 er leveringstiden 1-2 dage
+          </p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <img src="../public/svgIcons/package.png" alt="Gratis fragt ikon" />
+          </div>
+          <h3 class="benefit-title">Gratis fragt</h3>
+          <p class="benefit-description">
+            På ordre over 599,- i hele Danmark
+          </p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <img src="../public/svgIcons/retunering.png" alt="Gratis bytte ikon" />
+          </div>
+          <h3 class="benefit-title">Gratis bytte</h3>
+          <p class="benefit-description">
+            Byt nemt og gratis med byteposer
+          </p>
+        </div>
+
+      </div>
+    </div>
 
   <div class="footer-spacing">
   </div>
 </template>
 
 <style scoped>
-.footer-spacing {
-  margin-top: 2rem;
-}
-
 h1 {
   font-size: 1.4em;
   font-weight: bold;
@@ -441,4 +472,76 @@ h1 {
   padding: 2rem 0;
   overflow-x: hidden;
 }
+
+.benefits-section {
+  background-color: #f8f8f8;
+  padding: 3rem 1.5rem;
+  margin: 2rem 0;
+}
+.benefits-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.benefit-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.benefit-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.benefit-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.5rem;
+  text-transform: none;
+}
+
+.benefit-description {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  max-width: 250px;
+}
+
+@media (max-width: 930px) {
+  .benefits-container {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .benefit-item {
+    width: 100%;
+  }
+  
+  .benefit-description {
+    max-width: 100%;
+  }
+}
+
+.footer-spacing {
+  margin-top: 2rem;
+}
+
 </style>
