@@ -468,7 +468,6 @@ h2 {
 }
 
 .benefits-section {
-  background-color: #f8f8f8;
   padding: 3rem 1.5rem;
   margin: 2rem 0;
 }

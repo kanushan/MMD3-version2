@@ -27,3 +27,15 @@ const isBurgerOpen = ref(false);
     <TheFooter/>
   </div>
 </template>
+
+<style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+</style>
