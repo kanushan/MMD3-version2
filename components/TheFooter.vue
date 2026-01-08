@@ -63,7 +63,7 @@
           <h3 class="footer-heading">Følg os</h3>
           <div class="social-icons">
             <a
-              href="https://www.facebook.com/yourpage"
+              href="https://www.facebook.com/boxenaalborg?locale=da_DK"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -76,7 +76,7 @@
               />
             </a>
             <a
-              href="https://www.instagram.com/yourprofile"
+              href="https://www.instagram.com/boxenaalborg/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
