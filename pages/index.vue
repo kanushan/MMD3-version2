@@ -1,37 +1,58 @@
 <script setup>
-import HeroSection from "~/components/HeroSection.vue";
-import BannerSplitCards from "~/components/BannerSplitCards.vue";
-import { useFavorites } from "~/composables/useFavorites";
-import FullWidthBanner from "~/components/FullWidthBanner.vue";
-import TheFooter from "~/components/TheFooter.vue";
+/* Her bliver der importeret komponenter fra vores component mappe der skal bruges på siden */
+import HeroSection from "~/components/HeroSection.vue"; /* Hero-sektionen øverst på siden */
+import BannerSplitCards from "~/components/BannerSplitCards.vue"; /* Banner med delte kort som vises nede på siden med en 50/50 split med animation */
+import { useFavorites } from "~/composables/useFavorites"; /* Composable til håndtering af favoritter og grunden til denne er sat i { } er fordi vi importerer et named export. */
+import FullWidthBanner from "~/components/FullWidthBanner.vue"; /* Fuldbredde-bannerkomponent som ligger lige over footeren med en "følg os knap" */
+import TheFooter from "~/components/TheFooter.vue"; /* Footer-komponent */
 
+/* Her henter vi produkter fra API eller datastore som i vores tilfælde er et JSON fil hvor products er vores produkter og loading der viser om vores boolean stadig henter data... og til sidst error som viser en fejlmeddelelse om der er nogle fejl under processen */
 const { products, loading, error } = useProducts({ type: "product" });
+
+/* Her henter vi funktioner fra vores useFavorites composable, som håndtere favoritter. Den her composable retunere to funktioner som er toggle favorite som derfra tilføjer eller fjerner produkterne man har tilvalgt via hjerte ikonet på vores produkt cards... Is favourite tjekker om produktet allerede er markeret */
+
+/* Når man bruger disse funktioner direkte fra useFavorites kan vi bruge dem i komponenten uden ekstra reference, 
+   hvilket gør det nemt at opdatere UI'et og vise fx et hjerte, der skifter farve alt efter om produktet er en favorit eller ej.*/
 const { toggleFavorite, isFavorite } = useFavorites();
 
+/* Her definerer vi en funktion, der formaterer prisen fra vores JSON-data fil, så den kan vises pænt i template. 
+   Funktionen tager et tal som input og konverterer det til et string med to decimaler efterfulgt af 'DKK', 
+   så en pris som 100 bliver vist som "100.00 DKK" i brugergrænsefladen. */
 const formatPrice = (price) => `${price.toFixed(2)} DKK`;
 
+/* Her definerer vi en funktion, der ændrer et produkts status i favoritlisten. 
+   Funktionen modtager et produkt som input og kalder toggleFavorite fra useFavorites composable, 
+   hvilket tilføjer produktet til favoritter, hvis det ikke allerede er der, eller fjerner det, hvis det allerede er markeret som favorit. */
 const toggleWishlist = (product) => {
-  toggleFavorite(product);
+  toggleFavorite(product); /* her kalder vi toggleFavorite fra useFavorites */
 };
 
+/* Her definerer vi en funktion, der tjekker, om et produkt allerede er markeret som favorit...
+   Funktionen modtager et produkt som input og kalder isFavorite fra useFavorites composable med produktets id. 
+   Den returnerer true, hvis produktet er en favorit, og false, hvis det ikke er, så vi kan bruge resultatet til at opdatere det visuelle UI, fx farven på et hjerteikon. */
 const isProductFavorite = (product) => isFavorite(product.id);
 </script>
 
 <template>
   <div>
-    <!-- Hero Section -->
     <HeroSection />
 
-    <!-- First row: All products -->
     <h1 style="margin-top: 2rem">
       <NuxtLink to="/products" class="h1-link">NYHEDER &gt;</NuxtLink>
     </h1>
+    <!-- Hvis produkterne stadig hentes, vises en loading besked -->
     <div v-if="loading">Loading...</div>
+
+    <!-- Hvis der opstod en fejl under hentning af produkterne, vises fejlmeddelelsen her -->
     <div v-else-if="error">Fejl: {{ error }}</div>
+
+    <!-- Hvis der ikke findes produkter i listen (enten fordi products er tom eller undefined eller en anden form for fejl), vises en besked om, at ingen produkter blev fundet -->
     <div v-else-if="!products || products.length === 0">
       Ingen produkter fundet
     </div>
-    <div v-else class="product-scroll">
+
+    <!-- Hvis produkterne er hentet korrekt og listen ikke er tom, vises produktkortene i et scrollbart område med overflow på -->
+      <div v-else class="product-scroll">
       <NuxtLink
         v-for="product in products"
         :key="product.id"
@@ -50,16 +71,15 @@ const isProductFavorite = (product) => isFavorite(product.id);
             {{ product.ModelNavn?.charAt(0) || "?" }}
           </div>
 
-          <!-- Out of stock badge -->
           <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
 
-          <!-- Stacked badges -->
           <div class="badges-wrapper">
             <div v-if="product.isNew" class="product-badge">NYHED</div>
-            <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
+            <div v-if="product.BoxensLook" class="boxens-badge">
+              BOXENS LOOK
+            </div>
           </div>
 
-          <!-- Wishlist button -->
           <button
             class="wishlist-btn"
             :class="{ active: isProductFavorite(product) }"
@@ -90,12 +110,10 @@ const isProductFavorite = (product) => isFavorite(product.id);
       </NuxtLink>
     </div>
 
-    <!-- Banner Split (Full Width) -->
     <div class="banner-wrapper">
       <BannerSplitCards />
     </div>
 
-    <!-- Second row: Only BoxensLook products -->
     <h1 style="margin-top: 2rem">
       <NuxtLink to="/products?filter=boxens-look" class="h1-link">
         BOXENS LOOK &gt;
@@ -120,16 +138,15 @@ const isProductFavorite = (product) => isFavorite(product.id);
             {{ product.ModelNavn?.charAt(0) || "?" }}
           </div>
 
-          <!-- Out of stock badge -->
           <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
 
-          <!-- Stacked badges -->
           <div class="badges-wrapper">
             <div v-if="product.isNew" class="product-badge">NYHED</div>
-            <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
+            <div v-if="product.BoxensLook" class="boxens-badge">
+              BOXENS LOOK
+            </div>
           </div>
 
-          <!-- Wishlist button -->
           <button
             class="wishlist-btn"
             :class="{ active: isProductFavorite(product) }"
@@ -162,18 +179,16 @@ const isProductFavorite = (product) => isFavorite(product.id);
     <FullWidthBanner />
   </div>
 
-<div class="footer-spacing">
-  <TheFooter />
-</div>
+  <div class="footer-spacing">
+    <TheFooter />
+  </div>
 </template>
-
-
 
 <style scoped>
 .footer-spacing {
   margin-top: 2rem;
 }
-  
+
 h1 {
   font-size: 1.4em;
   font-weight: bold;
@@ -265,28 +280,28 @@ h1 {
 
 .product-badge {
   display: inline-block;
-  padding: 2px 6px; 
+  padding: 2px 6px;
   font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
   color: white;
   background-color: #ff4444;
-  white-space: nowrap;   
-  text-align: left;   
+  white-space: nowrap;
+  text-align: left;
 }
 
 .boxens-badge {
   display: inline-block;
-  padding: 4px 12px;  
+  padding: 4px 12px;
   font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
   color: white;
-  background-color: #0F2A1E;
-  white-space: nowrap; 
-  text-align: left; 
+  background-color: #0f2a1e;
+  white-space: nowrap;
+  text-align: left;
 }
 
 .product-card:hover {
@@ -416,6 +431,6 @@ h1 {
 
 .banner-wrapper {
   padding: 2rem 0;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 </style>
