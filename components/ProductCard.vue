@@ -44,7 +44,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
       <div class="badges-wrapper">
         <div v-if="product.isNew" class="product-badge">NYHED</div>
         <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
-      </div>
+      </div>    
 
       <button
         class="wishlist-btn"

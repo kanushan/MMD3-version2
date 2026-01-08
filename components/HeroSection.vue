@@ -94,7 +94,7 @@ onBeforeUnmount(() => {
   position: absolute;   
   top: 50%;       
   left: 180px;       
-  transform: translateY(130px); 
+  transform: translateY(110px); 
   font-size: 4em;         
   color: white;           
   font-weight: 500;

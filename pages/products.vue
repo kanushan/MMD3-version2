@@ -1,8 +1,8 @@
 <script setup>
-/* derefter henter vi produkter fra en ekstern kilde eller API via useProducts composable som i vores tilfælde er en JSON fil med alt product data... Vi destructurerer resultatet til "products" (produktlisten), "loading" (loading status) og "error" (fejlstatus). */
+/* Vi henter vores produkter fra en ekstern kilde eller API via useProducts composable som i vores tilfælde er en JSON fil med alt product data... Vi destructurerer resultatet til "products" (produktlisten), "loading" (loading status) og "error" (fejlstatus). */
 const { products, loading, error } = useProducts({ type: 'product' });
 
-/* Opretter en reaktiv variabel til de produkter, som er filtreret af ProductFilter-komponenten. */
+/* Opretter en reaktiv variabel som indholder et array til de produkter, som er filtreret af ProductFilter komponenten. */
 const filteredProducts = ref([]);
 
 /* Funktion, der opdaterer filteredProducts, når ProductFilter sender et nyt filtreret resultat. Dette gør det muligt at vise kun de produkter, som matcher brugerens filtre. */

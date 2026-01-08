@@ -29,7 +29,7 @@ export const useProducts = (filters = {}) => {
   /* vi bygger en API URL, inkl. query string hvis den ikke er tom */
   const url = queryString ? `/api/products?${queryString}` : "/api/products";
 
-  /* Hent produkter fra API'en med useFetch på den angivne URL. useFetch gør data reaktiv, så komponenten automatisk opdateres, når API-kaldet fuldføres. Den returnerer et objekt med data, som indeholder produktlisten, pending, som er en boolean der viser, om fetch stadig kører, error, som indeholder fejlinformation hvis fetch fejler, og refresh, en funktion til manuelt at genindlæse data uden at genloade siden. Dette gør det muligt at vise produktlisten dynamisk, håndtere loading-tilstande og fejl på en enkel måde. */
+  /* Hent produkter fra API'en med useFetch på den angivne URL. useFetch gør data reaktiv, så komponenten automatisk opdateres, når API-kaldet fuldføres. Den returnerer et objekt med data, som indeholder produktlisten, pending, som er tilstanden der bliver vist, når fetch stadig kører. Error, som indeholder fejlinformation hvis fetch fejler, og refresh, en funktion til manuelt at genindlæse data uden at genloade siden. Dette gør det muligt at vise produktlisten dynamisk, håndtere loading-tilstande og fejl på en enkel måde. */
   const { data, pending, error, refresh } = useFetch(url);
 
   /* her retunere objektet med alle nyttige værdier */
