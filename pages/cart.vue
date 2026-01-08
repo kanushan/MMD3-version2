@@ -1,28 +1,33 @@
 <script setup>
-import { useCart } from '~/composables/useCart';
+/* vi importerer igen et component som hedder "useCart" hvilket er et composable, som giver adgang til brugerens kurv, funktioner til at opdatere eller fjerne varer, samt totaler og antal varer i kurven */
+import { useCart } from "~/composables/useCart";
 
-const { cart, updateQuantity, removeFromCart, cartTotal, cartCount } = useCart();
+/* Her henter vi kurvdata og relevante funktioner fra "useCart". "cart" indeholder listen af produkter, "cartTotal" er summen, og "cartCount" er antal varer. "updateQuantity" og "removeFromCart" bruges til at ændre eller fjerne produkter. */
+const { cart, updateQuantity, removeFromCart, cartTotal, cartCount } =
+  useCart();
 
-// Øg antal
+/* Funktion "increaseQuantity" bruges til at øge antallet af et produkt i kurven med 1. 
+Den tjekker først, om den nuværende mængde er under maksgrænsen på 99 for at undgå at brugeren kan tilføje urealistisk mange varer. 
+Hvis betingelsen er opfyldt, kaldes "updateQuantity" fra "useCart" composable, som opdaterer produktets antal i kurven og samtidig opdaterer de samlede totaler og antal i brugerens kurv. */
 const increaseQuantity = (item) => {
   if (item.quantity < 99) {
     updateQuantity(item.cartItemId, item.quantity + 1);
   }
 };
 
-// Reducer antal
+/* Funktion til at reducere antallet af et produkt i kurven. Hvis mængden er større end 1, reduceres den med 1 ved at kalde "updateQuantity" */
 const decreaseQuantity = (item) => {
   if (item.quantity > 1) {
     updateQuantity(item.cartItemId, item.quantity - 1);
   }
 };
 
-// Formater pris
+/* Funktion til at formatere priser som danske kroner med to decimaler hvor vi bruger minimumFractionDigits: 2 hvor det det så kommer til og hede fx 199,00 kr. */
 const formatPrice = (price) => {
-  return new Intl.NumberFormat('da-DK', {
-    style: 'currency',
-    currency: 'DKK',
-    minimumFractionDigits: 2
+  return new Intl.NumberFormat("da-DK", {
+    style: "currency",
+    currency: "DKK",
+    minimumFractionDigits: 2,
   }).format(price);
 };
 </script>
@@ -30,37 +35,30 @@ const formatPrice = (price) => {
 <template>
   <div class="cart-page">
     <div class="container">
-      <!-- Header -->
       <div class="header">
         <h1>Kurv</h1>
-        <p v-if="cartCount > 0">{{ cartCount }} {{ cartCount === 1 ? 'produkt' : 'produkter' }} i kurven</p>
+<!-- Under den her kommentar bliver der vist antallet af produkter i kurven, hvis der er mindst en vare. 
+Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i flertal, afhængigt af "cartCount". -->
+        <p v-if="cartCount > 0">
+          {{ cartCount }} {{ cartCount === 1 ? "produkt" : "produkter" }} i
+          kurven
+        </p>
       </div>
 
-      <!-- Tom kurv -->
       <div v-if="cart.length === 0" class="empty-cart">
         <i class="fa-solid fa-cart-shopping empty-icon"></i>
         <h2>Din kurv er tom</h2>
         <p>Tilføj produkter til din kurv for at se dem her</p>
-        <NuxtLink to="/products" class="shop-btn">
-          Shop produkter
-        </NuxtLink>
+        <NuxtLink to="/products" class="shop-btn"> Shop produkter </NuxtLink>
       </div>
 
-      <!-- Kurv med produkter -->
       <div v-else class="cart-content">
-        <!-- Produkt liste -->
         <div class="cart-items">
-          <div
-            v-for="item in cart"
-            :key="item.cartItemId"
-            class="cart-item"
-          >
-            <!-- Produkt billede -->
+          <div v-for="item in cart" :key="item.cartItemId" class="cart-item">
             <NuxtLink :to="`/product/${item.slug}`" class="item-image">
-              <img :src="item.BilledeMain" :alt="item.ModelNavn">
+              <img :src="item.BilledeMain" :alt="item.ModelNavn" />
             </NuxtLink>
 
-            <!-- Produkt info -->
             <div class="item-details">
               <div class="item-main">
                 <div class="item-info">
@@ -68,28 +66,26 @@ const formatPrice = (price) => {
                     {{ item.ModelNavn }}
                   </NuxtLink>
                   <p class="item-brand">{{ item.Mærke }}</p>
-                  
-                  <!-- Størrelse og farve -->
                   <div class="item-variants">
                     <span v-if="item.size" class="variant-info">
                       Størrelse: <strong>{{ item.size }}</strong>
                     </span>
                     <span v-if="item.color" class="variant-info">
-                      <span class="color-dot" :style="{ backgroundColor: item.color }"></span>
+                      <span
+                        class="color-dot"
+                        :style="{ backgroundColor: item.color }"
+                      ></span>
                       Farve
                     </span>
                   </div>
                 </div>
 
-                <!-- Pris -->
                 <div class="item-price">
                   <p class="price">{{ formatPrice(item.Pris) }}</p>
                 </div>
               </div>
 
-              <!-- Antal og handlinger -->
               <div class="item-actions">
-                <!-- Antal selector -->
                 <div class="quantity-selector">
                   <button
                     @click="decreaseQuantity(item)"
@@ -108,12 +104,10 @@ const formatPrice = (price) => {
                   </button>
                 </div>
 
-                <!-- Total for dette item -->
                 <p class="item-total">
                   {{ formatPrice(item.Pris * item.quantity) }}
                 </p>
 
-                <!-- Slet knap -->
                 <button
                   @click="removeFromCart(item.cartItemId)"
                   class="remove-btn"
@@ -126,32 +120,23 @@ const formatPrice = (price) => {
           </div>
         </div>
 
-        <!-- Ordre oversigt -->
         <aside class="order-summary">
           <div class="summary-box">
             <h2>Ordre oversigt</h2>
-            
             <div class="summary-row">
               <span>Subtotal</span>
               <span>{{ formatPrice(cartTotal) }}</span>
             </div>
-            
             <div class="summary-row">
               <span>Levering</span>
               <span>Gratis</span>
             </div>
-            
             <div class="summary-divider"></div>
-            
             <div class="summary-row total">
               <span>Total</span>
               <span>{{ formatPrice(cartTotal) }}</span>
             </div>
-
-            <button class="checkout-btn">
-              Gå til kassen
-            </button>
-
+            <button class="checkout-btn">Gå til kassen</button>
             <NuxtLink to="/products" class="continue-shopping">
               Fortsæt med at handle
             </NuxtLink>
@@ -165,7 +150,7 @@ const formatPrice = (price) => {
 <style scoped>
 .cart-page {
   min-height: 100vh;
-  padding-bottom: 100px; /* Space for mobile nav */
+  padding-bottom: 100px;
 }
 
 .container {
@@ -174,7 +159,6 @@ const formatPrice = (price) => {
   padding: 20px;
 }
 
-/* Header */
 .header {
   margin-bottom: 32px;
 }
@@ -191,7 +175,6 @@ const formatPrice = (price) => {
   font-size: 15px;
 }
 
-/* Tom kurv */
 .empty-cart {
   text-align: center;
   padding: 80px 20px;
@@ -231,14 +214,12 @@ const formatPrice = (price) => {
   background: #333;
 }
 
-/* Kurv content */
 .cart-content {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
 }
 
-/* Kurv items */
 .cart-items {
   display: flex;
   flex-direction: column;
@@ -259,7 +240,6 @@ const formatPrice = (price) => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Produkt billede */
 .item-image {
   flex-shrink: 0;
   width: 120px;
@@ -280,7 +260,6 @@ const formatPrice = (price) => {
   transform: scale(1.05);
 }
 
-/* Produkt detaljer */
 .item-details {
   flex: 1;
   display: flex;
@@ -338,7 +317,6 @@ const formatPrice = (price) => {
   border: 1px solid #ddd;
 }
 
-/* Pris */
 .item-price {
   text-align: right;
 }
@@ -349,14 +327,12 @@ const formatPrice = (price) => {
   color: #111;
 }
 
-/* Item actions */
 .item-actions {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-/* Antal selector */
 .quantity-selector {
   display: flex;
   align-items: center;
@@ -396,7 +372,6 @@ const formatPrice = (price) => {
   font-size: 14px;
 }
 
-/* Item total */
 .item-total {
   font-size: 16px;
   font-weight: 600;
@@ -405,7 +380,6 @@ const formatPrice = (price) => {
   text-align: right;
 }
 
-/* Slet knap */
 .remove-btn {
   width: 40px;
   height: 40px;
@@ -426,7 +400,6 @@ const formatPrice = (price) => {
   color: #c41e3a;
 }
 
-/* Ordre oversigt */
 .order-summary {
   position: sticky;
   top: 120px;
@@ -500,7 +473,6 @@ const formatPrice = (price) => {
   color: #111;
 }
 
-/* Tablet - 600px+ */
 @media (min-width: 600px) {
   .item-image {
     width: 140px;
@@ -520,7 +492,6 @@ const formatPrice = (price) => {
   }
 }
 
-/* Desktop - 930px+ */
 @media (min-width: 930px) {
   .cart-content {
     grid-template-columns: 1fr 380px;
@@ -540,7 +511,6 @@ const formatPrice = (price) => {
   }
 }
 
-/* Mobile - under 600px */
 @media (max-width: 600px) {
   .cart-item {
     flex-direction: column;

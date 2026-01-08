@@ -10,27 +10,21 @@
             <li><span class="day">Man-tors kl:</span> 10.00 - 18.00</li>
             <li><span class="day">Fredag kl:</span> 10.00 - 19.00</li>
             <li><span class="day">Lørdag kl:</span> 10.00 - 16.00</li>
-            <li>
-              <span class="day">Første søndag i måneden kl:</span> 11.00 - 15.00
-            </li>
+            <li><span class="day">Første søndag i måneden kl:</span> 11.00 - 15.00</li>
           </ul>
         </div>
 
         <!-- Information -->
         <div class="footer-section">
           <h3 class="footer-heading">Information:</h3>
-          <ul class="footer-list footer-links">
-            <li>
-              <NuxtLink to="/handelsbetingelser">Handelsbetingelser</NuxtLink>
-            </li>
-            <li><NuxtLink to="/returnering">Returnering</NuxtLink></li>
-            <li><NuxtLink to="/fragtpriser">Fragtpriser</NuxtLink></li>
-            <li><NuxtLink to="/stoerrelsesguide">Størrelsesguide</NuxtLink></li>
-            <li>
-              <NuxtLink to="/privatlivspolitik">Privatlivspolitik</NuxtLink>
-            </li>
-            <li><NuxtLink to="/cookiepolitik">Cookiepolitik</NuxtLink></li>
-          </ul>
+          <div class="footer-paragraphs">
+            <p>Handelsbetingelser</p>
+            <p>Returnering</p>
+            <p>Fragtpriser</p>
+            <p>Størrelsesguide</p>
+            <p>Privatlivspolitik</p>
+            <p>Cookiepolitik</p>
+          </div>
         </div>
 
         <!-- Før dit køb -->
@@ -50,9 +44,7 @@
           <ul class="footer-list contact-list">
             <li>Boxen</li>
             <li>Nytorv 1</li>
-            <li>
-              <a href="mailto:boxen9000@gmail.com">boxen9000@gmail.com</a>
-            </li>
+            <li><a href="mailto:boxen9000@gmail.com">boxen9000@gmail.com</a></li>
             <li>DK-9000 Aalborg</li>
             <li>Tlf.: <a href="tel:+4598169166">+45 98 16 91 66</a></li>
           </ul>
@@ -151,7 +143,6 @@
   padding-top: 1rem;
 }
 
-
 .footer-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -176,6 +167,7 @@
   color: #ffffff;
 }
 
+/* Original lists */
 .footer-list {
   list-style: none;
   padding: 0;
@@ -194,18 +186,23 @@
   font-weight: 500;
 }
 
-/* Links */
-.footer-links a {
+/* Paragraphs for Information section */
+.footer-paragraphs p {
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
   transition: color 0.2s ease;
 }
 
-.footer-links a:hover {
+.footer-paragraphs p:hover {
   color: #ffffff;
 }
 
+/* Contact links */
 .contact-list a {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;

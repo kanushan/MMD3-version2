@@ -1,93 +1,90 @@
 <script setup>
-import { useCart } from '~/composables/useCart';
-import { useFavorites } from '~/composables/useFavorites';
+/* Importer funktioner til håndtering af kurv og favoritter fra vores composables */
+import { useCart } from "~/composables/useCart";
+import { useFavorites } from "~/composables/useFavorites";
 
+/* Hent nuværende rute information samt router funktionalitet til navigation tilbage */
 const route = useRoute();
 const router = useRouter();
+
+/* Hent produktdata baseret på slug fra ruten og samtidig loading og error status */
 const { product, loading, error } = useProduct(route.params.slug);
 
-// Cart and favorites
+/* Initialiser kurv funktioner til at tilføje produkter og favoritter funktioner til at tjekke og ændre favorit status */
 const { addToCart: addProductToCart } = useCart();
 const { isFavorite, toggleFavorite } = useFavorites();
- 
-// For image gallery
+
+/* Opret reaktive variable til håndtering af valgt produktbillede, antal, valgt størrelse, visning af bekræftelse og loader status */
 const selectedImage = ref(null);
 const quantity = ref(1);
-const selectedSize = ref('L');
+const selectedSize = ref("L");
 const showAddedToCart = ref(false);
-
-// Loader state
 const showLoader = ref(true);
 
-// One-liner to get all product images - FLYTTET OP
+/* Computed property der laver en liste af alle eksisterende produktbilleder og filtrerer tomme værdier væk */
 const productImages = computed(() =>
-  product.value ? ['BilledeMain', 'Billede1', 'Billede2', 'Billede3', 'Billede4']
+  product.value ? ["BilledeMain", "Billede1", "Billede2", "Billede3", "Billede4"]
     .map(key => product.value[key]).filter(Boolean) : []
 );
 
-// Watch for når produktet er loaded
+/* Watcher der overvåger når produktet bliver loadet, slukker loader efter 400 millisekunder og sætter det første billede som valgt billede */
 watch(() => product.value, (newProduct) => {
   if (newProduct) {
     setTimeout(() => {
       showLoader.value = false;
     }, 400);
-    
-    // Set initial image
     if (productImages.value.length > 0) {
       selectedImage.value = productImages.value[0];
     }
   }
 }, { immediate: true });
 
-// Reset loader når route ændrer sig
+/* Watcher der overvåger ændringer i slug parameteren, og hvis ruten ændres vises loader igen */
 watch(() => route.params.slug, () => {
   showLoader.value = true;
 });
- 
+
+/* Funktion til at reducere antallet af produkter i kurven, men kun hvis antallet er større end 1 */
 const decrementQuantity = () => {
   if (quantity.value > 1) quantity.value--;
 };
- 
+
+/* Funktion til at øge antallet af produkter i kurven med 1 */
 const incrementQuantity = () => {
   quantity.value++;
 };
- 
+
+/* Funktion til at tilføje produktet til kurven med valgt antal og størrelse samt vise en bekræftelse i 3 sekunder */
 const addToCart = () => {
   if (!product.value) return;
-
-  // Tilføj til kurv med valgte options
   addProductToCart(
     product.value,
     quantity.value,
     selectedSize.value,
-    null // farve, som kan implenteres senere
+    null
   );
-
-  // Vis bekræftelse
   showAddedToCart.value = true;
   setTimeout(() => {
     showAddedToCart.value = false;
   }, 3000);
-
-  // Reset quantity
   quantity.value = 1;
 };
- 
+
+/* Funktion til at navigere tilbage til den forrige side */
 const goBack = () => {
   router.back();
 };
 </script>
- 
+
+
 <template>
-  <!-- Loader overlay -->
   <div v-if="showLoader" class="loader-overlay">
     <Loader />
   </div>
 
   <div v-if="error" class="error">Produkt ikke fundet</div>
   <div v-else-if="product" class="product-page">
- 
-    <!-- Desktop buttons -->
+
     <button @click="goBack" class="back-button desktop-btn" aria-label="Tilbage">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
@@ -101,7 +98,6 @@ const goBack = () => {
       <i :class="isFavorite(product.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
     </button>
 
-    <!-- Left side: Image thumbnails -->
     <div class="image-thumbnails">
       <div
         v-for="(image, index) in productImages"
@@ -113,10 +109,8 @@ const goBack = () => {
         <img :src="image" :alt="`${product.ModelNavn} - bilde ${index + 1}`">
       </div>
     </div>
- 
-    <!-- Center: Main product image -->
+
     <div class="main-image">
-      <!-- Mobile buttons -->
       <button @click="goBack" class="back-button mobile-btn" aria-label="Tilbage">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
@@ -131,8 +125,7 @@ const goBack = () => {
 
       <img :src="selectedImage || product.BilledeMain" :alt="product.ModelNavn">
     </div>
- 
-    <!-- Right side: Product details -->
+
     <div class="product-details">
       <h1 class="brand">{{ product.Mærke }}</h1>
       <h2 class="model-name">{{ product.ModelNavn }}</h2>
@@ -143,17 +136,14 @@ const goBack = () => {
           Kun {{ Math.round(product.Pris / 4) }} kr. /md med <strong>VIABILL</strong>
         </p>
       </div>
- 
-      <!-- Color selection (if you have color variants) -->
+
       <div class="color-section">
         <label>Farve:</label>
         <div class="color-options">
-          <!-- Add color swatches here if available -->
           <div class="color-swatch active"></div>
         </div>
       </div>
- 
-      <!-- Size selection -->
+
       <div class="size-section">
         <div class="size-header">
           <label>Størrelse:</label>
@@ -171,8 +161,7 @@ const goBack = () => {
           </button>
         </div>
       </div>
- 
-      <!-- Quantity and Add to Cart -->
+
       <div class="cart-section">
         <div class="quantity-selector">
           <button @click="decrementQuantity" class="qty-btn">-</button>
@@ -182,7 +171,6 @@ const goBack = () => {
         <button class="add-to-cart" @click="addToCart">TILFØJ TIL KURV</button>
       </div>
 
-      <!-- Success message -->
       <Transition name="fade">
         <div v-if="showAddedToCart" class="added-confirmation">
           <i class="fa-solid fa-check-circle"></i>
@@ -190,14 +178,12 @@ const goBack = () => {
           <NuxtLink to="/cart" class="view-cart-link">Se kurv</NuxtLink>
         </div>
       </Transition>
- 
-      <!-- Delivery info -->
+
       <div class="delivery-info">
         <p>Hurtig levering ved bestilling inden kl. 16.30 på hverdage.</p>
         <p>Fri fragt ved køb over 599,-</p>
       </div>
- 
-      <!-- Product tabs -->
+
       <div class="product-tabs">
         <div class="tab-headers">
           <button class="tab-header active">Beskrivelse</button>
@@ -215,9 +201,8 @@ const goBack = () => {
     </div>
   </div>
 </template>
- 
+
 <style scoped>
-/* Loader overlay */
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -297,30 +282,30 @@ const goBack = () => {
   margin: 0 auto;
   padding: 20px;
 }
- 
+
 /* Image Thumbnails */
 .image-thumbnails {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
- 
+
 .thumbnail {
   border: 2px solid transparent;
   cursor: pointer;
   transition: border-color 0.2s;
 }
- 
+
 .thumbnail.active {
   border-color: #000;
 }
- 
+
 .thumbnail img {
   width: 100%;
   height: auto;
   display: block;
 }
- 
+
 /* Main Image */
 .main-image {
   background-color: #f5f5f5;
@@ -329,67 +314,64 @@ const goBack = () => {
   justify-content: center;
   position: relative;
 }
- 
+
 .main-image img {
   max-width: 100%;
   height: auto;
 }
 
-/* Hide mobile buttons on desktop */
 .mobile-btn {
   display: none;
 }
- 
-/* Product Details */
+
 .product-details {
   padding: 20px 0;
 }
- 
+
 .brand {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0 5px 0;
 }
- 
+
 .model-name {
   font-size: 1.1rem;
   font-weight: normal;
   color: #666;
   margin: 0 0 20px 0;
 }
- 
+
 .price-section {
   margin-bottom: 30px;
 }
- 
+
 .price {
   font-size: 2rem;
   font-weight: bold;
   margin: 0 0 5px 0;
 }
- 
+
 .installment {
   font-size: 0.9rem;
   color: #666;
   margin: 0;
 }
- 
-/* Color Section */
+
 .color-section {
   margin-bottom: 25px;
 }
- 
+
 .color-section label {
   display: block;
   margin-bottom: 10px;
   font-weight: 500;
 }
- 
+
 .color-options {
   display: flex;
   gap: 10px;
 }
- 
+
 .color-swatch {
   width: 40px;
   height: 40px;
@@ -398,43 +380,42 @@ const goBack = () => {
   cursor: pointer;
   background-color: #4a4a4a;
 }
- 
+
 .color-swatch.active {
   border-color: #000;
   box-shadow: 0 0 0 1px #000;
 }
- 
-/* Size Section */
+
 .size-section {
   margin-bottom: 25px;
 }
- 
+
 .size-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
- 
+
 .size-header label {
   font-weight: 500;
 }
- 
+
 .size-guide {
   font-size: 0.9rem;
   color: #666;
   text-decoration: none;
 }
- 
+
 .size-guide:hover {
   text-decoration: underline;
 }
- 
+
 .size-options {
   display: flex;
   gap: 10px;
 }
- 
+
 .size-options button {
   padding: 12px 20px;
   border: 1px solid #ddd;
@@ -443,43 +424,42 @@ const goBack = () => {
   font-weight: 500;
   transition: all 0.2s;
 }
- 
+
 .size-options button:hover:not(.disabled) {
   border-color: #000;
 }
- 
+
 .size-options button.active {
   background-color: #0F2A1E;
   color: white;
   border-color: #0F2A1E;
 }
- 
+
 .size-options button.disabled {
   text-decoration: line-through;
   opacity: 0.4;
   cursor: not-allowed;
 }
- 
-/* Cart Section */
+
 .cart-section {
   display: flex;
   gap: 15px;
   margin-bottom: 25px;
 }
- 
+
 .quantity-selector {
   display: flex;
   border: 1px solid #ddd;
   width: 120px;
 }
- 
+
 .quantity-selector input {
   width: 40px;
   text-align: center;
   border: none;
   font-size: 1rem;
 }
- 
+
 .qty-btn {
   width: 40px;
   border: none;
@@ -487,11 +467,11 @@ const goBack = () => {
   cursor: pointer;
   font-size: 1.2rem;
 }
- 
+
 .qty-btn:hover {
   background-color: #f5f5f5;
 }
- 
+
 .add-to-cart {
   flex: 1;
   background-color: #0F2A1E;
@@ -502,12 +482,11 @@ const goBack = () => {
   cursor: pointer;
   transition: background-color 0.2s;
 }
- 
+
 .add-to-cart:hover {
   background-color: #155c37;
 }
 
-/* Success Confirmation */
 .added-confirmation {
   background: #d4edda;
   border: 1px solid #c3e6cb;
@@ -536,7 +515,6 @@ const goBack = () => {
   color: #0c3d18;
 }
 
-/* Fade transition */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
@@ -546,32 +524,30 @@ const goBack = () => {
 .fade-leave-to {
   opacity: 0;
 }
- 
-/* Delivery Info */
+
 .delivery-info {
   background-color: #f9f9f9;
   padding: 15px;
   margin-bottom: 30px;
   font-size: 0.9rem;
 }
- 
+
 .delivery-info p {
   margin: 5px 0;
 }
- 
-/* Product Tabs */
+
 .product-tabs {
   border-top: 1px solid #ddd;
   padding-top: 20px;
 }
- 
+
 .tab-headers {
   display: flex;
   gap: 30px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
 }
- 
+
 .tab-header {
   background: none;
   border: none;
@@ -581,12 +557,12 @@ const goBack = () => {
   color: #666;
   position: relative;
 }
- 
+
 .tab-header.active {
   color: #000;
   font-weight: 500;
 }
- 
+
 .tab-header.active::after {
   content: '';
   position: absolute;
@@ -596,24 +572,21 @@ const goBack = () => {
   height: 2px;
   background-color: #000;
 }
- 
+
 .tab-content {
   line-height: 1.6;
   color: #333;
 }
- 
+
 .usp p {
   margin: 10px 0;
 }
- 
-/* Responsive */
+
 @media (max-width: 930px) {
-  /* Hide desktop buttons */
   .desktop-btn {
     display: none !important;
   }
 
-  /* Show mobile buttons */
   .mobile-btn {
     display: flex !important;
     position: absolute;
@@ -645,7 +618,7 @@ const goBack = () => {
     display: flex;
     flex-direction: column;
   }
-  
+
   .image-thumbnails {
     flex-direction: row;
     order: 2;
@@ -659,11 +632,11 @@ const goBack = () => {
     height: 100%;
     display: block;
   }
-  
+
   .main-image {
     order: 1;
   }
-  
+
   .product-details {
     order: 3;
     padding: 20px 16px;
