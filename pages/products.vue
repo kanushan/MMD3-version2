@@ -1,18 +1,22 @@
 <script setup>
+/* Her importerer vi nødvendige komponenter så som CategoryButtons til kategori knapper, ProductFilter til filtrering, og ProductCard til visning af hvert produkt. */
+
 import CategoryButtons from '~/components/CategoryButtons.vue';
 import ProductFilter from '~/components/ProductFilter.vue';
 import ProductCard from '~/components/ProductCard.vue';
 
-// Hent produkter
+/* derefter henter vi produkter fra en ekstern kilde eller API via useProducts composable som i vores tilfælde er en JSON fil med alt product data... Vi destructurerer resultatet til "products" (produktlisten), "loading" (loading status) og "error" (fejlstatus). */
 const { products, loading, error } = useProducts({ type: 'product' });
 
-// Filtered products fra filter component
+/* Opretter en reaktiv variabel til de produkter, som er filtreret af ProductFilter-komponenten. */
 const filteredProducts = ref([]);
 
+/* Funktion, der opdaterer filteredProducts, når ProductFilter sender et nyt filtreret resultat. Dette gør det muligt at vise kun de produkter, som matcher brugerens filtre. */
 const handleFiltered = (filtered) => {
   filteredProducts.value = filtered;
 };
 </script>
+
 
 <template>
   <div class="container">
@@ -32,26 +36,22 @@ const handleFiltered = (filtered) => {
     </div>
     
     <div v-else class="main-content">
-      <!-- Category Buttons - kun synlig på desktop -->
       <div class="category-section-desktop">
         <CategoryButtons :products="products" />
       </div>
 
       <div class="content-wrapper">
-        <!-- Sidebar med filters -->
         <aside class="sidebar">
           <ProductFilter 
             :products="products"
             @filtered="handleFiltered"
           >
-            <!-- Category buttons vises inde i filter på mobil -->
             <template #categories>
               <CategoryButtons :products="products" />
             </template>
           </ProductFilter>
         </aside>
 
-        <!-- Products Grid -->
         <div class="products-section">
           <div class="product-count">
             Viser {{ filteredProducts.length }} produkter
@@ -75,7 +75,6 @@ const handleFiltered = (filtered) => {
 </template>
 
 <style scoped>
-/* Mobile first - starter med mobile styles */
 .container {
   padding: 12px;
 }
@@ -148,12 +147,11 @@ const handleFiltered = (filtered) => {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 kolonner på mobil */
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   margin-bottom: 50px;
 }
 
-/* Desktop - 930px+ */
 @media (min-width: 930px) {
   .container {
     padding: 20px;
@@ -197,7 +195,6 @@ const handleFiltered = (filtered) => {
   }
 }
 
-/* Large Desktop - 1200px+ */
 @media (min-width: 1200px) {
   .products-grid {
     grid-template-columns: repeat(4, 1fr);

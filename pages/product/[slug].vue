@@ -235,9 +235,9 @@ const goBack = () => {
   position: fixed;
   top: 140px;
   left: 20px;
-  width: 25px;
-  height: 25px;
-  background: white;
+  width: 44px;
+  height: 44px;
+  background: rgb(0, 0, 0);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -250,7 +250,7 @@ const goBack = () => {
 
 .back-button i {
   font-size: 25px;
-  color: #000;
+  color: #ffffff;
   transition: all 0.2s;
 }
 
@@ -264,7 +264,7 @@ const goBack = () => {
   right: 20px;
   width: 25px;
   height: 25px;
-  background: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -617,12 +617,6 @@ const goBack = () => {
   .mobile-btn {
     display: flex !important;
     position: absolute;
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 50%;
     cursor: pointer;
     align-items: center;
     justify-content: center;
@@ -638,6 +632,7 @@ const goBack = () => {
   .mobile-btn.favorite-button {
     top: 20px;
     right: 16px;
+    background: none;
   }
 
   .mobile-btn i {

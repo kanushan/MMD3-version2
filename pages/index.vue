@@ -52,7 +52,8 @@ const isProductFavorite = (product) => isFavorite(product.id);
     </div>
 
     <!-- Hvis produkterne er hentet korrekt og listen ikke er tom, vises produktkortene i et scrollbart område med overflow på -->
-      <div v-else class="product-scroll">
+    <!-- NuxtLink opretter et link til alle nye produkter. Den tilføjer så en css class som hedder "out-of-stock", hvis produktet ikke er på lager. -->
+    <div v-else class="product-scroll">
       <NuxtLink
         v-for="product in products.filter((p) => p.isNew)"
         :key="product.id"
@@ -61,12 +62,15 @@ const isProductFavorite = (product) => isFavorite(product.id);
         :class="{ 'out-of-stock': !product.inStock }"
       >
         <div class="product-image-wrapper">
+          <!-- Her bliver der vist produktets hovedbillede, hvis det findes via den korrekte sti også bruger vi "ModelNavn" som alternativ tekst for at forbedre tilgængeligheden for søgemaskiner -->
           <img
             v-if="product.BilledeMain"
             :src="product.BilledeMain"
             :alt="product.ModelNavn"
             class="product-image"
           />
+
+          <!-- Hvis produktet ikke har et billede, vises denne placeholder i stedet. "charAt(0)" tager det første bogstav i produktets navn, og hvis navnet ikke findes, vises et spørgsmålstegn som fallback. css klassen "placeholder-image" bruges til at style placeholderen. -->
           <div v-else class="placeholder-image">
             {{ product.ModelNavn?.charAt(0) || "?" }}
           </div>
@@ -80,12 +84,14 @@ const isProductFavorite = (product) => isFavorite(product.id);
             </div>
           </div>
 
+          <!-- Her bliver der lavet en knap til at tilføje eller fjerne produktet fra ønskelisten. den bliver markeret som en "active" class, hvis produktet allerede er i ønskelisten... -->
           <button
             class="wishlist-btn"
             :class="{ active: isProductFavorite(product) }"
             aria-label="Tilføj til favoritter"
             @click.prevent="toggleWishlist(product)"
           >
+            <!-- Hvis hjertets ikon til ønskelisten allerede er markeret som favorit bliver den fylt ud med en solid rød fill farve -->
             <i
               class="fa-heart"
               :class="isProductFavorite(product) ? 'fa-solid' : 'fa-regular'"
@@ -93,10 +99,12 @@ const isProductFavorite = (product) => isFavorite(product.id);
           </button>
         </div>
 
+        <!-- Her bliver produktets mærke, navn og pris samt små farveprøver vist, hvis produktet findes i flere farver. -->
         <div class="product-info">
           <div class="product-brand">{{ product.Mærke }}</div>
           <div class="product-name">{{ product.ModelNavn }}</div>
           <div class="product-price">{{ formatPrice(product.Pris) }}</div>
+
           <div v-if="product.colors?.length" class="color-swatches">
             <div
               v-for="(color, idx) in product.colors"
@@ -110,6 +118,7 @@ const isProductFavorite = (product) => isFavorite(product.id);
       </NuxtLink>
     </div>
 
+    <!-- Her tager vi en div og sætter vores BannerSplitCards Component ind, der er ikke rigtig grund til og sætte den ind i en div men vi har valgt og gøre det fordi det giver nemmere justering til styling for vi kan komme ind og ramme den i Index.vue istedet for komponenten... + vi havde problemer med fullwidth versionen hvor der var gap til højre side men der fandt vi en fix som bare skulle give den en min-width på 100%... -->
     <div class="banner-wrapper">
       <BannerSplitCards />
     </div>
@@ -160,20 +169,22 @@ const isProductFavorite = (product) => isFavorite(product.id);
           </button>
         </div>
 
-        <div class="product-info">
-          <div class="product-brand">{{ product.Mærke }}</div>
-          <div class="product-name">{{ product.ModelNavn }}</div>
-          <div class="product-price">{{ formatPrice(product.Pris) }}</div>
-          <div v-if="product.colors?.length" class="color-swatches">
-            <div
-              v-for="(color, idx) in product.colors"
-              :key="idx"
-              class="color-swatch"
-              :style="{ backgroundColor: color }"
-              :title="color"
-            ></div>
-          </div>
-        </div>
+<!-- Denne sektion viser produktets information på kortet. Først vises produktets mærke med "product.Mærke", derefter modelnavnet med "product.ModelNavn", og prisen vises med "formatPrice(product.Pris)" for korrekt formatering. Hvis produktet har tilgængelige farver, vises små farveprøver ved hjælp af "v-for", hvor hver prøve får baggrundsfarven sat dynamisk via ":style" og viser farven som tooltip med ":title"... Dette gør det nemt for brugeren visuelt at se, hvilke farver produktet findes i. -->
+<div class="product-info">
+  <div class="product-brand">{{ product.Mærke }}</div>
+  <div class="product-name">{{ product.ModelNavn }}</div>
+  <div class="product-price">{{ formatPrice(product.Pris) }}</div>
+  <div v-if="product.colors?.length" class="color-swatches">
+    <div
+      v-for="(color, idx) in product.colors"
+      :key="idx"
+      class="color-swatch"
+      :style="{ backgroundColor: color }"
+      :title="color"
+    ></div>
+  </div>
+</div>
+
       </NuxtLink>
     </div>
     <FullWidthBanner />

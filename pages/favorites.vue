@@ -1,15 +1,20 @@
 <script setup>
-import { useFavorites } from '~/composables/useFavorites';
-import ProductCard from '~/components/ProductCard.vue';
+/* Vi importerer composable "useFavorites" som vi ogs¨å gøre på alle andre vue pages med vores komponenter, for at hente brugerens favoritter samt antallet af favoritter. Importerer "ProductCard" komponenten til visning af hvert favoritprodukt. "favorites" indeholder listen af favoritter, og "favoritesCount" holder styr på hvor mange favoritter brugeren har. */
+import { useFavorites } from "~/composables/useFavorites";
+import ProductCard from "~/components/ProductCard.vue";
 
 const { favorites, favoritesCount } = useFavorites();
 </script>
 
 <template>
   <div class="container">
+    <!-- Denne header viser overskriften "Mine Favoritter" og en beskrivelse af, hvor mange favoritter brugeren har. Hvis "favoritesCount" er større end 0, vises antallet af favoritter, og teksten tilpasses ental eller flertal. Hvis der ingen favoritter er, vises i stedet en besked om, at brugeren endnu ikke har nogle favoritter. -->
     <div class="header">
       <h1>Mine Favoritter</h1>
-      <p v-if="favoritesCount > 0">Du har {{ favoritesCount }} {{ favoritesCount === 1 ? 'favorit' : 'favoritter' }}</p>
+      <p v-if="favoritesCount > 0">
+        Du har {{ favoritesCount }}
+        {{ favoritesCount === 1 ? "favorit" : "favoritter" }}
+      </p>
       <p v-else>Du har ingen favoritter endnu</p>
     </div>
 
@@ -25,8 +30,8 @@ const { favorites, favoritesCount } = useFavorites();
     </div>
 
     <div v-else class="products-grid">
-      <ProductCard 
-        v-for="product in favorites" 
+      <ProductCard
+        v-for="product in favorites"
         :key="product.id"
         :product="product"
       />
