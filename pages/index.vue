@@ -3,6 +3,7 @@ import HeroSection from "~/components/HeroSection.vue";
 import BannerSplitCards from "~/components/BannerSplitCards.vue";
 import { useFavorites } from "~/composables/useFavorites";
 import FullWidthBanner from "~/components/FullWidthBanner.vue";
+import TheFooter from "~/components/TheFooter.vue";
 
 const { products, loading, error } = useProducts({ type: "product" });
 const { toggleFavorite, isFavorite } = useFavorites();
@@ -158,15 +159,21 @@ const isProductFavorite = (product) => isFavorite(product.id);
         </div>
       </NuxtLink>
     </div>
-
-    <!-- Hero Section 2 -->
     <FullWidthBanner />
   </div>
+
+<div class="footer-spacing">
+  <TheFooter />
+</div>
 </template>
 
 
 
 <style scoped>
+.footer-spacing {
+  margin-top: 2rem;
+}
+  
 h1 {
   font-size: 1.4em;
   font-weight: bold;
@@ -282,11 +289,8 @@ h1 {
   text-align: left; 
 }
 
-
-
-
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: scale(1.01);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
@@ -411,7 +415,7 @@ h1 {
 }
 
 .banner-wrapper {
-  padding: 2rem 0; /* Change to just padding-top/bottom, no horizontal */
-  overflow-x: hidden; /* Prevents horizontal scrollbar from the 100vw */
+  padding: 2rem 0;
+  overflow-x: hidden; 
 }
 </style>

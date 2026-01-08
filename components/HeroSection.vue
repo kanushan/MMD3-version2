@@ -1,46 +1,41 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const current = ref(0);
+const fills = ref([]);
+const images = ref([]);
 let interval = null;
 
-onMounted(async () => {
-  await nextTick();
+const imageCount = 2;
 
-  const images = document.querySelectorAll(".hero img");
-  const fills = document.querySelectorAll(".fill");
-
+onMounted(() => {
   // Start first bar animation
-  fills[current.value].style.width = "100%";
-
-  function switchSlide() {
-    // Remove the active class from current image
-    images[current.value].classList.remove("active");
-
-    const previous = current.value;
-    current.value = (current.value + 1) % images.length;
-
-    // Show the new image
-    images[current.value].classList.add("active");
-
-    // Reset the previous progress bar instantly
-    fills[previous].style.transition = "none";
-    fills[previous].style.width = "0%";
-
-    // Force reflow to apply transition again
-    void fills[previous].offsetWidth;
-
-    // Re-enable transition
-    fills[current.value].style.transition = "width 5s linear";
-
-    // Reset *new* fill to 0, then start growing it again
-    fills[current.value].style.width = "0%";
-    setTimeout(() => {
-      fills[current.value].style.width = "100%";
-    }, 50);
+  if (fills.value[0]) {
+    fills.value[0].style.transition = "width 5s linear";
+    fills.value[0].style.width = "100%";
   }
 
-  // Change image every 5 seconds
+  function switchSlide() {
+    const previous = current.value;
+    current.value = (current.value + 1) % imageCount;
+
+    // Reset previous progress bar
+    const prevFill = fills.value[previous];
+    if (prevFill) {
+      prevFill.style.transition = "none";
+      prevFill.style.width = "0%";
+    }
+
+    // Start new progress bar after a small delay
+    const currentFill = fills.value[current.value];
+    if (currentFill) {
+      // Force reflow
+      void currentFill.offsetWidth;
+      currentFill.style.transition = "width 5s linear";
+      currentFill.style.width = "100%";
+    }
+  }
+
   interval = setInterval(switchSlide, 5000);
 });
 
@@ -52,23 +47,26 @@ onBeforeUnmount(() => {
 <template>
   <div class="hero">
     <img
+      ref="el => images[0] = el"
       src="../public/img/bannerImgs/skibilledeMain1.png"
-      class="active"
+      :class="{ active: current === 0 }"
       alt="Ski Session vinter kollektion"
     />
 
     <img
+      ref="el => images[1] = el"
       src="../public/img/bannerImgs/snowBoard2ndHero.jpg"
+      :class="{ active: current === 1 }"
       alt="Jakke sæt til herrer"
     />
 
     <div class="hero-overlay"></div>
 
-    <router-link to="/products" class="hero-button"> Shop Nu </router-link>
+    <router-link to="/products" class="hero-button">Shop Nu</router-link>
 
     <div class="progress">
-      <div><span class="fill"></span></div>
-      <div><span class="fill"></span></div>
+      <div><span class="fill" :ref="el => fills[0] = el"></span></div>
+      <div><span class="fill" :ref="el => fills[1] = el"></span></div>
     </div>
   </div>
 </template>
@@ -161,11 +159,11 @@ onBeforeUnmount(() => {
 
 @media (max-width: 900px) {
   .hero {
-    height: 70vh;
+    height: 30vh;
   }
 
   .hero img {
-    height: 70vh;
+    height: 100%;
   }
 
   .hero-button {

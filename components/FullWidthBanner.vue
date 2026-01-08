@@ -28,7 +28,7 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
   width: 100%;
   height: 80vh;
   overflow: hidden;
-  padding-block: 1rem;
+  padding-block: 2rem;
 }
 
 .hero img {

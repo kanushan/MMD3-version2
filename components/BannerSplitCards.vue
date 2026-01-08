@@ -6,29 +6,34 @@ export default {
 
 <template>
   <div class="container">
-    <a href="#winter-collection" class="card card-left">
+    <div class="card card-left">
       <div class="card-bg"></div>
       <div class="card-overlay"></div>
       <div class="card-content">
-        <span class="card-button">UDFORSK SAMLINGEN</span>
+        <NuxtLink to="/products" class="card-button">
+          UDFORSK SAMLINGEN
+        </NuxtLink>
       </div>
-    </a>
+    </div>
 
-    <a href="#quality" class="card card-right">
+    <div class="card card-right">
       <div class="card-bg"></div>
       <div class="card-overlay"></div>
       <div class="card-content">
-        <span class="card-button">OPLEV KVALITET</span>
+        <NuxtLink to="/products" class="card-button">
+          OPLEV KVALITET
+        </NuxtLink>
       </div>
-    </a>
+    </div>
   </div>
 </template>
+
 
 <style scoped>
 .container {
   display: flex;
   height: 80vh;
-  width: 100vw;
+  min-width: 100vw;
   margin-left: calc(-50vw + 50%);
   padding: 0;
 }
