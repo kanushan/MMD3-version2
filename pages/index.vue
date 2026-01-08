@@ -3,7 +3,6 @@
 import HeroSection from "~/components/HeroSection.vue"; /* Hero-sektionen øverst på siden */
 import BannerSplitCards from "~/components/BannerSplitCards.vue"; /* Banner med delte kort som vises nede på siden med en 50/50 split med animation */
 import { useFavorites } from "~/composables/useFavorites"; /* Composable til håndtering af favoritter og grunden til denne er sat i { } er fordi vi importerer et named export. */
-import FullWidthBanner from "~/components/FullWidthBanner.vue"; /* Fuldbredde-bannerkomponent som ligger lige over footeren med en "følg os knap" */
 import TheFooter from "~/components/TheFooter.vue"; /* Footer-komponent */
 
 /* Her henter vi produkter fra API eller datastore som i vores tilfælde er et JSON fil hvor products er vores produkter og loading der viser om vores boolean stadig henter data... og til sidst error som viser en fejlmeddelelse om der er nogle fejl under processen */
@@ -187,7 +186,6 @@ const isProductFavorite = (product) => isFavorite(product.id);
 
       </NuxtLink>
     </div>
-    <FullWidthBanner />
   </div>
 
   <div class="footer-spacing">

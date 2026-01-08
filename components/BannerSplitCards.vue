@@ -69,11 +69,13 @@ export default {
 }
 
 .card-left .card-bg {
-  background-image: url("https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1200");
+background-image: url('/img/bannerImgs/boxenLook.jpg');
+
 }
 
 .card-right .card-bg {
-  background-image: url("https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200");
+background-image: url('/img/bannerImgs/suitNtie.jpg');
+
   background-position: center 30%;
 }
 

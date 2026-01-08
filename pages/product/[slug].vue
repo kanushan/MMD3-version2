@@ -180,8 +180,8 @@ const goBack = () => {
       </Transition>
 
       <div class="delivery-info">
-        <p>Hurtig levering ved bestilling inden kl. 16.30 på hverdage.</p>
-        <p>Fri fragt ved køb over 599,-</p>
+        <p><img src="../../public/svgIcons/local_shipping.png" alt="">Hurtig levering ved bestilling inden kl. 16.30 på hverdage.</p>
+        <p><img src="../../public/svgIcons/package_2.png" alt="">Fri fragt ved køb over 599,-</p>
       </div>
 
       <div class="product-tabs">
@@ -534,7 +534,11 @@ const goBack = () => {
 
 .delivery-info p {
   margin: 5px 0;
+  display: flex;         
+  align-items: center;     
+  gap: 8px;       
 }
+
 
 .product-tabs {
   border-top: 1px solid #ddd;
