@@ -189,7 +189,6 @@ const isProductFavorite = (product) => isFavorite(product.id);
   </div>
 
   <div class="footer-spacing">
-    <TheFooter />
   </div>
 </template>
 
