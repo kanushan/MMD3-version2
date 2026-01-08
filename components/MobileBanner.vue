@@ -32,7 +32,6 @@
   width: auto;
 }
 
-/* Hide on desktop */
 @media (min-width: 930px) {
   .mobile-header {
     display: none;

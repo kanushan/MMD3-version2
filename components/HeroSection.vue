@@ -1,47 +1,53 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
-const current = ref(0);
-const fills = ref([]);
-const images = ref([]);
-let interval = null;
+/* Reaktive references til slideren */
+const current = ref(0);      // Gemmer indekset af den aktive slide
+const fills = ref([]);        // Array med referencer til progress bars under billederne
+const images = ref([]);       // Array med billeder, hvis vi vil manipulere dem direkte
+let interval = null;          // Gemmer interval ID, så vi kan rydde det senere
 
-const imageCount = 2;
+const imageCount = 2;         // Antal billeder i slideren
 
+/* Kode der kører når komponenten mountes */
 onMounted(() => {
-  // Start first bar animation
+  // Start animationen på den første progress bar
   if (fills.value[0]) {
     fills.value[0].style.transition = "width 5s linear";
     fills.value[0].style.width = "100%";
   }
 
+  /* Funktion der skifter til næste slide og resetter progress bar */
   function switchSlide() {
-    const previous = current.value;
-    current.value = (current.value + 1) % imageCount;
+    const previous = current.value;                 
+    current.value = (current.value + 1) % imageCount;   
 
-    // Reset previous progress bar
+   /* her starter progres baren fra en % på 0 som er venstre også fylder og derefter sletter den værdien og nulstiller den tilbage til 0 hvor den så starter forfra på næste billed */
     const prevFill = fills.value[previous];
     if (prevFill) {
-      prevFill.style.transition = "none";
-      prevFill.style.width = "0%";
+      prevFill.style.transition = "none";              
+      prevFill.style.width = "0%";               
     }
 
-    // Start new progress bar after a small delay
+    // Start animation på den nye progress bar som bliver filled med en solid hvid farve... eneste der er dårligt ved denne script er at farverne på billedet spiller en stor rolle for progress barene... hvis billedet er hvid og progress barene er hvide bliver det svært og se, derfor har vi lavet et overlay på hero billedet men man kan også køre et script som laver modsætnings farver men det virkede lidt for kompleks og unødvendig kode i denne omgang...
     const currentFill = fills.value[current.value];
     if (currentFill) {
-      // Force reflow
-      void currentFill.offsetWidth;
+  /* her forcer vi browserens reflow så transition starter korrekt på main billed 1 hver gang */
+      void currentFill.offsetWidth;                   
       currentFill.style.transition = "width 5s linear";
       currentFill.style.width = "100%";
     }
   }
 
-  interval = setInterval(switchSlide, 5000);
+  /* Her sker der intervaller på 5 sekunder for hvert hero img til og skfite til et andet. */
+  interval = setInterval(switchSlide, 5000);          
 });
 
+/* Ryd interval når komponenten fjernes, for at undgå hukommelseslæk, Over tid kan det gøre programmet langsommere eller få det til at crashe, fordi computeren løber tør for tilgængelig hukommelse. RAM... */
 onBeforeUnmount(() => {
   clearInterval(interval);
 });
+
 </script>
 
 <template>

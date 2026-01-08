@@ -1,16 +1,17 @@
 <script setup>
+/* Vi definerer props for komponenten, så den kan modtage data fra en parent komponent. Her modtager vi en prop kaldet "completed". */
 const props = defineProps({
+  /* "completed" er en Boolean, som bestemmer om processen er færdig eller ej. Hvis der ikke sendes noget fra parent, sættes den som default til false */
   completed: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 </script>
 
 <template>
   <div class="loader-container">
     <svg class="loader" viewBox="0 0 50 50">
-      <!-- Spinning circle -->
       <circle
         class="loader-circle"
         cx="25"
@@ -22,7 +23,6 @@ const props = defineProps({
     </svg>
   </div>
 </template>
-
 
 <style scoped>
 .loader-container {
@@ -36,16 +36,14 @@ const props = defineProps({
   height: 50px;
 }
 
-/* Spinning circle */
 .loader-circle {
-  stroke: #0F2A1E;
+  stroke: #0f2a1e;
   stroke-dasharray: 126;
   stroke-dashoffset: 126;
   animation: spin 1.5s linear infinite, draw 1.5s ease-in-out infinite;
   transform-origin: center;
 }
 
-/* Animations */
 @keyframes spin {
   0% {
     transform: rotate(0deg);

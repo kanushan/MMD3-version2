@@ -1,17 +1,21 @@
 <script setup>
+/* Her definerer vi en prop/model kaldet isOpen, som styrer om accordion menuen er åben eller lukket. Den er en boolean og starter som false */
 const isOpen = defineModel({ type: Boolean, default: false });
 
+/* Vi opretter et reaktivt objekt, der holder styr på hvilke accordions der er åbne. Alle starter som lukket (false), og hver gang brugeren klikker på en sektion, vil værdien skifte fra false til true eller fra true til false afhængigt af den nuværende tilstand */
 const accordions = ref({
   brands: false,
   shoes: false,
   clothing: false,
-  accessories: false
+  accessories: false,
 });
 
+/* Funktion til at åbne eller lukke en specifik accordion. Den skifter værdien mellem true og false hver gang den kaldes (når man trykker) */
 const toggleAccordion = (key) => {
   accordions.value[key] = !accordions.value[key];
 };
 
+/* Funktion til at lukke hele accordion menuen. Når denne funktion kaldes, sættes "isOpen" til false, hvilket betyder at hele menuen lukkes. Dette kan f.eks. bruges når brugeren klikker udenfor menuen eller vil forlade accordion sektionen, så den visuelle UI automatisk skjuler alt indhold */
 const close = () => {
   isOpen.value = false;
 };
@@ -22,19 +26,27 @@ const close = () => {
     <div v-if="isOpen" class="burgerMenu">
       <div class="menuContent">
         <!-- Brands Accordion -->
-<div class="accordion">
-  <button @click="toggleAccordion('brands')" class="accordionHeader">
-    <span>Brands</span>
-    <span class="arrow" :class="{ open: accordions.brands }">▼</span>
-  </button>
-  <div v-show="accordions.brands" class="accordionContent">
-    <NuxtLink to="/products?brand=JACK%20%26%20JONES" @click="close">JACK & JONES</NuxtLink>
-    <NuxtLink to="/products?brand=ONLY%20%26%20SONS" @click="close">ONLY & SONS</NuxtLink>
-    <NuxtLink to="/products?brand=Woodbird." @click="close">Woodbird.</NuxtLink>
-    <NuxtLink to="/products?brand=SELECTED" @click="close">SELECTED</NuxtLink>
-    <NuxtLink to="/products?brand=LVL" @click="close">LVL</NuxtLink>
-  </div>
-</div>
+        <div class="accordion">
+          <button @click="toggleAccordion('brands')" class="accordionHeader">
+            <span>Brands</span>
+            <span class="arrow" :class="{ open: accordions.brands }">▼</span>
+          </button>
+          <div v-show="accordions.brands" class="accordionContent">
+            <NuxtLink to="/products?brand=JACK%20%26%20JONES" @click="close"
+              >JACK & JONES</NuxtLink
+            >
+            <NuxtLink to="/products?brand=ONLY%20%26%20SONS" @click="close"
+              >ONLY & SONS</NuxtLink
+            >
+            <NuxtLink to="/products?brand=Woodbird." @click="close"
+              >Woodbird.</NuxtLink
+            >
+            <NuxtLink to="/products?brand=SELECTED" @click="close"
+              >SELECTED</NuxtLink
+            >
+            <NuxtLink to="/products?brand=LVL" @click="close">LVL</NuxtLink>
+          </div>
+        </div>
 
         <!-- Sko Accordion -->
         <div class="accordion">
@@ -43,9 +55,19 @@ const close = () => {
             <span class="arrow" :class="{ open: accordions.shoes }">▼</span>
           </button>
           <div v-show="accordions.shoes" class="accordionContent">
-            <NuxtLink to="/products?category=Sko&subcategory=Loafer" @click="close">Loafers</NuxtLink>
-            <NuxtLink to="/products?category=Sko&subcategory=Støvle" @click="close">Støvler</NuxtLink>
-            <NuxtLink to="/products?category=Sko" @click="close">Alle Sko</NuxtLink>
+            <NuxtLink
+              to="/products?category=Sko&subcategory=Loafer"
+              @click="close"
+              >Loafers</NuxtLink
+            >
+            <NuxtLink
+              to="/products?category=Sko&subcategory=Støvle"
+              @click="close"
+              >Støvler</NuxtLink
+            >
+            <NuxtLink to="/products?category=Sko" @click="close"
+              >Alle Sko</NuxtLink
+            >
           </div>
         </div>
 
@@ -56,35 +78,69 @@ const close = () => {
             <span class="arrow" :class="{ open: accordions.clothing }">▼</span>
           </button>
           <div v-show="accordions.clothing" class="accordionContent">
-            <NuxtLink to="/products?category=Tøj&subcategory=Tshirt" @click="close">T-shirts</NuxtLink>
-            <NuxtLink to="/products?category=Tøj&subcategory=Striktrøje" @click="close">Striktrøjer</NuxtLink>
-            <NuxtLink to="/products?category=Tøj&subcategory=Hættetrøje" @click="close">Hættetrøjer</NuxtLink>
-            <NuxtLink to="/products?category=Tøj&subcategory=Jakke" @click="close">Jakker</NuxtLink>
-            <NuxtLink to="/products?category=Tøj&subcategory=Bukser" @click="close">Bukser</NuxtLink>
-            <NuxtLink to="/products?category=Tøj" @click="close">Alt Tøj</NuxtLink>
+            <NuxtLink
+              to="/products?category=Tøj&subcategory=Tshirt"
+              @click="close"
+              >T-shirts</NuxtLink
+            >
+            <NuxtLink
+              to="/products?category=Tøj&subcategory=Striktrøje"
+              @click="close"
+              >Striktrøjer</NuxtLink
+            >
+            <NuxtLink
+              to="/products?category=Tøj&subcategory=Hættetrøje"
+              @click="close"
+              >Hættetrøjer</NuxtLink
+            >
+            <NuxtLink
+              to="/products?category=Tøj&subcategory=Jakke"
+              @click="close"
+              >Jakker</NuxtLink
+            >
+            <NuxtLink
+              to="/products?category=Tøj&subcategory=Bukser"
+              @click="close"
+              >Bukser</NuxtLink
+            >
+            <NuxtLink to="/products?category=Tøj" @click="close"
+              >Alt Tøj</NuxtLink
+            >
           </div>
         </div>
 
         <!-- Accessories Accordion - tom indtil du får accessories -->
         <div class="accordion">
-          <button @click="toggleAccordion('accessories')" class="accordionHeader">
+          <button
+            @click="toggleAccordion('accessories')"
+            class="accordionHeader"
+          >
             <span>Accessories</span>
-            <span class="arrow" :class="{ open: accordions.accessories }">▼</span>
+            <span class="arrow" :class="{ open: accordions.accessories }"
+              >▼</span
+            >
           </button>
           <div v-show="accordions.accessories" class="accordionContent">
-            <p style="color: #999; padding: 0.5rem;">Kommer snart...</p>
+            <p style="color: #999; padding: 0.5rem">Kommer snart...</p>
           </div>
         </div>
 
         <!-- Direkte links -->
         <div class="directLinks">
-          <NuxtLink to="/products?isNew=true" @click="close" class="directLink">Nyheder</NuxtLink>
-          <NuxtLink to="/products?BoxensLook=true" @click="close" class="directLink">Boxens Look</NuxtLink>
+          <NuxtLink to="/products?isNew=true" @click="close" class="directLink"
+            >Nyheder</NuxtLink
+          >
+          <NuxtLink
+            to="/products?BoxensLook=true"
+            @click="close"
+            class="directLink"
+            >Boxens Look</NuxtLink
+          >
         </div>
       </div>
     </div>
   </Transition>
-  
+
   <!-- Backdrop -->
   <Transition name="fade">
     <div v-if="isOpen" class="backdrop" @click="close"></div>
@@ -99,7 +155,7 @@ const close = () => {
   width: 100%;
   background: white;
   z-index: 100;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   max-height: calc(100vh - 80px);
   overflow-y: auto;
@@ -179,7 +235,7 @@ const close = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 40;
 }
 

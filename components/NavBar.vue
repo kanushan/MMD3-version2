@@ -20,13 +20,11 @@ const toggleMenu = () => {
 
 <template>
  <nav class="navBar">
-    <!-- Hjem -->
     <NuxtLink to="/" class="navItem" aria-label="Hjem">
       <i class="fa-solid fa-house navIcon"></i>
       <span class="navLabel">Hjem</span>
     </NuxtLink>
 
-    <!-- Søg -->
     <button
       type="button"
       class="navItem"
@@ -37,27 +35,23 @@ const toggleMenu = () => {
       <span class="navLabel">Søg</span>
     </button>
 
-    <!-- Favoritter -->
     <NuxtLink to="/favorites" class="navItem" aria-label="Favoritter">
       <i class="fa-solid fa-heart navIcon"></i>
       <span class="navLabel">Favorit</span>
       <span class="cartBadge" v-if="favoritesCount > 0">{{ favoritesCount }}</span>
     </NuxtLink>
 
-    <!-- Kurv -->
     <NuxtLink to="/cart" class="navItem" aria-label="Kurv">
       <i class="fa-solid fa-cart-shopping navIcon"></i>
       <span class="navLabel">Kurv</span>
       <span class="cartBadge" v-if="cartCount > 0">{{ cartCount }}</span>
     </NuxtLink>
 
-    <!-- Bruger -->
     <NuxtLink to="/account" class="navItem" aria-label="Bruger">
       <i class="fa-solid fa-user navIcon"></i>
       <span class="navLabel">Bruger</span>
     </NuxtLink>
 
-    <!-- Burger-menu -->
     <button
       type="button"
       class="navItem"
@@ -76,13 +70,9 @@ const toggleMenu = () => {
   justify-content: space-around;
   align-items: center;
   gap: 0.5rem;
-
   background: #f3f3f3;
   border-top: 1px solid #ddd;
-
   padding: 0.5rem 0.75rem;
-
-  /* MOBILE FIRST: fast i bunden */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -124,7 +114,6 @@ const toggleMenu = () => {
   font-size: 0.7rem;
 }
 
-/* Skjul på desktop - over 930px */
 @media (min-width: 930px) {
   .navBar {
     display: none;

@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue';
-import { useFavorites } from '~/composables/useFavorites';
-import { useCart } from '~/composables/useCart';
-import { useSearch } from '~/composables/useSearch';
+import { ref } from "vue";
+import { useFavorites } from "~/composables/useFavorites";
+import { useCart } from "~/composables/useCart";
+import { useSearch } from "~/composables/useSearch";
 
 const { favoritesCount } = useFavorites();
 const { cartCount } = useCart();
@@ -17,10 +17,8 @@ const closeDropdowns = () => {
 
 <template>
   <nav class="desktop-nav">
-    <!-- Top Bar -->
     <div class="top-bar">
       <div class="container">
-        <!-- Search -->
         <div class="search-section">
           <form @submit.prevent="handleSearch()" class="search-form">
             <input
@@ -35,12 +33,10 @@ const closeDropdowns = () => {
           </form>
         </div>
 
-        <!-- Logo -->
         <NuxtLink to="/" class="logo">
           <img src="../public/img/boxen-logo.png" alt="">
         </NuxtLink>
 
-        <!-- Right Actions -->
         <div class="actions">
           <NuxtLink class="action-link">
             <i class="fa-solid fa-user"></i>
@@ -62,16 +58,13 @@ const closeDropdowns = () => {
       </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <div class="bottom-bar">
       <div class="container">
         <div class="nav-links">
-          <!-- Nyheder -->
           <NuxtLink to="/products?isNew=true" class="nav-item">
             NYHEDER
           </NuxtLink>
 
-          <!-- Tøj Dropdown -->
           <div 
             class="nav-item dropdown"
             @mouseenter="openDropdown = 'toj'"
@@ -91,7 +84,6 @@ const closeDropdowns = () => {
             </div>
           </div>
 
-          <!-- Sko Dropdown -->
           <div 
             class="nav-item dropdown"
             @mouseenter="openDropdown = 'sko'"
@@ -108,7 +100,6 @@ const closeDropdowns = () => {
             </div>
           </div>
 
-          <!-- Accessories Dropdown -->
           <div 
             class="nav-item dropdown"
             @mouseenter="openDropdown = 'accessories'"
@@ -123,7 +114,6 @@ const closeDropdowns = () => {
             </div>
           </div>
 
-          <!-- Mærker Dropdown -->
           <div 
             class="nav-item dropdown"
             @mouseenter="openDropdown = 'maerker'"
@@ -142,7 +132,6 @@ const closeDropdowns = () => {
             </div>
           </div>
 
-          <!-- Boxens Look -->
           <NuxtLink to="/products?BoxensLook=true" class="nav-item special">
             BOXENS LOOK
           </NuxtLink>
@@ -161,7 +150,6 @@ const closeDropdowns = () => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Top Bar */
 .top-bar {
   border-bottom: 1px solid #e5e5e5;
   padding: 16px 0;
@@ -177,7 +165,6 @@ const closeDropdowns = () => {
   gap: 24px;
 }
 
-/* Search */
 .search-section {
   justify-self: start;
 }
@@ -216,34 +203,12 @@ const closeDropdowns = () => {
   color: #000;
 }
 
-/* Logo */
 .logo {
   justify-self: center;
   width: 75%;
   height: 75%;
 }
 
-.logo-text {
-  font-size: 28px;
-  font-weight: 700;
-  color: #000;
-  letter-spacing: 2px;
-}
-
-.logo-x {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: #c41e3a;
-  color: white;
-  border-radius: 50%;
-  font-size: 20px;
-  margin: 0 2px;
-}
-
-/* Actions */
 .actions {
   display: flex;
   gap: 24px;
@@ -287,7 +252,6 @@ const closeDropdowns = () => {
   font-weight: 600;
 }
 
-/* Bottom Bar */
 .bottom-bar {
   padding: 14px 0;
 }
@@ -328,7 +292,6 @@ const closeDropdowns = () => {
   color: #a01828;
 }
 
-/* Dropdown */
 .dropdown {
   position: relative;
 }
@@ -400,7 +363,6 @@ const closeDropdowns = () => {
   font-style: italic;
 }
 
-/* Hide on mobile */
 @media (max-width: 930px) {
   .desktop-nav {
     display: none;
