@@ -1,12 +1,5 @@
 <script setup>
-/* Vi definerer props for komponenten, så den kan modtage data fra en parent komponent. Her modtager vi en prop kaldet "completed". */
-const props = defineProps({
-  /* "completed" er en Boolean, som bestemmer om processen er færdig eller ej. Hvis der ikke sendes noget fra parent, sættes den som default til false */
-  completed: {
-    type: Boolean,
-    default: false,
-  },
-});
+
 </script>
 
 <template>

@@ -33,10 +33,10 @@ const closeDropdowns = () => {
         </NuxtLink>
 
         <div class="actions">
-          <NuxtLink class="action-link">
+          <a class="action-link">
             <i class="fa-solid fa-user"></i>
             <span>Log ind</span>
-          </NuxtLink>
+          </a>
           
           <NuxtLink to="/favorites" class="action-link">
             <i class="fa-regular fa-heart"></i>

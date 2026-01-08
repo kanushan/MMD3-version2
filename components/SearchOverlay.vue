@@ -27,26 +27,6 @@ const close = () => {
   isOpen.value = false;
   setSearchQuery(''); // tøm søgefeltet
 };
-
-/* handleKeyDown funktionen lytter efter, om brugeren trykker på Escape knappen (tasten på keyboardet). Hvis det sker, kaldes "close()", så overlayet lukkes automatisk. */
-const handleKeydown = (e) => {
-  if (e.key === 'Escape') {
-    close();
-  }
-};
-
-/* En "watcher" observere, om søge overlayet åbnes eller lukkes. Når det åbnes (isOpen = true), tilføjer vi en event listener, så brugeren kan lukke med Escape, efter venter vi et øjeblik (nextTick), så DOM’en er klar, og sætter derefter fokus i inputfeltet. Når det lukkes (isOpen = false) fjerner vi event listeneren for at undgå hukommelseslæk (unødvendige aktive events for pcen ikke bruger alt for megt RAM). */
-watch(isOpen, (newVal) => {
-  if (newVal) {
-    document.addEventListener('keydown', handleKeydown);
-    nextTick(() => {
-      const input = document.querySelector('.search-overlay-input');
-      if (input) input.focus(); 
-    });
-  } else {
-    document.removeEventListener('keydown', handleKeydown);
-  }
-});
 </script>
 
 

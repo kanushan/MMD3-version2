@@ -28,14 +28,14 @@ onMounted(() => {
     const previous = current.value;
     current.value = (current.value + 1) % imageCount;
 
-    /* her starter progres baren fra en % på 0 som er venstre også fylder og derefter sletter den værdien og nulstiller den tilbage til 0 hvor den så starter forfra på næste billed */
+    /* her starter progress baren fra en % på 0 som er venstre også fylder og derefter sletter den værdien og nulstiller den tilbage til 0 hvor den så starter forfra på næste billede */
     const prevFill = fills.value[previous];
     if (prevFill) {
       prevFill.style.transition = "none";
       prevFill.style.width = "0%";
     }
 
-    // Start animation på den nye progress bar som bliver filled med en solid hvid farve... eneste der er dårligt ved denne script er at farverne på billedet spiller en stor rolle for progress barene... hvis billedet er hvid og progress barene er hvide bliver det svært og se, derfor har vi lavet et overlay på hero billedet men man kan også køre et script som laver modsætnings farver men det virkede lidt for kompleks og unødvendig kode i denne omgang...
+    // Start animation på den nye progress bar som bliver filled med en solid hvid farve. Det eneste der er dårligt ved denne script er at farverne på billedet spiller en stor rolle for progress barene. Hvis billedet er hvid og progress barene er hvide bliver det svært og se, derfor har vi lavet et overlay på hero billedet men man kan også køre et script som laver modsætnings farver men det virkede lidt for kompleks og unødvendig kode i denne omgang...
     const currentFill = fills.value[current.value];
     if (currentFill) {
       /* her forcer vi browserens reflow så transition starter korrekt på main billed 1 hver gang */
@@ -45,7 +45,7 @@ onMounted(() => {
     }
   }
 
-  /* Her sker der intervaller på 5 sekunder for hvert hero img til og skfite til et andet. */
+  /* Her sker der intervaller på 5 sekunder for hvert hero img til og skifte til et andet. */
   interval = setInterval(switchSlide, 5000);
 });
 
@@ -197,9 +197,17 @@ onBeforeUnmount(() => {
     height: 100%;
   }
 
+  .Overlay-H1 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    text-align: center;
+    width: 90%;
+  }
+
   .hero-button {
-    position: absolute;
-    bottom: 60px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 35px;
@@ -214,7 +222,7 @@ onBeforeUnmount(() => {
   }
 
   .progress {
-    bottom: 20px;
+    bottom: 15px;
   }
 }
 </style>

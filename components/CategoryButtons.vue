@@ -38,7 +38,7 @@ const categories = computed(() => {
 const updateCategoryFromRoute = () => {
   const query = route.query;
 
-  /* Hvis BoxensLook eller isNew er i query, betyder det at ingen kategori skal markeres, fx ved særlige kampagner. */
+  /* Hvis BoxensLook eller isNew er i query, betyder det at ingen kategori skal markeres, fx ved særlige kollektioner. */
   if (query.BoxensLook || query.isNew) {
     selectedCategory.value = null;
     return;
@@ -57,7 +57,7 @@ const updateCategoryFromRoute = () => {
       else if (query.subcategory === "Jakke") selectedCategory.value = "JAKKER";
       else if (query.subcategory === "Bukser")
         selectedCategory.value = "BUKSER";
-      else selectedCategory.value = null; // Hvis subkategori ikke findes
+      else selectedCategory.value = null;
     }
   } else {
     /* Hvis ingen kategori i URL, bliver alle produkter vist */
@@ -71,7 +71,7 @@ onMounted(() => {
   updateCategoryFromRoute();
 });
 
-/* Watcher er en Vue funktion som observere en eller flere ændringer i URL query. Hvis brugeren fx navigerer med browserens tilbage eller forward knapper, opdateres selectedCategory automatisk uden at reload siden. */
+/* Watch er en Vue funktion som observerer en eller flere ændringer i URL query. Hvis brugeren fx navigerer med browserens tilbage eller forward knapper, opdateres selectedCategory automatisk uden at genindlæse siden. */
 watch(
   () => route.query,
   () => {

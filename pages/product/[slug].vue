@@ -14,7 +14,7 @@ const { isFavorite, toggleFavorite } = useFavorites();
 /* Opret reaktive variable til håndtering af valgt produktbillede, antal, valgt størrelse, visning af bekræftelse og loader status */
 const selectedImage = ref(null);
 const quantity = ref(1);
-const selectedSize = ref("L");
+const selectedSize = ref("");
 const showAddedToCart = ref(false);
 const showLoader = ref(true);
 
@@ -41,12 +41,12 @@ watch(() => route.params.slug, () => {
   showLoader.value = true;
 });
 
-/* Funktion til at reducere antallet af produkter i kurven, men kun hvis antallet er større end 1 */
+/* Funktion til at reducere antallet af produkter man vil have i kurven, men kun hvis antallet er større end 1 */
 const decrementQuantity = () => {
   if (quantity.value > 1) quantity.value--;
 };
 
-/* Funktion til at øge antallet af produkter i kurven med 1 */
+/* Funktion til at øge antallet af produkter man vil have i kurven med 1 */
 const incrementQuantity = () => {
   quantity.value++;
 };

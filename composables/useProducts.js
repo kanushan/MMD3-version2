@@ -1,6 +1,6 @@
 /*  useProducts composable henter en liste af produkter fra API’et med mulighed for filtre. Den returnerer produkter, loading-status, fejl og en refresh-funktion. */
 export const useProducts = (filters = {}) => {
-  /* her bliver der oprettet et URLSearchParams (URLSearchParams er en indbygget javascript klasse som gør det nemt at arbejde med URL query strings... Den bruges til at bygge, læse eller ændre ændre query parametre i en URL) objekt til at bygge query string */
+  /* Vi opretter en ny, tom URLSearchParams som bruges til at bygge query parameters (søgeparametre) til URL'en. Denne vil senere blive konverteret til en string og tilføjet til URL'en for at filtrere produkter baseret på brugerens valg. */
   const query = new URLSearchParams();
 
   /* Vi tilføjer filtre til query string, hvis de findes */
@@ -23,10 +23,10 @@ export const useProducts = (filters = {}) => {
   /* Filter på tags */
   if (filters.tags) query.append("tags", filters.tags);
 
-  /* der bliver konverter query params til en streng */
+  /* der bliver konverteret query params til en string */
   const queryString = query.toString();
 
-  /* vi bygger en API URL, inkl. query string hvis den ikke er tom */
+  /* vi bygger en API URL, inkl. query string hvis den ikke er tom (? : er shorthand for if else)*/
   const url = queryString ? `/api/products?${queryString}` : "/api/products";
 
   /* Hent produkter fra API'en med useFetch på den angivne URL. useFetch gør data reaktiv, så komponenten automatisk opdateres, når API-kaldet fuldføres. Den returnerer et objekt med data, som indeholder produktlisten, pending, som er tilstanden der bliver vist, når fetch stadig kører. Error, som indeholder fejlinformation hvis fetch fejler, og refresh, en funktion til manuelt at genindlæse data uden at genloade siden. Dette gør det muligt at vise produktlisten dynamisk, håndtere loading-tilstande og fejl på en enkel måde. */

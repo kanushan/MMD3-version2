@@ -1,6 +1,3 @@
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-
 /* useSearch er en composable, der håndterer søgefunktionalitet i applikationen. Den gør det muligt at gemme søgeteksten reaktivt, opdatere den, rydde den og navigere til søgeresultater uden at komponenten selv skal bruge krafter på routing logikken. */
 export const useSearch = () => {
   const router = useRouter();

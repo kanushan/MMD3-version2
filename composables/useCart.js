@@ -1,9 +1,9 @@
-/* Dette composable ("useCart") håndterer hele logikken omkring indkøbskurven i appen. Det sørger for at tilføje, fjerne, opdatere og beregne produkter i kurven.*/
+/* Dette composable ("useCart") håndterer hele logikken omkring indkøbskurven i webshoppen. Det sørger for at tilføje, fjerne, opdatere og beregne produkter i kurven.*/
 export const useCart = () => {
-  /* useState bruges til at oprette en delt, reaktiv tilstand (state) for hele applikationen. Her opretter vi en global variabel "cart", som starter som et tomt array. Det betyder, at alle komponenter, der bruger "useCart", deler den samme kurv. */
+  /* useState bruges til at oprette en delt, reaktiv tilstand (state) for hele webshoppen, det gælder både sider og komponenter. Her opretter vi en global variabel "cart", som starter som et tomt array. Det betyder, at alle komponenter, der bruger "useCart", deler den samme kurv. */
   const cart = useState("cart", () => []);
 
-  /* addToCart-funktionen tilføjer et produkt til kurven. Først tjekker vi, om produktet allerede findes i kurven (samme id, størrelse og farve). Hvis det gør, øges mængden i stedet for at tilføje et nyt element. Hvis ikke, pushes produktet som et nyt objekt ind i arrayet, med ekstra oplysninger som "quantity", "size" og "color". Vi tilføjer også et unikt "cartItemId" vha. tid og tilfældigt tal, så hvert produkt kan identificeres unikt. */
+  /* addToCart funktionen tilføjer et produkt til kurven. Først tjekker vi, om produktet allerede findes i kurven (samme id, størrelse og farve). Hvis det gør, øges mængden i stedet for at tilføje et nyt element. Hvis ikke, pushes produktet som et nyt objekt ind i arrayet, med ekstra oplysninger som "quantity", "size" og "color". Vi tilføjer også et unikt "cartItemId" ved at kombinere tid og tilfældigt tal, som giver hvert produkt et unikt ID. */
   const addToCart = (product, quantity = 1, size = null, color = null) => {
     const existingItem = cart.value.find(
       (item) =>
@@ -14,7 +14,7 @@ export const useCart = () => {
       existingItem.quantity += quantity;
     } else {
       cart.value.push({
-        ...product,
+        ...product, // spreder alle produktets egenskaber ind i det nye objekt
         quantity,
         size,
         color,
@@ -31,7 +31,7 @@ export const useCart = () => {
     }
   };
 
-  /* removeFromCart fjerner et produkt fra kurven helt. Den filtrerer kurven og returnerer et nyt array uden det matchende "cartItemId". */
+  /* removeFromCart fjerner et produkt fra kurven helt. Den filtrerer kurven og returnerer et nyt array uden det matchende "cartItemId". Den tjekker om cartitemId er lig med det cartItemId vi gerne vil fjerne, hvis det ikke er lig med hinanden bliver de i arrayet, hvis de matcher bliver de fjernet */
   const removeFromCart = (cartItemId) => {
     cart.value = cart.value.filter((item) => item.cartItemId !== cartItemId);
   };

@@ -2,12 +2,12 @@ import { ref, computed } from 'vue';
 
 const favorites = ref([]);
 
-/* Hvis vi kører på klienten (browseren), prøver vi at hente gemte favoritter fra localStorage. Dette sikrer, at favoritter huskes mellem sideopdateringer.*/
+/* Hvis vi besøger webshoppen, prøver vi at hente gemte favoritter fra localStorage, det betyder at den tjekker om denne browser har været på siden før og om de har gemt nogle favoritter. Dette sikrer, at favoritter huskes mellem sideopdateringer og besøg fra samme enhed.*/
 if (process.client) {
   const stored = localStorage.getItem('favorites');
   if (stored) {
     try {
-      /* den analysere JSON-strengen fra localStorage og gemmer det i favorites. (det er et program der analysere data som hedder parser) */
+      /* den analysere JSON-strengen fra localStorage og gemmer det i favorites. Det fungerer ved at tage det JSON som ligger i localStorage og parse det til et eller flere objekter */
       favorites.value = JSON.parse(stored);
     } catch (e) {
       /* Hvis parsing fejler, logges fejlen, så vi kan debugge data som ikke virker */
@@ -19,7 +19,7 @@ if (process.client) {
 /* useFavorites composable giver funktionalitet til at håndtere favoritter. Man kan returnerer metoder og computed værdier, som komponenter kan bruge. */
 export const useFavorites = () => {
 
-  /* Her bliver der tilføjet et produkt til favoritterne, hvis det ikke allerede findes. "product" er et objekt med produktdata. der bliver tjekket først med `isFavorite` for at undgå kopieringer. derefter bliver gemmer listen til localStorage for persistens. */
+  /* AddToFavorites tilføjer et produkt til favoritterne hvis det ikke allerede findes i listen. Efter tilføjelse opdateres localStorage for at gemme ændringen. */
   const addToFavorites = (product) => {
     if (!isFavorite(product.id)) {
       favorites.value.push(product);
@@ -27,13 +27,13 @@ export const useFavorites = () => {
     }
   };
 
-  /* RemoveFromFavorites fjerner et produkt fra favoritterne baseret på produktets id. Den filterer alle produkter fra listen, der ikke matcher id'et og opdaterer localStorage efter ændring. */
+  /* RemoveFromFavorites fjerner et produkt fra favoritter ved at sammenligne id'erne i arrayet og beholder alle dem der ikke matcher det id vi gerne vil fjerne. Vi gemmer det nye array med saveFavorites */
   const removeFromFavorites = (productId) => {
     favorites.value = favorites.value.filter(p => p.id !== productId);
     saveFavorites();
   };
 
-  /* ToggleFavorite toggler favoritstatus for et produkt der gøre hvis produktet allerede er i favoritter, fjernes det... Hvis produktet ikke er i favoritter, tilføjes det og bruges ved klik på "hjerte" ikon. */
+  /* ToggleFavorite toggler favoritstatus for et produkt. Hvis det allerede er i favoritter, fjernes det. Hvis det ikke er i favoritter, tilføjes det. ved at kalde henholdsvis addToFavorites og removeFromFavorites */
   const toggleFavorite = (product) => {
     if (isFavorite(product.id)) {
       removeFromFavorites(product.id);
@@ -42,25 +42,25 @@ export const useFavorites = () => {
     }
   };
 
-  /* Checker om et produkt er i favoritterne hvor den derefter returnerer "true" hvis produktets id findes i listen. Den returnerer `false` ellers... den bruges f.eks. til at vise fyldt med en solid fill med en rød farve hvis hjertet af produktet allerede er gjort til en favorit. */
+  /* Tjekker om et produkt er i favoritterne ved at bruge some() hvor den derefter returnerer "true" hvis produktets id findes i listen. Den returnerer `false` ellers. Den bruges til at vise hjerterne som fyldte hvis de er favoritiseret */
   const isFavorite = (productId) => {
     return favorites.value.some(p => p.id === productId);
   };
 
-  /* Her gemmer den aktuelle favoritliste til localStorage for at sikrer at favoritter huskes mellem sideopdateringer. Her er det kun på klienten, da server side rendering ikke har localStorage. */
+  /* Her gemmes den aktuelle favoritliste til localStorage for at sikre at favoritter huskes mellem sideopdateringer. Her er det kun på klienten (process.client), da server side rendering ikke har localStorage. */
   const saveFavorites = () => {
     if (process.client) {
       localStorage.setItem('favorites', JSON.stringify(favorites.value));
     }
   };
 
-  /* Computed property der returnerer alle favoritter reaktivt gør det nemt for komponenter at lytte til ændringer i listen. */
+  /* getFavorites er en computed property der returnerer favoritlisten reaktivt. Dette betyder at komponenter, der bruger getFavorites, automatisk opdateres når favorites ændres (når produkter tilføjes eller fjernes). */
   const getFavorites = computed(() => favorites.value);
 
-  /* Computed property der returnerer antal favoritter. Her kan man bruge det til at vise badge med antal favoritter i Ui som vi har i top højre hjørne af vores navbar  */
+  /* favoritesCount er en computed property der returnerer antal favoritter. Her kan man bruge det til at vise badge med antal favoritter i UI som vi har i top højre hjørne af vores navbar  */
   const favoritesCount = computed(() => favorites.value.length);
 
-  /* til sidst bliver at returneret hvor alle funktioner og computed værdier bliver kørt igennem */
+  /* til sidst bliver alt returneret, så vi kan bruge dem på tværs af webshoppens komponenter og sider ved brug af useFavorites */
   return {
     favorites: getFavorites,
     favoritesCount,
