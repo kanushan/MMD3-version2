@@ -307,7 +307,7 @@ const activeFiltersCount = computed(() => {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 12px;
-  color: #111;
+  color: #111111;
 }
 
 .filter-box h3.accordion {
@@ -347,21 +347,21 @@ const activeFiltersCount = computed(() => {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
+  color: #8E8E8E;
   font-size: 14px;
 }
 
 .search-input {
   width: 100%;
   padding: 8px 12px 8px 36px;
-  border: 1px solid #ddd;
+  border: 1px solid #8E8E8E;
   border-radius: 8px;
   font-size: 14px;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #000;
+  border-color: #111111;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -388,7 +388,7 @@ const activeFiltersCount = computed(() => {
 .brand-item label {
   margin-left: 8px;
   font-size: 14px;
-  color: #333;
+  color: #111111;
   cursor: pointer;
   flex: 1;
 }
@@ -448,7 +448,7 @@ const activeFiltersCount = computed(() => {
   }
 
   .mobile-filter-toggle:hover {
-    background: #f5f5f5;
+    background: #FAFAFA;
   }
 
   .mobile-filter-toggle i:first-child {
@@ -466,7 +466,7 @@ const activeFiltersCount = computed(() => {
 
   .filter-badge {
     background: #000;
-    color: white;
+    color: #FAFAFA;
     border-radius: 50%;
     width: 20px;
     height: 20px;

@@ -110,7 +110,7 @@ const close = () => {
 .search-header h2 {
   font-size: 20px;
   font-weight: 600;
-  color: #000;
+  color: #111;
 }
 
 .close-btn {
@@ -124,7 +124,7 @@ const close = () => {
 }
 
 .close-btn:hover {
-  color: #000;
+  color: #111111;
 }
 
 .search-form {
@@ -151,7 +151,7 @@ const close = () => {
 .search-overlay-input {
   width: 100%;
   padding: 14px 46px 14px 48px;
-  border: 2px solid #ddd;
+  border: 2px solid #FAFAFA;
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.2s;
@@ -159,7 +159,7 @@ const close = () => {
 
 .search-overlay-input:focus {
   outline: none;
-  border-color: #000;
+  border-color: #111111;
 }
 
 .clear-btn {
@@ -168,19 +168,19 @@ const close = () => {
   background: none;
   border: none;
   font-size: 18px;
-  color: #999;
+  color: #8E8E8E;
   cursor: pointer;
   padding: 8px;
 }
 
 .clear-btn:hover {
-  color: #000;
+  color: #111111;
 }
 
 .search-btn {
   padding: 14px 28px;
-  background: #000;
-  color: white;
+  background: #111111;
+  color: #FAFAFA;
   border: none;
   border-radius: 8px;
   font-size: 16px;

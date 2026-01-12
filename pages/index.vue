@@ -118,12 +118,12 @@ h2 {
   bottom: 0;
   height: 2px;
   width: 0%;
-  background-color: #757474;
+  background-color: #8E8E8E;
   transition: width 0.3s ease;
 }
 
 .h2-link:hover {
-  color: #757474;
+  color: #8E8E8E;
 }
 
 .h2-link:hover::after {

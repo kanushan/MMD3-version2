@@ -133,8 +133,8 @@
 </template>
 <style scoped>
 .footer {
-  background-color: #212121;
-  color: #ffffff;
+  background-color: #111111;
+  color: #FAFAFA;
   padding-top: 1rem;
 }
 
@@ -159,7 +159,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #ffffff;
+  color: #FAFAFA;
 }
 
 .footer-list {
@@ -176,7 +176,7 @@
 }
 
 .footer-list .day {
-  color: #ffffff;
+  color: #FAFAFA;
   font-weight: 500;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .footer-paragraphs p:hover {
-  color: #ffffff;
+  color: #FAFAFA;
 }
 
 .contact-list a {
@@ -202,7 +202,7 @@
 }
 
 .contact-list a:hover {
-  color: #ffffff;
+  color: #FAFAFA;
   text-decoration: underline;
 }
 
@@ -240,7 +240,7 @@
 
 .footer-logos {
   padding: 1.5rem 0;
-  background-color: #212121;
+  background-color: #111111;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 

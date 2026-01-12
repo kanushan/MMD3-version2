@@ -1,3 +1,12 @@
 body {
   font-family: 'Inter', sans-serif; /* your global font */
 }
+
+:root {
+  /* Farver */
+  --AccentColourGreen: #0F2A1E;
+  --accentColourRed: #931304;
+  --PrimaryTextColour: #FFFFFF;
+  --PrimaryColourWhite: #FAFAFA;
+  --PrimaryColourBlack: #111111;
+}

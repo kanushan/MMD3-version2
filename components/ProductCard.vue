@@ -80,9 +80,9 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
 <style scoped>
 .product-card {
   flex: 0 0 340px;
-  background: white;
+  background: #FAFAFA;
   border-radius: 0;
-  border: 1px solid #c5c4c4;
+  border: 1px solid #8E8E8E;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -105,7 +105,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   position: relative;
   width: 100%;
   height: 50vh;
-  background-color: #f8f8f8;
+  background-color: #FAFAFA;
   overflow: hidden;
 }
 
@@ -121,7 +121,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #FAFAFA;
   font-size: 48px;
   font-weight: 600;
 }
@@ -144,7 +144,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
-  color: white;
+  color: #FAFAFA;
   background-color: #ff4444;
   white-space: nowrap;
   text-align: left;
@@ -157,7 +157,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
-  color: white;
+  color: #FAFAFA;
   background-color: #0f2a1e;
   white-space: nowrap;
   text-align: left;
@@ -168,7 +168,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   top: 12px;
   left: 12px;
   background: #d32f2f;
-  color: white;
+  color: #FAFAFA;
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
@@ -201,7 +201,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
 
 .wishlist-btn i {
   font-size: 18px;
-  color: #666;
+  color: #8E8E8E;
   transition: all 0.2s;
 }
 
@@ -222,7 +222,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
 
 .product-name {
   font-size: 13px;
-  color: #666;
+  color: #8E8E8E;
   margin-bottom: 12px;
   line-height: 1.4;
 }
@@ -244,7 +244,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid #8E8E8E;
   cursor: pointer;
   transition: transform 0.2s;
 }
