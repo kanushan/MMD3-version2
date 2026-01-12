@@ -59,7 +59,7 @@ onBeforeUnmount(() => {
   <div class="hero">
     <img
       ref="el => images[0] = el"
-      src="../public/img/bannerImgs/Wintercollection.jpg"
+      src="../public/img/bannerImgs/Wintercollection.webp"
       :class="{ active: current === 0 }"
       alt="Winter Kollektion"
     />
@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
 
     <img
       ref="el => images[1] = el"
-      src="../public/img/bannerImgs/boxlook2.jpg"
+      src="../public/img/bannerImgs/boxlook2.webp"
       :class="{ active: current === 1 }"
       alt="Boxens look"
     />

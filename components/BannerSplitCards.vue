@@ -66,12 +66,12 @@ export default {
 }
 
 .card-left .card-bg {
-  background-image: url("/img/bannerImgs/boxenLook.jpg");
+  background-image: url("/img/bannerImgs/boxenLook.webp");
 }
 /* Kilde besøgt 08-01-2026, https://unsplash.com/photos/man-with-short-blonde-hair-wearing-tank-top-m72me5WjwNM */
 
 .card-right .card-bg {
-  background-image: url("/img/bannerImgs/suitNtie.jpg");
+  background-image: url("/img/bannerImgs/suitNtie.webp");
   background-position: center 30%;
 }
 /* Kilde besøgt 08-01-2026, https://www.colourbox.com/image/buttons-sleeves-for-men-s-jacket-image-31147602 */
