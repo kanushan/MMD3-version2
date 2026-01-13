@@ -42,7 +42,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
       <div v-if="!product.inStock" class="stock-badge">Udsolgt</div>
 
       <div class="badges-wrapper">
-        <div v-if="product.isNew" class="product-badge">NYHED</div>
+        <div v-if="product.isNew" class="news-badge">NYHED</div>
         <div v-if="product.BoxensLook" class="boxens-badge">BOXENS LOOK</div>
       </div>    
 
@@ -97,10 +97,6 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
-.product-card.out-of-stock {
-  opacity: 0.6;
-}
-
 .product-image-wrapper {
   position: relative;
   width: 100%;
@@ -137,10 +133,10 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   align-items: flex-start;
 }
 
-.product-badge {
+.badges-wrapper .news-badge {
   display: inline-block;
-  padding: 2px 6px;
-  font-size: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
@@ -150,10 +146,10 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   text-align: left;
 }
 
-.boxens-badge {
+.badges-wrapper .boxens-badge {
   display: inline-block;
-  padding: 4px 12px;
-  font-size: 10px;
+  padding: 6px 12px;
+  font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
@@ -163,27 +159,12 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   text-align: left;
 }
 
-.stock-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: #d32f2f;
-  color: #FAFAFA;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
-}
-
 .wishlist-button {
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   background: rgba(255, 255, 255, 0);
   border: none;
   border-radius: 50%;
@@ -200,7 +181,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
 }
 
 .wishlist-button i {
-  font-size: 18px;
+  font-size: 30px;
   color: #8E8E8E;
   transition: all 0.2s;
 }

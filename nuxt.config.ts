@@ -11,6 +11,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'BOXEN - Tøj og Mode Aalborg',
+      htmlAttrs: {
+        lang: 'da'
+      },
       meta: [
         { name: 'description', content: 'Shop det nyeste tøj og mode online. Hurtig levering og fri fragt over 599 kr.' }
       ],
