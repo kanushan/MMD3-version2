@@ -23,7 +23,7 @@ const closeDropdowns = () => {
               class="search-input"
             >
             <button type="submit" class="search-button">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i class="fa-solid fa-magnifying-glass" alt="Søg knap"></i>
             </button>
           </form>
         </div>
