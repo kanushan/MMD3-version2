@@ -20,7 +20,7 @@ const { favorites, favoritesCount } = useFavorites();
       </div>
       <h2>Ingen favoritter endnu</h2>
       <p>Klik på hjertet på produkter for at tilføje dem til dine favoritter</p>
-      <NuxtLink to="/products" class="browse-btn">
+      <NuxtLink to="/products" class="browse-button">
         Gennemse produkter
       </NuxtLink>
     </div>
@@ -92,7 +92,7 @@ const { favorites, favoritesCount } = useFavorites();
   max-width: 400px;
 }
 
-.browse-btn {
+.browse-button {
   display: inline-block;
   padding: 12px 32px;
   background: #000;
@@ -103,7 +103,7 @@ const { favorites, favoritesCount } = useFavorites();
   transition: background 0.2s;
 }
 
-.browse-btn:hover {
+.browse-button:hover {
   background: #333;
 }
 

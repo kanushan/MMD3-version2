@@ -47,7 +47,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
       </div>    
 
       <button
-        class="wishlist-btn"
+        class="wishlist-button"
         :class="{ active: isProductFavorite }"
         aria-label="Tilføj til favoritter"
         @click.prevent="toggleWishlist"
@@ -178,7 +178,7 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   z-index: 2;
 }
 
-.wishlist-btn {
+.wishlist-button {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -195,17 +195,17 @@ const isProductFavorite = computed(() => isFavorite(props.product.id));
   z-index: 2;
 }
 
-.wishlist-btn:hover {
+.wishlist-button:hover {
   transform: scale(1.1);
 }
 
-.wishlist-btn i {
+.wishlist-button i {
   font-size: 18px;
   color: #8E8E8E;
   transition: all 0.2s;
 }
 
-.wishlist-btn.active i {
+.wishlist-button.active i {
   color: #ff4444;
 }
 

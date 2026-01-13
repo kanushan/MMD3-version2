@@ -126,7 +126,7 @@ const handleCategoryClick = (category) => {
     <button
       v-for="(count, category) in categories"
       :key="category"
-      class="category-btn"
+      class="category-button"
       :class="{ active: selectedCategory === category }"
       @click="handleCategoryClick(category)"
     >
@@ -143,7 +143,7 @@ const handleCategoryClick = (category) => {
   width: 100%;
 }
 
-.category-btn {
+.category-button {
   flex: 1 1 auto;
   min-width: 140px;
   padding: 14px 32px;
@@ -160,12 +160,12 @@ const handleCategoryClick = (category) => {
   text-align: center;
 }
 
-.category-btn:hover {
+.category-button:hover {
   background: #000;
   color: white;
 }
 
-.category-btn.active {
+.category-button.active {
   background: #000;
   color: white;
   border-color: #000;
@@ -173,7 +173,7 @@ const handleCategoryClick = (category) => {
 
 /* Mobile styles */
 @media (max-width: 930px) {
-  .category-btn {
+  .category-button {
     font-size: 13px;
     padding: 10px 20px;
     min-width: 120px;
@@ -181,7 +181,7 @@ const handleCategoryClick = (category) => {
 }
 
 @media (max-width: 600px) {
-  .category-btn {
+  .category-button {
     font-size: 12px;
     padding: 8px 16px;
     min-width: 100px;

@@ -268,7 +268,7 @@ const activeFiltersCount = computed(() => {
         </div>
       </div>
 
-      <button class="clear-btn" @click="clearFilters">
+      <button class="clear-button" @click="clearFilters">
         Ryd alle filtre
       </button>
     </div>
@@ -414,7 +414,7 @@ const activeFiltersCount = computed(() => {
   width: 100%;
 }
 
-.clear-btn {
+.clear-button {
   width: 100%;
   padding: 10px;
   background: #f5f5f5;
@@ -427,7 +427,7 @@ const activeFiltersCount = computed(() => {
   transition: background 0.2s;
 }
 
-.clear-btn:hover {
+.clear-button:hover {
   background: #e5e5e5;
 }
 
@@ -506,7 +506,7 @@ const activeFiltersCount = computed(() => {
     font-size: 13px;
   }
 
-  .clear-btn {
+  .clear-button {
     font-size: 13px;
     padding: 9px;
   }

@@ -22,14 +22,14 @@ const closeDropdowns = () => {
               placeholder="Søg"
               class="search-input"
             >
-            <button type="submit" class="search-btn">
+            <button type="submit" class="search-button">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
         </div>
 
         <NuxtLink to="/" class="logo">
-          <img src="../public/img/boxen-logo.png" alt="">
+          <img src="../public/img/boxen-logo.png" alt="Boxens logo">
         </NuxtLink>
 
         <div class="actions">
@@ -182,7 +182,7 @@ const closeDropdowns = () => {
   border-color: #000;
 }
 
-.search-btn {
+.search-button {
   position: absolute;
   right: 8px;
   top: 50%;
@@ -194,7 +194,7 @@ const closeDropdowns = () => {
   color: #666;
 }
 
-.search-btn:hover {
+.search-button:hover {
   color: #000;
 }
 

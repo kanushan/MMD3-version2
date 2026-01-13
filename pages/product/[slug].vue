@@ -142,7 +142,7 @@ const goBack = () => {
   <div v-else-if="product" class="product-page">
     <button
       @click="goBack"
-      class="back-button desktop-btn"
+      class="back-button desktop-button"
       aria-label="Tilbage"
     >
       <i class="fa-solid fa-chevron-left"></i>
@@ -150,7 +150,7 @@ const goBack = () => {
 
     <button
       @click="toggleFavorite(product)"
-      class="favorite-button desktop-btn"
+      class="favorite-button desktop-button"
       :class="{ active: isFavorite(product.id) }"
       :title="
         isFavorite(product.id)
@@ -180,7 +180,7 @@ const goBack = () => {
     <div class="main-image">
       <button
         @click="goBack"
-        class="back-button mobile-btn"
+        class="back-button mobile-button"
         aria-label="Tilbage"
       >
         <i class="fa-solid fa-chevron-left"></i>
@@ -188,7 +188,7 @@ const goBack = () => {
 
       <button
         @click="toggleFavorite(product)"
-        class="favorite-button mobile-btn"
+        class="favorite-button mobile-button"
         :class="{ active: isFavorite(product.id) }"
       >
         <i
@@ -250,9 +250,9 @@ const goBack = () => {
 
       <div class="cart-section">
         <div class="quantity-selector">
-          <button @click="decrementQuantity" class="qty-btn">-</button>
+          <button @click="decrementQuantity" class="qty-button">-</button>
           <input type="number" v-model.number="quantity" min="1" readonly />
-          <button @click="incrementQuantity" class="qty-btn">+</button>
+          <button @click="incrementQuantity" class="qty-button">+</button>
         </div>
         <button class="add-to-cart" @click="addToCart">TILFØJ TIL KURV</button>
       </div>
@@ -520,7 +520,7 @@ const goBack = () => {
   height: auto;
 }
 
-.mobile-btn {
+.mobile-button {
   display: none;
 }
 
@@ -704,7 +704,7 @@ const goBack = () => {
   font-size: 1rem;
 }
 
-.qty-btn {
+.qty-button {
   width: 40px;
   border: none;
   background: white;
@@ -712,7 +712,7 @@ const goBack = () => {
   font-size: 1.2rem;
 }
 
-.qty-btn:hover {
+.qty-button:hover {
   background-color: #f5f5f5;
 }
 
@@ -829,11 +829,11 @@ const goBack = () => {
 }
 
 @media (max-width: 930px) {
-  .desktop-btn {
+  .desktop-button {
     display: none !important;
   }
 
-  .mobile-btn {
+  .mobile-button {
     display: flex !important;
     position: absolute;
     cursor: pointer;
@@ -843,18 +843,18 @@ const goBack = () => {
     z-index: 10;
   }
 
-  .mobile-btn.back-button {
+  .mobile-button.back-button {
     top: 20px;
     left: 16px;
   }
 
-  .mobile-btn.favorite-button {
+  .mobile-button.favorite-button {
     top: 20px;
     right: 16px;
     background: none;
   }
 
-  .mobile-btn i {
+  .mobile-buttons i {
     font-size: 20px;
   }
 

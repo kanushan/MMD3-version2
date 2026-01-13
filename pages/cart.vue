@@ -46,7 +46,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
         <i class="fa-solid fa-cart-shopping empty-icon"></i>
         <h2>Din kurv er tom</h2>
         <p>Tilføj produkter til din kurv for at se dem her</p>
-        <NuxtLink to="/products" class="shop-btn"> Shop produkter </NuxtLink>
+        <NuxtLink to="/products" class="shop-button"> Shop produkter </NuxtLink>
       </div>
 
       <div v-else class="cart-content">
@@ -86,7 +86,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
                 <div class="quantity-selector">
                   <button
                     @click="decreaseQuantity(item)"
-                    class="qty-btn"
+                    class="qty-button"
                     :disabled="item.quantity <= 1"
                   >
                     <i class="fa-solid fa-minus"></i>
@@ -94,7 +94,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
                   <span class="qty-display">{{ item.quantity }}</span>
                   <button
                     @click="increaseQuantity(item)"
-                    class="qty-btn"
+                    class="qty-button"
                     :disabled="item.quantity >= 99"
                   >
                     <i class="fa-solid fa-plus"></i>
@@ -107,7 +107,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
 
                 <button
                   @click="removeFromCart(item.cartItemId)"
-                  class="remove-btn"
+                  class="remove-button"
                   aria-label="Fjern produkt"
                 >
                   <i class="fa-solid fa-trash-can"></i>
@@ -133,7 +133,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
               <span>Total</span>
               <span>{{ formatPrice(cartTotal) }}</span>
             </div>
-            <button class="checkout-btn">Gå til kassen</button>
+            <button class="checkout-button">Gå til kassen</button>
             <NuxtLink to="/products" class="continue-shopping">
               Fortsæt med at handle
             </NuxtLink>
@@ -196,7 +196,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   margin-bottom: 32px;
 }
 
-.shop-btn {
+.shop-button {
   display: inline-block;
   padding: 14px 32px;
   background: #000;
@@ -207,7 +207,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   transition: background 0.2s;
 }
 
-.shop-btn:hover {
+.shop-button:hover {
   background: #333;
 }
 
@@ -339,7 +339,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   padding: 4px;
 }
 
-.qty-btn {
+.qty-button {
   width: 32px;
   height: 32px;
   display: flex;
@@ -353,11 +353,11 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   transition: background 0.2s;
 }
 
-.qty-btn:hover:not(:disabled) {
+.qty-button:hover:not(:disabled) {
   background: #f5f5f5;
 }
 
-.qty-btn:disabled {
+.qty-button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
@@ -377,7 +377,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   text-align: right;
 }
 
-.remove-btn {
+.remove-button {
   width: 40px;
   height: 40px;
   display: flex;
@@ -391,7 +391,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   transition: all 0.2s;
 }
 
-.remove-btn:hover {
+.remove-button:hover {
   background: #fee;
   border-color: #fcc;
   color: #c41e3a;
@@ -438,7 +438,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   margin: 16px 0;
 }
 
-.checkout-btn {
+.checkout-button {
   width: 100%;
   padding: 16px;
   background: #000;
@@ -452,7 +452,7 @@ Teksten tilpasses automatisk, så der står "produkt" i ental og "produkter" i f
   margin-top: 20px;
 }
 
-.checkout-btn:hover {
+.checkout-button:hover {
   background: #333;
 }
 

@@ -36,7 +36,7 @@ const close = () => {
       <div class="search-container">
         <div class="search-header">
           <h2>Søg produkter</h2>
-          <button class="close-btn" @click="close" aria-label="Luk søgning">
+          <button class="close-button" @click="close" aria-label="Luk søgning">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -53,13 +53,13 @@ const close = () => {
             <button
               v-if="searchQuery"
               type="button"
-              class="clear-btn"
+              class="clear-button"
               @click="setSearchQuery('')"
             >
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
-          <button type="submit" class="search-btn" :disabled="!searchQuery.trim()">
+          <button type="submit" class="search-button" :disabled="!searchQuery.trim()">
             Søg
           </button>
         </form>
@@ -113,7 +113,7 @@ const close = () => {
   color: #111;
 }
 
-.close-btn {
+.close-button {
   background: none;
   border: none;
   font-size: 24px;
@@ -123,7 +123,7 @@ const close = () => {
   transition: color 0.2s;
 }
 
-.close-btn:hover {
+.close-button:hover {
   color: #111111;
 }
 
@@ -162,7 +162,7 @@ const close = () => {
   border-color: #111111;
 }
 
-.clear-btn {
+.clear-button {
   position: absolute;
   right: 12px;
   background: none;
@@ -173,11 +173,11 @@ const close = () => {
   padding: 8px;
 }
 
-.clear-btn:hover {
+.clear-button:hover {
   color: #111111;
 }
 
-.search-btn {
+.search-button {
   padding: 14px 28px;
   background: #111111;
   color: #FAFAFA;
@@ -190,11 +190,11 @@ const close = () => {
   white-space: nowrap;
 }
 
-.search-btn:hover:not(:disabled) {
+.search-button:hover:not(:disabled) {
   background: #333;
 }
 
-.search-btn:disabled {
+.search-button:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
@@ -259,7 +259,7 @@ const close = () => {
     flex-direction: column;
   }
 
-  .search-btn {
+  .search-button {
     width: 100%;
   }
 
