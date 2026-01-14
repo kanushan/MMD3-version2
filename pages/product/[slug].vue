@@ -1,5 +1,4 @@
 <script setup>
-  
 /* Hent nuværende rute information samt router funktionalitet til navigation tilbage */
 const route = useRoute();
 const router = useRouter();
@@ -8,7 +7,11 @@ const router = useRouter();
 const { product, loading, error } = useProduct(route.params.slug);
 
 /* Hent alle produkter til at vise i bunden af siden */
-const { products, loading: productsLoading, error: productsError } = useProducts({ type: "product" });
+const {
+  products,
+  loading: productsLoading,
+  error: productsError,
+} = useProducts({ type: "product" });
 
 /* Initialiser kurv funktioner til at tilføje produkter og favoritter funktioner til at tjekke og ændre favorit status */
 const { addToCart: addProductToCart } = useCart();
@@ -95,18 +98,11 @@ const incrementQuantity = () => {
 /* Funktion der tjekker om en størrelse er udsolgt baseret på lager */
 const isSizeDisabled = (size) => {
   if (!product.value) return false;
-  
-  // Check udsolgtStørrelser array (simpel metode)
+
+  // tjekker udsolgtStørrelser array...
   if (product.value.udsolgtStørrelser) {
     return product.value.udsolgtStørrelser.includes(size);
   }
-  
-  // Check størrelseLager object (avanceret metode)
-  if (product.value.størrelseLager) {
-    return product.value.størrelseLager[size] === 0;
-  }
-  
-  return false;
 };
 
 /* Funktion til at tilføje produktet til kurven med valgt antal og størrelse samt vise en bekræftelse i 3 sekunder */
@@ -226,11 +222,19 @@ const goBack = () => {
       </div>
 
       <div class="size-section">
+        <!-- Hele boksen med størrelser -->
+
         <div class="size-header">
+          <!-- Header med tekst og link -->
           <label>Størrelse:</label>
+          <!-- Skriver teksten "Størrelse:" -->
           <a href="#" class="size-guide">Størrelsesguide</a>
+          <!-- Link til størrelsesguide -->
         </div>
+
         <div class="size-options" :class="{ 'shoe-sizes': isShoes }">
+          <!-- :class binder CSS-klasse til kode. Tilføjer 'shoe-sizes' hvis isShoes er sand -->
+
           <button
             v-for="size in availableSizes"
             :key="size"
@@ -245,6 +249,13 @@ const goBack = () => {
             {{ size }}
             <span v-if="isSizeDisabled(size)" class="sold-out-badge"></span>
           </button>
+          <!-- v-for laver en knap for hver størrelse i availableSizes -->
+          <!-- :key giver hver knap et unikt id (kræves af Vue) -->
+          <!-- :class tilføjer 'active' hvis valgt, 'disabled' hvis udsolgt -->
+          <!-- @click vælger størrelsen ved klik, kun hvis den ikke er udsolgt (! betyder "ikke") -->
+          <!-- :disabled gør knappen uklikbar, hvis udsolgt -->
+          <!-- :title viser tooltip: "Udsolgt" hvis udsolgt, ellers "Vælg størrelse X" -->
+          <!-- v-if viser badge kun hvis størrelsen er udsolgt -->
         </div>
       </div>
 
@@ -299,7 +310,7 @@ const goBack = () => {
   <div class="recommendations-section">
     <h2 class="section-title">
       <NuxtLink to="/products" class="h2-link">
-        VI TROR DU VIL ELSKE  &gt;
+        VI TROR DU VIL ELSKE &gt;
       </NuxtLink>
     </h2>
 
@@ -307,10 +318,15 @@ const goBack = () => {
     <div v-if="productsLoading" class="loading-message">Loading...</div>
 
     <!-- Hvis der opstod en fejl under hentning af produkterne, vises fejlmeddelelsen her -->
-    <div v-else-if="productsError" class="error-message">Fejl: {{ productsError }}</div>
+    <div v-else-if="productsError" class="error-message">
+      Fejl: {{ productsError }}
+    </div>
 
     <!-- Hvis der ikke findes produkter i listen -->
-    <div v-else-if="!products || products.length === 0" class="no-products-message">
+    <div
+      v-else-if="!products || products.length === 0"
+      class="no-products-message"
+    >
       Ingen produkter fundet
     </div>
 
@@ -393,12 +409,12 @@ const goBack = () => {
   bottom: 0;
   height: 2px;
   width: 0%;
-  background-color: #8E8E8E;
+  background-color: #8e8e8e;
   transition: width 0.3s ease;
 }
 
 .h2-link:hover {
-  color: #8E8E8E;
+  color: #8e8e8e;
 }
 
 .h2-link:hover::after {

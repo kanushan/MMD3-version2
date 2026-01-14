@@ -4,18 +4,8 @@
       "id": 1,
       "slug": "casablanca-pu-jacket",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/casablanca/CasablancaMain.webp",
       "Billede1": "/img/products/casablanca/Casablanca1.webp",
       "Billede2": "/img/products/casablanca/Casablanca2.webp",
@@ -29,28 +19,15 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 600.0,
       "ProduktBeskrivelse": "Sweatshirt i farven Cloud Dancer. Beigefarvet langærmet sweatshirt i oversize cropped fit.",
-      "tags": [
-        "nyt",
-        "oversize"
-      ],
+      "tags": ["nyt", "oversize"],
       "inStock": false
     },
     {
       "id": 2,
       "slug": "pacs-sports-hoodie",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/pacs/pacsMain.webp",
       "Billede1": "",
       "Billede2": "",
@@ -64,28 +41,15 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 520.0,
       "ProduktBeskrivelse": "Flot og blød Woodbird Hættetrøje til Herre Pacs Snow Melange",
-      "tags": [
-        "populær",
-        "comfort"
-      ],
+      "tags": ["populær", "comfort"],
       "inStock": true
     },
     {
       "id": 3,
       "slug": "kidd-knit-sea-salt",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/kidd/kiddMain.webp",
       "Billede1": "/img/products/kidd/kidd1.webp",
       "Billede2": "/img/products/kidd/kidd2.webp",
@@ -98,10 +62,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 300.0,
       "ProduktBeskrivelse": "Simpel strik i relaxed fit. Trøjen har crewneck, lange ærmer og en kraftig struktur.",
-      "tags": [
-        "relaxed",
-        "basic"
-      ],
+      "tags": ["relaxed", "basic"],
       "inStock": true,
       "isNew": true
     },
@@ -109,18 +70,8 @@
       "id": 4,
       "slug": "horizon-sport-ls-cloud",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/horizon/horizonMain.webp",
       "Billede1": "/img/products/horizon/horizon1.webp",
       "Billede2": "/img/products/horizon/horizon2.webp",
@@ -134,28 +85,15 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 300.0,
       "ProduktBeskrivelse": "Beigefarvet langærmet sweatshirt i oversize cropped fit.",
-      "tags": [
-        "relaxed",
-        "classic"
-      ],
+      "tags": ["relaxed", "classic"],
       "inStock": true
     },
     {
       "id": 5,
       "slug": "bradley-knit-moonbeam",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/bradley/bradleyMain.webp",
       "Billede1": "/img/products/bradley/bradley1.webp",
       "Billede2": "/img/products/bradley/bradley2.webp",
@@ -168,10 +106,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 300.0,
       "ProduktBeskrivelse": "Fladstrikket trøje med crewneck og lange ærmer Trøjen har en relaxed pasform.",
-      "tags": [
-        "relaxed",
-        "classic"
-      ],
+      "tags": ["relaxed", "classic"],
       "inStock": true,
       "isNew": true
     },
@@ -179,18 +114,8 @@
       "id": 6,
       "slug": "hydra-cutout-cedar",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/hydraCedar/hydraCedarMain.webp",
       "Billede1": "/img/products/hydraCedar/hydraCedar1.webp",
       "Billede2": "/img/products/hydraCedar/hydraCedar2.webp",
@@ -203,10 +128,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 200.0,
       "ProduktBeskrivelse": "T-shirts i farven Cedar Grøn t-shirt i loose fit Kommer med print foran og på ryggen samt crew neck",
-      "tags": [
-        "print",
-        "loose"
-      ],
+      "tags": ["print", "loose"],
       "inStock": true,
       "isNew": true
     },
@@ -214,18 +136,8 @@
       "id": 7,
       "slug": "millinium-oversize-tee",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/millinium/milliniumMain.webp",
       "Billede1": "/img/products/millinium/millinium1.webp",
       "Billede2": "/img/products/millinium/millinium2.webp",
@@ -239,28 +151,15 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 200.0,
       "ProduktBeskrivelse": "Flot og god Basic t-shirt, Box fit",
-      "tags": [
-        "oversize",
-        "basic"
-      ],
+      "tags": ["oversize", "basic"],
       "inStock": true
     },
     {
       "id": 8,
       "slug": "ceres-wide-sweatpants-black",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/ceres/ceresMain.webp",
       "Billede1": "/img/products/ceres/ceres1.webp",
       "Billede2": "/img/products/ceres/ceres2.webp",
@@ -274,10 +173,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 250.0,
       "ProduktBeskrivelse": "Sweatpants i wide fit Bukserne har snører og elastik i livet samt to lommer foran og en bagpå",
-      "tags": [
-        "wide",
-        "comfort"
-      ],
+      "tags": ["wide", "comfort"],
       "inStock": true,
       "isNew": true
     },
@@ -285,18 +181,8 @@
       "id": 9,
       "slug": "phil-half-zip-demitasse",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/demitasse/demitasseMain.webp",
       "Billede1": "/img/products/demitasse/demitasse1.webp",
       "Billede2": "/img/products/demitasse/demitasse2.webp",
@@ -309,10 +195,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 350.0,
       "ProduktBeskrivelse": "Strikket trøje med høj og half-zip Trøjen har ribkant ved halsen, ved ærmerne samt i livet og er i regular fit",
-      "tags": [
-        "half-zip",
-        "regular"
-      ],
+      "tags": ["half-zip", "regular"],
       "inStock": true,
       "isNew": true
     },
@@ -320,18 +203,8 @@
       "id": 10,
       "slug": "join-regular-strik-black",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/joinBlac/joinBlacMain.webp",
       "Billede1": "/img/products/joinBlac/joinBlac1.webp",
       "Billede2": "/img/products/joinBlac/joinBlac2.webp",
@@ -344,10 +217,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 350.0,
       "ProduktBeskrivelse": "Grov strikket trøje med høj hals og half-zip Trøjen har ribkant ved ærmerne og i livet",
-      "tags": [
-        "half-zip",
-        "grov"
-      ],
+      "tags": ["half-zip", "grov"],
       "inStock": true,
       "isNew": true
     },
@@ -355,18 +225,8 @@
       "id": 11,
       "slug": "join-regular-strik-dk",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "udsolgtStørrelser": [
-        "M",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
+      "udsolgtStørrelser": ["M", "XL", "XXL"],
       "BilledeMain": "/img/products/joinReg/joinRegMain.webp",
       "Billede1": "/img/products/joinReg/joinReg1.webp",
       "Billede2": "/img/products/joinReg/joinReg2.webp",
@@ -379,31 +239,15 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 350.0,
       "ProduktBeskrivelse": "Den bløde strukturstrik med et bredt udvalg af mønstre og strukturer giver et stilfuldt og rent look.",
-      "tags": [
-        "strukturstrik",
-        "elegant"
-      ],
+      "tags": ["strukturstrik", "elegant"],
       "inStock": true
     },
     {
       "id": 12,
       "slug": "blake-suede-loafer-chocolate",
       "type": "product",
-      "Størrelser": [
-        "38",
-        "39",
-        "40",
-        "41",
-        "42",
-        "43",
-        "44",
-        "45"
-      ],
-      "udsolgtStørrelser": [
-        "38",
-        "41",
-        "45"
-      ],
+      "Størrelser": ["38", "39", "40", "41", "42", "43", "44", "45"],
+      "udsolgtStørrelser": ["38", "41", "45"],
       "BilledeMain": "/img/products/blake/blakeMain.webp",
       "Billede1": "/img/products/blake/blake1.webp",
       "Billede2": "/img/products/blake/blake2.webp",
@@ -417,11 +261,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 1100.0,
       "ProduktBeskrivelse": "Loafers i ruskind med rund snude Har kvast-detalje",
-      "tags": [
-        "ruskind",
-        "elegant",
-        "premium"
-      ],
+      "tags": ["ruskind", "elegant", "premium"],
       "inStock": true,
       "isNew": true
     },
@@ -429,21 +269,8 @@
       "id": 13,
       "slug": "chelsea-boots-black",
       "type": "product",
-      "Størrelser": [
-        "38",
-        "39",
-        "40",
-        "41",
-        "42",
-        "43",
-        "44",
-        "45"
-      ],
-      "udsolgtStørrelser": [
-        "38",
-        "41",
-        "45"
-      ],
+      "Størrelser": ["38", "39", "40", "41", "42", "43", "44", "45"],
+      "udsolgtStørrelser": ["38", "41", "45"],
       "BilledeMain": "/img/products/lvl/lvlMain.webp",
       "Billede1": "/img/products/lvl/lvl1.webp",
       "Billede2": "/img/products/lvl/lvl2.webp",
@@ -456,32 +283,15 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 600.0,
       "ProduktBeskrivelse": "LVL Chelsea boots i sort. Støvlen er lavet i imiteret læder og har et elegant og minimalistisk udtryk.",
-      "tags": [
-        "chelsea",
-        "minimalistisk",
-        "classic"
-      ],
+      "tags": ["chelsea", "minimalistisk", "classic"],
       "inStock": true
     },
     {
       "id": 14,
       "slug": "ainsworth-pu-brown-sto",
       "type": "product",
-      "Størrelser": [
-        "38",
-        "39",
-        "40",
-        "41",
-        "42",
-        "43",
-        "44",
-        "45"
-      ],
-      "udsolgtStørrelser": [
-        "38",
-        "41",
-        "45"
-      ],
+      "Størrelser": ["38", "39", "40", "41", "42", "43", "44", "45"],
+      "udsolgtStørrelser": ["38", "41", "45"],
       "BilledeMain": "/img/products/ainsworth/ainsworthMain.webp",
       "Billede1": "/img/products/ainsworth/ainsworth1.webp",
       "Billede2": "/img/products/ainsworth/ainsworth2.webp",
@@ -494,23 +304,14 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 400.0,
       "ProduktBeskrivelse": "Støvlerne har rund tå og gummisål og er forret med polyester",
-      "tags": [
-        "støvle",
-        "vinter"
-      ],
+      "tags": ["støvle", "vinter"],
       "inStock": true
     },
     {
       "id": 15,
       "slug": "alex-smith-crockery",
       "type": "product",
-      "Størrelser": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
+      "Størrelser": ["S", "M", "L", "XL", "XXL"],
       "BilledeMain": "/img/products/alex/alexMain.webp",
       "Billede1": "/img/products/alex/alex1.webp",
       "Billede2": "/img/products/alex/alex2.webp",
@@ -524,10 +325,7 @@
       "VareNummer": "xxxx xxxx xxxx",
       "Pris": 375.0,
       "ProduktBeskrivelse": "Jeans i baggy fit, farven er beige",
-      "tags": [
-        "jeans",
-        "baggy"
-      ],
+      "tags": ["jeans", "baggy"],
       "inStock": true,
       "isNew": true
     }
